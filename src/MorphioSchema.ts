@@ -30,7 +30,9 @@ export class MorphioSchema {
 }
 
 interface PropertyMetadata {
-  type: string;
+  type: string | (new () => any);
   required?: boolean;
   description?: string;
+  container?: 'array' | 'map';
+  valueType?: string | (new () => any);
 }

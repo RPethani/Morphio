@@ -6,13 +6,17 @@ export function JsonProp(options: JsonPropOptions) {
     schema.addProperty(propertyKey, {
       type: options.type,
       required: options.required !== false, // Default to true if not specified
-      description: options.description
+      description: options.description,
+      container: options.container,
+      valueType: options.valueType
     });
   };
 }
 
-interface JsonPropOptions {
-  type: string;
+export interface JsonPropOptions {
+  type: string | (new () => any);
   required?: boolean;
   description?: string;
+  container?: 'array' | 'map';
+  valueType?: string | (new () => any);
 }
