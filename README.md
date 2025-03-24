@@ -52,7 +52,7 @@ console.log(deserializedUser);
 
 ## Logo
 
-![Morphio Logo](https://github.com/RPethani/Morphio/blob/main/assets/morphio-logo.png)
+![Morphio Logo](https://github.com/RPethani/Morphio/blob/main/assets/morphio.png)
 
 ## License
 
