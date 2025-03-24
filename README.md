@@ -1,5 +1,7 @@
 # Morphio - TypeScript Serialization Library
 
+![Morphio Logo](./assets/morphio.png)
+
 Morphio is a powerful and flexible TypeScript library for serialization and deserialization of objects. It supports data transformation with a focus on simplicity, performance, and extensibility. Morphio is designed to make it easy to handle JSON serialization in a structured and intuitive way, with a schema-driven approach.
 
 ## Features
@@ -49,10 +51,6 @@ console.log(json);
 const deserializedUser = deserialize(json, User);
 console.log(deserializedUser);
 ```
-
-## Logo
-
-![Morphio Logo](https://github.com/RPethani/Morphio/blob/main/assets/morphio.png)
 
 ## License
 
