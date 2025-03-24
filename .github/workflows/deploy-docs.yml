@@ -31,8 +31,13 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git checkout --orphan gh-pages
-          git rm -rf .
+          
+          # Remove everything except the docs directory
+          git ls-files | grep -v '^docs/' | xargs git rm -f
+
+          # Copy the generated docs to the root of gh-pages branch
           cp -r docs/* .
+
           git add .
           git commit -m "Deploy documentation"
           git push --force --set-upstream origin gh-pages
