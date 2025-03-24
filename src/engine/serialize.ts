@@ -24,14 +24,16 @@ export function serialize(input: any): any {
           })
           : value;
       }
-      // Handle map serialization
+      // Handle map serialization (convert to plain object)
       else if (meta.container === 'map' && value instanceof Map) {
         const serializedMap: Record<string, any> = {};
+        // Iterate over map entries and convert them to a plain object
         for (const [mapKey, mapValue] of value.entries()) {
           const itemSchema = typeof meta.valueType === 'function' ? SchemaRegistry.getSchema(meta.valueType) : undefined;
+          // Convert Map entry to plain object
           serializedMap[String(mapKey)] = itemSchema ? serialize(mapValue) : mapValue;
         }
-        result[key] = serializedMap;
+        result[key] = serializedMap;  // Convert Map to plain object here
       }
       // Handle nested objects
       else if (nestedSchema && isTypeFunction) {
