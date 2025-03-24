@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7d0f02de-dd15-409d-9ed4-37e30dd76f3f" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="gh-pages" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;RPethani&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/RPethani/Morphio.git&quot;,
+    &quot;accountId&quot;: &quot;070734c5-6399-4b48-ae62-006d0216f960&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2n9nuQtdxtXe0AZjyleXQe9OAWR" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;Jest.Morphio.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/rakeshpethani/Workspaces/Morphio&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs.jest.jest_package&quot;: &quot;/Users/rakeshpethani/Workspaces/Morphio/node_modules/jest-cli&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;npm.docs.executor&quot;: &quot;Run&quot;,
+    &quot;npm.prepare.executor&quot;: &quot;Run&quot;,
+    &quot;npm.test.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;dev.turingcomplete.intellijdevelopertoolsplugin._internal.settings.DeveloperToolsConfigurable&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/rakeshpethani/Workspaces/Morphio/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets" />
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.docs">
+    <configuration name="Morphio" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest-cli" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/test/basics.test.ts" />
+      <test-names>
+        <test-name value="Morphio" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="docs" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="docs" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="prepare" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="prepare" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="test" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Jest.Morphio" />
+      <item itemvalue="npm.docs" />
+      <item itemvalue="npm.prepare" />
+      <item itemvalue="npm.test" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.docs" />
+        <item itemvalue="npm.test" />
+        <item itemvalue="npm.prepare" />
+        <item itemvalue="Jest.Morphio" />
+        <item itemvalue="npm.test" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-WS-243.26053.12" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7d0f02de-dd15-409d-9ed4-37e30dd76f3f" name="Changes" comment="" />
+      <created>1728394382073</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1728394382073</updated>
+      <workItem from="1728394383212" duration="1391000" />
+      <workItem from="1728455899748" duration="1362000" />
+      <workItem from="1728473708014" duration="18000" />
+      <workItem from="1728557436291" duration="237000" />
+      <workItem from="1728635555808" duration="2504000" />
+      <workItem from="1728886289697" duration="1887000" />
+      <workItem from="1728898222937" duration="12227000" />
+      <workItem from="1728970173871" duration="87000" />
+      <workItem from="1728970265311" duration="968000" />
+      <workItem from="1728971480333" duration="1016000" />
+      <workItem from="1728972504921" duration="6395000" />
+      <workItem from="1728981115843" duration="54000" />
+      <workItem from="1728981174504" duration="29000" />
+      <workItem from="1728981208325" duration="12895000" />
+      <workItem from="1729148827081" duration="4984000" />
+      <workItem from="1730980110060" duration="37000" />
+      <workItem from="1730980152722" duration="5285000" />
+      <workItem from="1737698346144" duration="187000" />
+      <workItem from="1737698539451" duration="4597000" />
+      <workItem from="1737721765968" duration="9802000" />
+      <workItem from="1738316590049" duration="12158000" />
+      <workItem from="1741674192245" duration="142000" />
+      <workItem from="1741674360517" duration="601000" />
+      <workItem from="1742376026696" duration="535000" />
+      <workItem from="1742376566959" duration="2150000" />
+      <workItem from="1742812330790" duration="13406000" />
+      <workItem from="1742825843216" duration="6000" />
+      <workItem from="1742825852129" duration="81000" />
+      <workItem from="1742825935165" duration="1074000" />
+    </task>
+    <task id="LOCAL-00001" summary="Serializable decorator">
+      <option name="closed" value="true" />
+      <created>1742812547201</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1742812547201</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Serializable decorator">
+      <option name="closed" value="true" />
+      <created>1742812568880</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1742812568880</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Array and map support">
+      <option name="closed" value="true" />
+      <created>1742818919244</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1742818919244</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Array and map support">
+      <option name="closed" value="true" />
+      <created>1742821377738</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1742821377738</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Removed Morphio.ts">
+      <option name="closed" value="true" />
+      <created>1742821847222</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1742821847222</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Readme">
+      <option name="closed" value="true" />
+      <created>1742822225487</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1742822225487</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Readme">
+      <option name="closed" value="true" />
+      <created>1742822418530</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1742822418530</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Readme">
+      <option name="closed" value="true" />
+      <created>1742822627817</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1742822627817</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Docs">
+      <option name="closed" value="true" />
+      <created>1742826012987</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1742826012987</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Serializable decorator" />
+    <MESSAGE value="Array and map support" />
+    <MESSAGE value="Removed Morphio.ts" />
+    <MESSAGE value="Readme" />
+    <MESSAGE value="Docs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Docs" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="js.build_tools.npm">
+        <watch expression="Object.getOwnPropertyDescriptors(instance)" language="TypeScript" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
