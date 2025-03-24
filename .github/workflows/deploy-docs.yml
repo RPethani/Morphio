@@ -30,8 +30,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}  # Use the GitHub token secret for authentication
         run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
+          git config --global user.name "RPethani"
+          git config --global user.email "rocky.pethani@gmail.com"
           git checkout --orphan gh-pages  # Create a new gh-pages branch without history
 
           # Remove all files from the branch except the docs directory
