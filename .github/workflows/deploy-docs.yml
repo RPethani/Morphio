@@ -44,4 +44,4 @@ jobs:
           git commit -m "Deploy documentation"  # Commit the deployed documentation
 
           # Push using GitHub Token
-          git push --force --set-upstream https://github.com/${{ github.repository }} gh-pages
+          git push --force --set-upstream https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }} gh-pages
