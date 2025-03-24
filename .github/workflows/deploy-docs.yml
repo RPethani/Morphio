@@ -24,20 +24,24 @@ jobs:
 
       - name: Generate TypeDoc documentation
         run: |
-          npm run docs
+          npm run docs  # Run the docs generation script
 
       - name: Deploy to GitHub Pages
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}  # Use the GitHub token secret for authentication
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git checkout --orphan gh-pages
-          
-          # Remove everything except the docs directory
-          git ls-files | grep -v '^docs/' | xargs git rm -f
+          git checkout --orphan gh-pages  # Create a new gh-pages branch without history
 
-          # Copy the generated docs to the root of gh-pages branch
+          # Remove all files from the branch except the docs directory
+          git ls-files | grep -v '^docs/' | xargs git rm -f  # Exclude docs/ folder from removal
+
+          # Copy the generated documentation from docs/ folder to the root of the branch
           cp -r docs/* .
 
-          git add .
-          git commit -m "Deploy documentation"
-          git push --force --set-upstream origin gh-pages
+          git add .  # Stage the changes for commit
+          git commit -m "Deploy documentation"  # Commit the deployed documentation
+
+          # Push using GitHub Token
+          git push --force --set-upstream https://github.com/${{ github.repository }} gh-pages
