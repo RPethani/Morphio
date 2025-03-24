@@ -9,6 +9,6 @@ export function Serializable(options?: SerializableOptions) {
   };
 }
 
-interface SerializableOptions {
+export interface SerializableOptions {
   name?: string;
 }
