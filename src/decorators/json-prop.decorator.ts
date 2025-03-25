@@ -1,4 +1,5 @@
 import {SchemaRegistry} from "../SchemaRegistry";
+import {PropertyMetadata} from "./PropertyMetadata";
 
 /**
  * A decorator function that adds metadata to a class property.
@@ -17,65 +18,12 @@ import {SchemaRegistry} from "../SchemaRegistry";
  * @param options - The options for configuring the property metadata.
  * @returns A decorator function that applies the metadata to the target property.
  */
-export function JsonProp(options: JsonPropOptions) {
+export function JsonProp(options: PropertyMetadata) {
   return function (target: any, propertyKey: string): void {
     const schema = SchemaRegistry.getOrCreate(target.constructor);
 
     // Add property metadata to the schema
-    schema.addProperty(propertyKey, {
-      type: options.type,
-      required: options.required !== false,  // Defaults to true if not specified
-      description: options.description,
-      container: options.container,
-      valueType: options.valueType
-    });
+    schema.addProperty(propertyKey, options);
   };
 }
 
-/**
- * Options for configuring a property in the `@JsonProp` decorator.
- *
- * This interface defines the metadata that can be applied to a class property
- * for use in serialization and deserialization. The options include the type
- * of the property, whether it is required, its description, container type (e.g.,
- * array or map), and the type of the values inside collections.
- */
-export interface JsonPropOptions {
-  /**
-   * The type of the property. Can be a string representing a primitive type
-   * or a class constructor representing a complex type.
-   *
-   * @type {string | (new () => any)}
-   */
-  type: string | (new () => any);
-
-  /**
-   * Whether the property is required in the schema.
-   *
-   * @default true
-   */
-  required?: boolean;
-
-  /**
-   * A description of the property, providing additional context or explanation.
-   *
-   * @type {string}
-   */
-  description?: string;
-
-  /**
-   * The container type for the property, used for collections such as arrays and maps.
-   * Can be either 'array' or 'map'.
-   *
-   * @type {'array' | 'map'}
-   */
-  container?: 'array' | 'map';
-
-  /**
-   * The type of the values inside a container, such as an array or map.
-   * For example, if the property is a `Map<string, Value>`, this would be `Value`.
-   *
-   * @type {string | (new () => any)}
-   */
-  valueType?: string | (new () => any);
-}

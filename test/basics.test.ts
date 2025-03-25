@@ -1,7 +1,5 @@
 import 'reflect-metadata';
-import { deserialize } from '../src/engine/deserialize';
-import { Serializable } from '../src/decorators/serializable.decorator';
-import { JsonProp } from '../src/decorators/json-prop.decorator';
+import {deserialize, JsonProp, Serializable} from '../src';
 
 describe('Morphio deserialization engine', () => {
   it('should assign values without JsonProp using fallback', () => {
@@ -24,7 +22,7 @@ describe('Morphio deserialization engine', () => {
     class TestClass {
       name?: string;
 
-      @JsonProp({ type: 'number', required: false })
+      @JsonProp({type: 'number', required: false})
       age?: number;
     }
 

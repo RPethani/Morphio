@@ -1,3 +1,5 @@
+import {PropertyMetadata} from "./decorators/PropertyMetadata";
+
 /**
  * Represents the schema for an object in Morphio.
  * The schema contains metadata about the properties of the object and helps with serialization/deserialization.
@@ -95,49 +97,4 @@ export class MorphioSchema {
   }
 
   // Add more methods as needed for managing schema metadata
-}
-
-/**
- * Describes the metadata associated with a property in a schema.
- * This metadata defines the type, whether the property is required, and any other relevant details.
- */
-interface PropertyMetadata {
-  /**
-   * The type of the property. It can either be a string representing a primitive type,
-   * or a class constructor representing a nested type.
-   *
-   * @type {string | (new () => any)}
-   */
-  type: string | (new () => any);
-
-  /**
-   * Whether this property is required in the schema.
-   * Defaults to `false` if not provided.
-   *
-   * @type {boolean}
-   */
-  required?: boolean;
-
-  /**
-   * A description of the property, explaining its purpose or use.
-   *
-   * @type {string}
-   */
-  description?: string;
-
-  /**
-   * The container type for the property, if applicable.
-   * It could be 'array' or 'map' for properties that hold arrays or maps.
-   *
-   * @type {'array' | 'map'}
-   */
-  container?: 'array' | 'map';
-
-  /**
-   * The type of values within a container (e.g., array or map).
-   * For example, if the property is a `Map<string, Value>`, this will represent `Value`.
-   *
-   * @type {string | (new () => any)}
-   */
-  valueType?: string | (new () => any);
 }

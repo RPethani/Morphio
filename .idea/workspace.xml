@@ -5,7 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7d0f02de-dd15-409d-9ed4-37e30dd76f3f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy-docs.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy-docs.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/decorators/PropertyMetadata.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MorphioSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/MorphioSchema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SchemaRegistry.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/SchemaRegistry.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/decorators/json-prop.decorator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/decorators/json-prop.decorator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/decorators/serializable.decorator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/decorators/serializable.decorator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/deserialize.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/deserialize.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/serialize.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/serialize.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/arrays-maps.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/arrays-maps.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/basics.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/basics.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/blah.test.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/serialize.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/serialize.test.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +91,7 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.docs">
+  <component name="RunManager" selected="npm.test">
     <configuration name="Morphio" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest-cli" />
@@ -131,8 +142,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.docs" />
         <item itemvalue="npm.test" />
+        <item itemvalue="npm.docs" />
         <item itemvalue="npm.prepare" />
         <item itemvalue="Jest.Morphio" />
         <item itemvalue="npm.test" />
@@ -183,7 +194,8 @@
       <workItem from="1742825843216" duration="6000" />
       <workItem from="1742825852129" duration="81000" />
       <workItem from="1742825935165" duration="1074000" />
-      <workItem from="1742827040481" duration="5127000" />
+      <workItem from="1742827040481" duration="6374000" />
+      <workItem from="1742887914780" duration="9173000" />
     </task>
     <task id="LOCAL-00001" summary="Serializable decorator">
       <option name="closed" value="true" />
@@ -337,7 +349,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742882350204</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Docs">
+      <option name="closed" value="true" />
+      <created>1742882751855</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1742882751855</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
