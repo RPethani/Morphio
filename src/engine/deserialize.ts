@@ -1,6 +1,6 @@
-// src/engine/deserialize.ts
-import { SchemaRegistry } from '../SchemaRegistry';
-import { MorphioSchema } from '../MorphioSchema';
+import {SchemaRegistry} from '../SchemaRegistry';
+import {MorphioSchema} from '../MorphioSchema';
+import {ContainerType, PropertyMetadata} from "../decorators/PropertyMetadata";
 
 /**
  * Deserializes a JSON string or object into an instance of the given class type.
@@ -53,73 +53,99 @@ export function deserialize<T>(input: string | object, classType: new () => T): 
  * @param meta The schema metadata for the property.
  * @returns The processed value.
  */
-function handleMetaProperty(value: any, meta: any): any {
-  if (value === undefined || value === null) {
-    if (meta.required) throw new Error(`Missing required property: ${meta.name}`);
-    return value;
+function handleMetaProperty(value: any, meta: PropertyMetadata): any {
+  if (isContainerType(meta.type)) {
+    return handleContainerDeserialization(value, meta.type as ContainerType);
   }
 
-  if (meta.container === 'array') {
-    return handleArray(value, meta);
-  } else if (meta.container === 'map') {
-    return handleMap(value, meta);
-  } else if (typeof meta.type === 'function') {
-    return deserialize(value, meta.type);
-  } else {
-    return coerceType(value, meta.type);
+  if (meta.type instanceof Function) {
+    return deserialize(value, meta.type);  // Recursively deserialize nested objects
   }
+
+  return value;
+}
+
+/**
+ * Type guard to check if the type is a ContainerType (Array or Map).
+ *
+ * @param type The type to check.
+ * @returns True if the type is a ContainerType, otherwise false.
+ */
+function isContainerType(type: any): type is ContainerType {
+  return type && typeof type === 'object' && 'container' in type;
+}
+
+/**
+ * Handles deserialization of container types such as arrays and maps.
+ *
+ * @param value The container value (array or map).
+ * @param container The container type metadata.
+ * @returns The deserialized container.
+ */
+function handleContainerDeserialization(value: any, container: ContainerType): any {
+  if (container.container === 'array' && Array.isArray(value)) {
+    return handleArrayDeserialization(value, container);
+  } else if (container.container === 'map' && value && typeof value === 'object') {
+    return handleMapDeserialization(value, container);
+  }
+
+  return value; // Return as-is if not a container type
 }
 
 /**
  * Handles deserialization of array properties.
  *
  * @param value The array value to process.
- * @param meta The schema metadata for the array property.
+ * @param container The container metadata for the array property.
  * @returns The deserialized array.
  */
-function handleArray(value: any[], meta: any): any[] {
-  return meta.valueType
-    ? value.map(item => {
-      const itemSchema = typeof meta.valueType === 'function' ? SchemaRegistry.getSchema(meta.valueType) : undefined;
-      return itemSchema ? deserialize(item, meta.valueType) : coerceType(item, meta.valueType);
-    })
-    : value;
+function handleArrayDeserialization(value: any[], container: ContainerType): any[] {
+  return value.map((item: any) => {
+    // If itemType is a simple type (string, number, etc.)
+    if (typeof container.itemType === 'string') {
+      return item;
+    }
+
+    // If itemType is a class (custom object), deserialize it recursively
+    if (container.itemType instanceof Function) {
+      return deserialize(item, container.itemType);
+    }
+
+    // If itemType is another container (array or map), handle it recursively
+    if (isContainerType(container.itemType)) {
+      return handleContainerDeserialization(item, container.itemType);
+    }
+
+    return item; // Fallback if no matching condition
+  });
 }
 
 /**
  * Handles deserialization of map properties.
  *
  * @param value The map value to process.
- * @param meta The schema metadata for the map property.
+ * @param container The container metadata for the map property.
  * @returns The deserialized map.
  */
-function handleMap(value: Record<string, any>, meta: any): Map<any, any> {
+function handleMapDeserialization(value: Record<string, any>, container: ContainerType): Map<any, any> {
   const map = new Map();
   for (const [key, val] of Object.entries(value)) {
-    const item = meta.valueType
-      ? deserialize(val, meta.valueType)
-      : val;
-    map.set(key, item);
+    // If itemType is a simple type (string, number, etc.)
+    if (typeof container.itemType === 'string') {
+      map.set(key, val);
+    }
+
+    // If itemType is a class (custom object), deserialize it recursively
+    else if (container.itemType instanceof Function) {
+      map.set(key, deserialize(val, container.itemType));
+    }
+
+    // If itemType is another container (array or map), handle it recursively
+    else if (isContainerType(container.itemType)) {
+      map.set(key, handleContainerDeserialization(val, container.itemType));
+    } else {
+      map.set(key, val); // Fallback if no matching condition
+    }
   }
   return map;
-}
-
-/**
- * Coerces the type of the given value to match the specified target type.
- *
- * This helper function attempts to convert a given value to the target type (e.g.
- * number, string, boolean) based on the provided `type` argument.
- *
- * @param value The value to be coerced into the target type.
- * @param type The target type to coerce the value into (can be a string like 'number' or a function type).
- * @returns The coerced value in the desired type.
- */
-function coerceType(value: any, type: string | Function): any {
-  const targetType = typeof type === 'string' ? type : typeof type();
-  switch (targetType) {
-    case 'number': return Number(value);
-    case 'string': return String(value);
-    case 'boolean': return Boolean(value);
-    default: return value;
-  }
 }

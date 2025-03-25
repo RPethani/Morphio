@@ -1,5 +1,6 @@
 import {SchemaRegistry} from "../SchemaRegistry";
 import {MorphioSchema} from "../MorphioSchema";
+import {ContainerType, PropertyType} from "../decorators/PropertyMetadata";
 
 /**
  * Serializes an instance of a class into a plain object.
@@ -30,7 +31,7 @@ export function serialize(input: any): object {
     const meta = schema?.getProperties().get(key);
 
     if (meta) {
-      serializedObject[key] = handleMetaPropertySerialization(value, meta);
+      serializedObject[key] = handlePropertySerialization(value, meta.type);
     } else {
       // Fallback: serialize properties without metadata
       serializedObject[key] = value;
@@ -66,50 +67,93 @@ export function serializeToString(input: any): string {
  * Handles serialization of a property that has schema metadata, including arrays, maps, and nested objects.
  *
  * @param value The value of the property to serialize.
- * @param meta The schema metadata for the property.
+ * @param propertyType The schema metadata for the property.
  * @returns The serialized value.
  */
-function handleMetaPropertySerialization(value: any, meta: any): any {
-  if (meta.container === 'array' && Array.isArray(value)) {
-    return handleArraySerialization(value, meta);
-  } else if (meta.container === 'map' && value && typeof value === 'object') {
-    return handleMapSerialization(value, meta);
-  } else if (typeof meta.type === 'function') {
+function handlePropertySerialization(value: any, propertyType: PropertyType): any {
+  if (isContainerType(propertyType)) {
+    return handleContainerSerialization(value, propertyType as ContainerType);
+  }
+
+  if (propertyType instanceof Function) {
     return serialize(value);  // Recursively serialize nested objects
-  } else {
-    return value;
   }
+
+  return value;
 }
 
 /**
- * Handles serialization of array properties.
+ * Type guard to check if the type is a ContainerType (Array or Map).
  *
- * @param value The array value to serialize.
- * @param meta The schema metadata for the array property.
- * @returns The serialized array.
+ * @param type The type to check.
+ * @returns True if the type is a ContainerType, otherwise false.
  */
-function handleArraySerialization(value: any[], meta: any): any[] {
-  return meta.valueType
-    ? value.map(item => {
-      const itemSchema = typeof meta.valueType === 'function' ? SchemaRegistry.getSchema(meta.valueType) : undefined;
-      return itemSchema ? serialize(item) : item;
-    })
-    : value;
+function isContainerType(type: any): type is ContainerType {
+  return type && typeof type === 'object' && 'container' in type;
 }
 
 /**
- * Handles serialization of map properties.
+ * Handles serialization of container types such as arrays and maps.
  *
- * @param value The map value to serialize.
- * @param meta The schema metadata for the map property.
- * @returns The serialized map.
+ * @param value The container value (array or map).
+ * @param container The container type metadata.
+ * @returns The serialized container.
  */
-function handleMapSerialization(value: Map<any, any>, meta: any): Record<string, any> {
-  const serializedMap: Record<string, any> = {};
-  for (const [key, val] of value.entries()) {
-    serializedMap[key] = meta.valueType
-      ? serialize(val)
-      : val;
+function handleContainerSerialization(value: any, container: ContainerType): any {
+  if (container.container === 'array' && Array.isArray(value)) {
+    return handleContainerItemSerialization(value, container);
+  } else if (container.container === 'map' && value && typeof value === 'object') {
+    return handleContainerItemSerialization(value, container);
   }
-  return serializedMap;
+
+  return value; // Return as-is if not a container type
+}
+
+/**
+ * A helper method to handle item serialization for both arrays and maps.
+ *
+ * @param value The container value (array or map).
+ * @param container The container metadata.
+ * @returns The serialized container items.
+ */
+function handleContainerItemSerialization(value: any, container: ContainerType): any {
+  if (Array.isArray(value)) {
+    return value.map((item: any) => serializeContainerItem(item, container.itemType));
+  }
+
+  if (value instanceof Map) {
+    const serializedMap: Record<string, any> = {};
+    for (const [key, val] of value.entries()) {
+      serializedMap[key] = serializeContainerItem(val, container.itemType);
+    }
+    return serializedMap;
+  }
+
+  return value; // Fallback if the value is neither an array nor a map
+}
+
+/**
+ * Serialize a single container item based on its type.
+ *
+ * @param item The item to serialize.
+ * @param itemType The type of the item (could be a simple type, class, or another container).
+ * @returns The serialized item.
+ */
+function serializeContainerItem(item: any, itemType: PropertyType): any {
+  // If itemType is a simple type (string, number, etc.), return the item as-is
+  if (typeof itemType === 'string') {
+    return item;
+  }
+
+  // If itemType is a class (custom object), serialize it recursively
+  if (itemType instanceof Function) {
+    return serialize(item);
+  }
+
+  // If itemType is another container (array or map), handle it recursively
+  if (isContainerType(itemType)) {
+    return handleContainerSerialization(item, itemType);
+  }
+
+  return item; // Fallback if no matching condition
 }

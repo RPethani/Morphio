@@ -1,3 +1,7 @@
+export type PropertyType = string | (new () => any) | ContainerType;
+
+
+
 /**
  * Metadata for a property used in serialization and deserialization.
  *
@@ -8,12 +12,14 @@
  */
 export interface PropertyMetadata {
   /**
-   * The type of the property. Can be a string representing a primitive type
-   * or a class constructor representing a complex type.
+   * The type of the property. It can either be:
+   * - A primitive type like `string`, `number`, etc.
+   * - A class constructor function (for custom classes).
+   * - A complex type representing a collection like `Array<Type>` or `Map<KeyType, ValueType>`.
    *
-   * @type {string | (new () => any)}
+   * @type {string | (new () => any) | ContainerType}
    */
-  type: string | (new () => any);
+  type: PropertyType;
 
   /**
    * Whether the property is required in the schema.
@@ -28,20 +34,22 @@ export interface PropertyMetadata {
    * @type {string}
    */
   description?: string;
+}
+
+/**
+ * A type that represents a container structure (Array, Map, etc.) with its elements' types.
+ *
+ * `Array` or `Map` will include nested types in a recursive fashion.
+ */
+export interface ContainerType {
+  /**
+   * The container type, can be 'array' or 'map'.
+   */
+  container: 'array' | 'map';
 
   /**
-   * The container type for the property, used for collections such as arrays and maps.
-   * Can be either 'array' or 'map'.
-   *
-   * @type {'array' | 'map'}
+   * The inner type of the container. For arrays, it represents the type of items inside the array.
+   * For maps, it represents the type of the values inside the map.
    */
-  container?: 'array' | 'map';
-
-  /**
-   * The type of the values inside a container, such as an array or map.
-   * For example, if the property is a `Map<string, Value>`, this would be `Value`.
-   *
-   * @type {string | (new () => any)}
-   */
-  valueType?: string | (new () => any);
+  itemType: PropertyType;  // Recursively handle nested containers
 }
