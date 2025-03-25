@@ -183,7 +183,7 @@
       <workItem from="1742825843216" duration="6000" />
       <workItem from="1742825852129" duration="81000" />
       <workItem from="1742825935165" duration="1074000" />
-      <workItem from="1742827040481" duration="4762000" />
+      <workItem from="1742827040481" duration="5127000" />
     </task>
     <task id="LOCAL-00001" summary="Serializable decorator">
       <option name="closed" value="true" />
@@ -329,7 +329,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742881607941</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Docs">
+      <option name="closed" value="true" />
+      <created>1742882350204</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1742882350204</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
