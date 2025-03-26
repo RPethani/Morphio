@@ -1,5 +1,13 @@
 {
-  "version": "0.1.0-beta.1",
+  "version": "0.1.0-beta.3",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RPethani/Morphio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RPethani/Morphio/issues"
+  },
+  "homepage": "https://rpethani.github.io/Morphio/",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
