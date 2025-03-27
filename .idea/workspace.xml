@@ -6,17 +6,29 @@
   <component name="ChangeListManager">
     <list default="true" id="7d0f02de-dd15-409d-9ed4-37e30dd76f3f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MorphioSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/MorphioSchema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SchemaRegistry.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/SchemaRegistry.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/decorators/PropertyMetadata.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/decorators/PropertyMetadata.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/decorators/json-prop.decorator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/decorators/json-prop.decorator.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/decorators/serializable.decorator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/decorators/serializable.decorator.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/deserialize.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/deserialize.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/serialize.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/serialize.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.nojekyll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/hierarchy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/highlight.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/icons.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/icons.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/navigation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/search.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/classes/MorphioSchema.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/functions/JsonProp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/functions/Serializable.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/functions/deserialize.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/functions/serialize.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/hierarchy.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/interfaces/JsonPropOptions.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/interfaces/SerializableOptions.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/media/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/media/morphio.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/modules.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/typedoc.json" beforeDir="false" afterPath="$PROJECT_DIR$/typedoc.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +80,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "com.codeium.enabled": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "develop",
     "js.last.introduce.type": "CONST",
     "last_opened_file_path": "/Users/rakeshpethani/Workspaces/Morphio",
     "node.js.detected.package.eslint": "true",
@@ -200,7 +212,7 @@
       <workItem from="1742825935165" duration="1074000" />
       <workItem from="1742827040481" duration="6374000" />
       <workItem from="1742887914780" duration="9173000" />
-      <workItem from="1743071525585" duration="13077000" />
+      <workItem from="1743071525585" duration="14172000" />
     </task>
     <task id="LOCAL-00001" summary="Serializable decorator">
       <option name="closed" value="true" />
