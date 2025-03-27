@@ -1,7 +1,4 @@
-import {
-  PropertyMetadata,
-  PropertyType,
-} from '../../decorators/PropertyMetadata';
+import { PropertyMetadata, PropertyType } from '../../schema';
 import { ProcessorContext } from './ProcessorContext';
 import { ValueProcessor } from './ValueProcessor';
 

@@ -1,8 +1,5 @@
 import { ValueProcessor } from './ValueProcessor';
-import {
-  PropertyMetadata,
-  PropertyType,
-} from '../../decorators/PropertyMetadata';
+import { PropertyMetadata, PropertyType } from '../../schema';
 
 /**
  * Interface for providing context to value processors during serialization/deserialization.

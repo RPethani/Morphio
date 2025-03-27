@@ -1,7 +1,4 @@
-import {
-  PropertyMetadata,
-  PropertyType,
-} from '../../decorators/PropertyMetadata';
+import { PropertyMetadata, PropertyType } from '../../schema';
 
 /**
  * Interface for processing values during serialization and deserialization.

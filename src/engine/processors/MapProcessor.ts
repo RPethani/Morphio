@@ -1,8 +1,4 @@
-import {
-  ContainerType,
-  PropertyMetadata,
-  PropertyType,
-} from '../../decorators/PropertyMetadata';
+import { ContainerType, PropertyMetadata, PropertyType } from '../../schema';
 import { BaseProcessor } from './BaseProcessor';
 import { ProcessorContext } from './ProcessorContext';
 

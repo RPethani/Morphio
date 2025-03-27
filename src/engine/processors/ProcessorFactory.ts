@@ -1,4 +1,4 @@
-import { PropertyType } from '../../decorators/PropertyMetadata';
+import { PropertyType } from '../../schema';
 import { ArrayProcessor } from './ArrayProcessor';
 import { ClassProcessor } from './ClassProcessor';
 import { MapProcessor } from './MapProcessor';

@@ -1,5 +1,4 @@
-import { SchemaRegistry } from '../SchemaRegistry';
-import { PropertyMetadata } from './PropertyMetadata';
+import { PropertyMetadata, SchemaRegistry, SchemaOps } from '../schema';
 
 /**
  * A decorator function that adds metadata to a class property.
@@ -23,6 +22,10 @@ export function JsonProp(options: PropertyMetadata) {
     const schema = SchemaRegistry.getOrCreate(target.constructor);
 
     // Add property metadata to the schema
-    schema.addProperty(propertyKey, options);
+    SchemaOps.addProperty(schema, propertyKey.toString(), {
+      type: options?.type || Reflect.getMetadata('design:type', target, propertyKey),
+      required: options?.required ?? true,
+      description: options?.description
+    });
   };
 }

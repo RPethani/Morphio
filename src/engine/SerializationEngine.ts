@@ -1,9 +1,7 @@
 import { ProcessorContext } from './processors/ProcessorContext';
 import { ValueProcessor } from './processors/ValueProcessor';
 import { ProcessorFactory } from './processors/ProcessorFactory';
-import { PropertyType } from '../decorators/PropertyMetadata';
-import { SchemaRegistry } from '../SchemaRegistry';
-import { MorphioSchema } from '../MorphioSchema';
+import { MorphioSchema, PropertyType, SchemaRegistry } from '../schema';
 
 /**
  * The main engine responsible for serialization and deserialization of objects.
@@ -45,14 +43,20 @@ export class SerializationEngine implements ProcessorContext {
   serialize(input: any): object {
     if (input === null || input === undefined) return {};
 
-    const serializedObject: Record<string, any> = {};
     const schema: MorphioSchema | undefined = SchemaRegistry.getSchema(
       input.constructor
     );
 
+    if (!schema) {
+      return input;
+    }
+
+    const serializedObject: Record<string, any> = {};
+    const properties = schema.properties;
+
     for (const key of Object.keys(input)) {
       const value = input[key];
-      const meta = schema?.getProperties().get(key);
+      const meta = properties.get(key);
 
       if (meta) {
         const processor = this.findProcessor(meta.type);
@@ -76,11 +80,17 @@ export class SerializationEngine implements ProcessorContext {
   deserialize<T>(input: Record<string, any>, type: new () => T): T {
     if (!input) return new type();
 
-    const instance = new type() as Record<string, any>;
     const schema: MorphioSchema | undefined = SchemaRegistry.getSchema(type);
 
+    if (!schema) {
+      throw new Error(`No schema found for type ${type.name}`);
+    }
+
+    const instance = new type() as Record<string, any>;
+    const properties = schema.properties;
+
     for (const [key, value] of Object.entries(input)) {
-      const meta = schema?.getProperties().get(key);
+      const meta = properties.get(key);
 
       if (meta) {
         const processor = this.findProcessor(meta.type);

@@ -15,17 +15,20 @@
  * @module morphio
  */
 
-// Core serialization/deserialization functions
-export * from './engine/serialize';
-export * from './engine/deserialize';
+// Core exports
+export { serialize } from './engine/serialize';
+export { deserialize } from './engine/deserialize';
 
-// Decorators for class and property definitions
-export * from './decorators/serializable.decorator';
-export * from './decorators/json-prop.decorator';
+// Decorators
+export { JsonProp } from './decorators/json-prop.decorator';
+export { Serializable } from './decorators/serializable.decorator';
 
-// Types for property metadata
+// Types
 export {
+  MorphioSchema,
   PropertyMetadata,
   PropertyType,
   ContainerType,
-} from './decorators/PropertyMetadata';
+  SchemaRegistry,
+  SchemaOps,
+} from './schema';
