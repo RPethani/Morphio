@@ -10,7 +10,7 @@
  *
  * ## Table of Contents
  *
- * 1. {@link GettingStarted | Getting Started}
+ * 1. Getting Started
  *    - Installation
  *    - Basic Usage
  *    - Quick Examples
@@ -21,16 +21,16 @@
  *    - Decorators
  *
  * 3. API Reference
- *    - {@link Serializable | @Serializable}
- *    - {@link JsonProp | @JsonProp}
- *    - {@link serialize | serialize/deserialize}
+ *    - `@Serializable` decorator
+ *    - `@JsonProp` decorator
+ *    - `serialize` and `deserialize` functions
  *
  * 4. Advanced Usage
  *    - Custom Type Handling
  *    - Arrays and Maps
  *    - Nested Objects
  *
- * 5. {@link Contributing | Contributing}
+ * 5. Contributing
  *    - Development Setup
  *    - Code Style
  *    - Testing
