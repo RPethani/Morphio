@@ -1,5 +1,6 @@
 import { MorphioSchema } from '../types/MorphioSchema';
 import { Constructor, PropertyMetadata } from '../types/PropertyMetadata';
+import { SchemaRegistry } from '../registry/SchemaRegistry';
 
 /**
  * Operations for managing MorphioSchema instances.
@@ -174,3 +175,50 @@ export const SchemaOps = {
     );
   },
 };
+
+/**
+ * Creates and registers a schema for an interface type.
+ * This is a convenience function that combines schema creation, property registration,
+ * and schema registration into a single call.
+ * 
+ * @example
+ * ```typescript
+ * interface Person {
+ *   name: string;
+ *   age: number;
+ * }
+ * 
+ * morphioSchema('Person', {
+ *   name: { type: 'string', required: true },
+ *   age: { type: 'number', required: true }
+ * });
+ * ```
+ * 
+ * @param name - The name of the interface
+ * @param properties - Map of property names to their metadata
+ * @param options - Optional schema configuration
+ * @returns The created and registered schema
+ */
+export function morphioSchema(
+  name: string,
+  properties: Record<string, PropertyMetadata>,
+  options?: {
+    discriminator?: string;
+    discriminatorValue?: string;
+    implementation?: Constructor;
+    extends?: MorphioSchema[];
+  }
+): MorphioSchema {
+  // Create the schema
+  const schema = SchemaOps.create(name, { isInterface: true, ...options });
+
+  // Add all properties
+  for (const [key, meta] of Object.entries(properties)) {
+    SchemaOps.addProperty(schema, key, meta);
+  }
+
+  // Register the schema
+  SchemaRegistry.registerSchema(name, schema);
+
+  return schema;
+}

@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import {deserialize, JsonProp, Serializable} from '../src';
+import { deserialize, JsonProp, Serializable } from '../src';
 
 describe('Morphio deserialization engine', () => {
   it('should assign values without JsonProp using fallback', () => {
@@ -11,7 +11,7 @@ describe('Morphio deserialization engine', () => {
 
     const jsonString = '{"name": "John Doe", "age": 30}';
     const result = deserialize(jsonString, TestClass);
-
+    console.log(result);
     expect(result).toBeInstanceOf(TestClass);
     expect(result.name).toBe('John Doe');
     expect(result.age).toBe(30);
@@ -22,7 +22,7 @@ describe('Morphio deserialization engine', () => {
     class TestClass {
       name?: string;
 
-      @JsonProp({type: 'number', required: false})
+      @JsonProp({ type: 'number', required: false })
       age?: number;
     }
 

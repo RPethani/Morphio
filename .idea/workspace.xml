@@ -4,31 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d0f02de-dd15-409d-9ed4-37e30dd76f3f" name="Changes" comment="">
+    <list default="true" id="7d0f02de-dd15-409d-9ed4-37e30dd76f3f" name="Changes" comment="Docs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/.nojekyll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/hierarchy.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/highlight.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/icons.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/icons.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/navigation.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/search.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/MorphioSchema.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/functions/JsonProp.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/functions/Serializable.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/functions/deserialize.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/functions/serialize.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/hierarchy.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/JsonPropOptions.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/SerializableOptions.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/media/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/media/morphio.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/typedoc.json" beforeDir="false" afterPath="$PROJECT_DIR$/typedoc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/SerializationEngine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/SerializationEngine.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/processors/ClassProcessor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/processors/ClassProcessor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/processors/ProcessorFactory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/processors/ProcessorFactory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/schema/operations/SchemaOps.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/schema/operations/SchemaOps.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/schema/registry/SchemaRegistry.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/schema/registry/SchemaRegistry.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/schema/types/MorphioSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/schema/types/MorphioSchema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/basics.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/basics.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/serialize.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/serialize.test.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +45,16 @@
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/RPethani/Morphio.git&quot;,
     &quot;accountId&quot;: &quot;070734c5-6399-4b48-ae62-006d0216f960&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;RPethani&quot;,
+    &quot;repository&quot;: &quot;Morphio&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -80,7 +75,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "com.codeium.enabled": "true",
-    "git-widget-placeholder": "develop",
+    "git-widget-placeholder": "feature/interface-serialization",
     "js.last.introduce.type": "CONST",
     "last_opened_file_path": "/Users/rakeshpethani/Workspaces/Morphio",
     "node.js.detected.package.eslint": "true",
@@ -212,7 +207,8 @@
       <workItem from="1742825935165" duration="1074000" />
       <workItem from="1742827040481" duration="6374000" />
       <workItem from="1742887914780" duration="9173000" />
-      <workItem from="1743071525585" duration="14172000" />
+      <workItem from="1743071525585" duration="16002000" />
+      <workItem from="1743099176808" duration="9134000" />
     </task>
     <task id="LOCAL-00001" summary="Serializable decorator">
       <option name="closed" value="true" />
@@ -389,6 +385,16 @@
     <option name="LAST_COMMIT_MESSAGE" value="Docs" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/basics.test.ts</url>
+          <line>12</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="js.build_tools.npm">
         <watch expression="Object.getOwnPropertyDescriptors(instance)" language="TypeScript" />

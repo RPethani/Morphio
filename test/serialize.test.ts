@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import {JsonProp, Serializable, serialize} from '../src';
+import { JsonProp, Serializable, serialize } from '../src';
 
 describe('Morphio serialization engine', () => {
   it('should serialize a class without JsonProp using fallback', () => {
@@ -14,19 +14,19 @@ describe('Morphio serialization engine', () => {
     user.age = 28;
 
     const json = serialize(user);
-    expect(json).toEqual({name: 'Jane', age: 28});
+    expect(json).toEqual({ name: 'Jane', age: 28 });
   });
 
   it('should respect JsonProp decorator and skip undefined/null values', () => {
     @Serializable()
     class DecoratedUser {
-      @JsonProp({type: 'string'})
+      @JsonProp({ type: 'string' })
       name?: string;
 
-      @JsonProp({type: 'number'})
+      @JsonProp({ type: 'number' })
       age?: number;
 
-      @JsonProp({type: 'string'})
+      @JsonProp({ type: 'string' })
       email?: string;
     }
 
@@ -36,22 +36,22 @@ describe('Morphio serialization engine', () => {
     user.email = undefined;
 
     const json = serialize(user);
-    expect(json).toEqual({name: 'Tom', age: 32});
+    expect(json).toEqual({ name: 'Tom', age: 32 });
   });
 
   it('should serialize nested objects if they are serializable', () => {
     @Serializable()
     class Address {
-      @JsonProp({type: 'string'})
+      @JsonProp({ type: 'string' })
       city!: string;
     }
 
     @Serializable()
     class Person {
-      @JsonProp({type: 'string'})
+      @JsonProp({ type: 'string' })
       name!: string;
 
-      @JsonProp({type: Address})
+      @JsonProp({ type: Address })
       address!: Address;
     }
 
@@ -61,6 +61,6 @@ describe('Morphio serialization engine', () => {
     person.address.city = 'Mumbai';
 
     const json = serialize(person);
-    expect(json).toEqual({name: 'Sara', address: {city: 'Mumbai'}});
+    expect(json).toEqual({ name: 'Sara', address: { city: 'Mumbai' } });
   });
 });

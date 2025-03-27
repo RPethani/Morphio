@@ -109,6 +109,9 @@ export interface MorphioSchema {
    */
   extends?: MorphioSchema[];
 
+  /** Names of interfaces that this schema implements */
+  implementedInterfaces?: string[];
+
   /**
    * For interface types, specifies a concrete class implementation to always use.
    * This is an alternative to discriminator-based resolution.

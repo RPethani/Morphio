@@ -1,4 +1,4 @@
-import { PropertyType } from '../../schema';
+import { PropertyType, SchemaRegistry } from '../../schema';
 import { ArrayProcessor } from './ArrayProcessor';
 import { ClassProcessor } from './ClassProcessor';
 import { MapProcessor } from './MapProcessor';
@@ -17,7 +17,7 @@ export enum ProcessorType {
   ARRAY = 'array',
   /** For processing Map objects */
   MAP = 'map',
-  /** For processing class instances */
+  /** For processing class instances and interfaces */
   CLASS = 'class',
 }
 
@@ -56,7 +56,7 @@ export class ProcessorFactory {
    * Gets the singleton instance of ProcessorFactory.
    * Creates a new instance if one doesn't exist.
    *
-   * @param context - The context to pass to the factory
+   * @param context - The context to pass to created processors
    * @returns The singleton ProcessorFactory instance
    */
   static getInstance(context: ProcessorContext): ProcessorFactory {
@@ -64,16 +64,6 @@ export class ProcessorFactory {
       ProcessorFactory.instance = new ProcessorFactory(context);
     }
     return ProcessorFactory.instance;
-  }
-
-  /**
-   * Gets a processor by its type.
-   *
-   * @param type - The type of processor to get
-   * @returns The processor instance or undefined if not found
-   */
-  getProcessor(type: ProcessorType): ValueProcessor | undefined {
-    return this.processorMap.get(type);
   }
 
   /**
@@ -109,8 +99,17 @@ export class ProcessorFactory {
       }
     }
 
-    // Check for class types
-    if (propertyType instanceof Function) {
+    // Check for class types and interfaces
+    if (typeof propertyType === 'string') {
+      // Check if it's an interface
+      const schema = SchemaRegistry.getSchema(propertyType);
+      if (schema) {
+        return (
+          this.processorMap.get(ProcessorType.CLASS) ||
+          new ClassProcessor(this.context)
+        );
+      }
+    } else if (propertyType instanceof Function) {
       return (
         this.processorMap.get(ProcessorType.CLASS) ||
         new ClassProcessor(this.context)

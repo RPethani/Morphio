@@ -47,4 +47,30 @@ export class SchemaRegistry {
   static getSchema(target: TypeIdentifier): MorphioSchema | undefined {
     return this.schemas.get(target);
   }
+
+  /**
+   * Finds an implementation schema for an interface based on discriminator value
+   *
+   * @param interfaceName - The name of the interface
+   * @param discriminatorValue - The value of the discriminator field
+   * @returns The schema for the matching implementation or undefined if not found
+   */
+  static findImplementation(
+    interfaceName: string,
+    discriminatorValue: any
+  ): MorphioSchema | undefined {
+    const interfaceSchema = Array.from(this.schemas.values()).find(
+      (schema) => schema.name === interfaceName
+    );
+
+    if (!interfaceSchema) {
+      return undefined;
+    }
+
+    return Array.from(this.schemas.values()).find(
+      (schema) =>
+        schema.implementedInterfaces?.includes(interfaceName) &&
+        schema.discriminatorValue === discriminatorValue
+    );
+  }
 }
