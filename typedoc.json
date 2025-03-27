@@ -17,6 +17,6 @@
   },
   "categorizeByGroup": true,
   "searchInComments": true,
-  "readme": "modules/Documentation.html",
+  "readme": "README.md",
   "sort": ["source-order"]
 }
