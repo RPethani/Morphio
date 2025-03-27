@@ -1,8 +1,22 @@
 {
-  "entryPoints": ["src/index.ts"],
+  "entryPoints": [
+    "src/index.ts",
+    "src/docs/index.ts",
+    "src/docs/getting-started.ts",
+    "src/docs/contributing.ts"
+  ],
   "out": "docs",
   "exclude": ["**/test/**"],
   "hideGenerator": true,
   "theme": "default",
-  "includeVersion": true
+  "includeVersion": true,
+  "navigationLinks": {
+    "GitHub": "https://github.com/RPethani/Morphio",
+    "Getting Started": "modules/GettingStarted.html",
+    "Contributing": "modules/Contributing.html"
+  },
+  "categorizeByGroup": true,
+  "searchInComments": true,
+  "readme": "modules/Documentation.html",
+  "sort": ["source-order"]
 }
