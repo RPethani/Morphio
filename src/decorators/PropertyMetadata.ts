@@ -1,7 +1,5 @@
 export type PropertyType = string | (new () => any) | ContainerType;
 
-
-
 /**
  * Metadata for a property used in serialization and deserialization.
  *
@@ -51,5 +49,5 @@ export interface ContainerType {
    * The inner type of the container. For arrays, it represents the type of items inside the array.
    * For maps, it represents the type of the values inside the map.
    */
-  itemType: PropertyType;  // Recursively handle nested containers
+  itemType: PropertyType; // Recursively handle nested containers
 }

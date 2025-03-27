@@ -1,4 +1,4 @@
-import {PropertyMetadata} from "./decorators/PropertyMetadata";
+import { PropertyMetadata } from './decorators/PropertyMetadata';
 
 /**
  * Represents the schema for an object in Morphio.
@@ -17,7 +17,6 @@ import {PropertyMetadata} from "./decorators/PropertyMetadata";
  * ```
  */
 export class MorphioSchema {
-
   /**
    * The name of the schema, typically the name of the class it represents.
    *

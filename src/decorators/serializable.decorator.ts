@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import {SchemaRegistry} from "../SchemaRegistry";
+import { SchemaRegistry } from '../SchemaRegistry';
 
 /**
  * A decorator to mark a class as serializable, enabling it to be serialized and deserialized.
@@ -20,15 +20,14 @@ import {SchemaRegistry} from "../SchemaRegistry";
  * ```
  * In this example, the `User` class is marked as serializable and given the custom name `CustomUser`.
  *
- * @param options Optional configuration options for the `Serializable` decorator.
  * @returns A decorator function that can be applied to a class constructor.
+ * @param name - The custom name to give the schema for the class. If not provided, the class's constructor name will be used as the default name.
  */
 
-
-export function Serializable(options?: SerializableOptions) {
-  return function (constructor: Function) {
-    const schema = SchemaRegistry.getOrCreate(constructor);
-    schema.setName(options?.name || constructor.name);
+export function Serializable(name?: string) {
+  return function (target: new () => any) {
+    const schema = SchemaRegistry.getOrCreate(target);
+    schema.setName(name || target.name);
   };
 }
 

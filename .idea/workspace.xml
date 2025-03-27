@@ -5,18 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7d0f02de-dd15-409d-9ed4-37e30dd76f3f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/decorators/PropertyMetadata.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MorphioSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/MorphioSchema.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SchemaRegistry.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/SchemaRegistry.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/decorators/PropertyMetadata.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/decorators/PropertyMetadata.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/decorators/json-prop.decorator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/decorators/json-prop.decorator.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/decorators/serializable.decorator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/decorators/serializable.decorator.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/deserialize.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/deserialize.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/serialize.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/serialize.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/arrays-maps.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/arrays-maps.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/basics.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/basics.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/blah.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/serialize.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/serialize.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,10 +69,13 @@
     "RunOnceActivity.git.unshallow": "true",
     "com.codeium.enabled": "true",
     "git-widget-placeholder": "main",
+    "js.last.introduce.type": "CONST",
     "last_opened_file_path": "/Users/rakeshpethani/Workspaces/Morphio",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs.jest.jest_package": "/Users/rakeshpethani/Workspaces/Morphio/node_modules/jest-cli",
     "nodejs_interpreter_path": "node",
@@ -80,7 +83,8 @@
     "npm.docs.executor": "Run",
     "npm.prepare.executor": "Run",
     "npm.test.executor": "Run",
-    "settings.editor.selected.configurable": "dev.turingcomplete.intellijdevelopertoolsplugin._internal.settings.DeveloperToolsConfigurable",
+    "prettierjs.PrettierConfiguration.Package": "/Users/rakeshpethani/Workspaces/Morphio/node_modules/prettier",
+    "settings.editor.selected.configurable": "preferences.sourceCode.TypeScript",
     "ts.external.directory.path": "/Users/rakeshpethani/Workspaces/Morphio/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -196,6 +200,7 @@
       <workItem from="1742825935165" duration="1074000" />
       <workItem from="1742827040481" duration="6374000" />
       <workItem from="1742887914780" duration="9173000" />
+      <workItem from="1743071525585" duration="13077000" />
     </task>
     <task id="LOCAL-00001" summary="Serializable decorator">
       <option name="closed" value="true" />
