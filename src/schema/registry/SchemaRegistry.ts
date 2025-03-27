@@ -1,5 +1,6 @@
 import { MorphioSchema } from '../types/MorphioSchema';
 import { SchemaOps } from '../operations/SchemaOps';
+import { TypeIdentifier } from '../types/PropertyMetadata';
 
 /**
  * A registry that maintains the mapping between types (classes/interfaces) and their schemas.
@@ -9,8 +10,7 @@ export class SchemaRegistry {
    * Map of type constructors or interface names to their schemas
    * @private
    */
-  private static schemas: Map<new () => any | string, MorphioSchema> =
-    new Map();
+  private static schemas: Map<TypeIdentifier, MorphioSchema> = new Map();
 
   /**
    * Registers a schema for a type
@@ -18,41 +18,33 @@ export class SchemaRegistry {
    * @param target - The class constructor or interface name
    * @param schema - The schema to register
    */
-  static registerSchema(
-    target: new () => any | string,
-    schema: MorphioSchema
-  ): void {
+  static registerSchema(target: TypeIdentifier, schema: MorphioSchema): void {
     this.schemas.set(target, schema);
   }
 
   /**
-   * Gets the schema for a type
+   * Gets or creates a schema for a type
    *
    * @param target - The class constructor or interface name
-   * @returns The schema if found, undefined otherwise
+   * @returns The schema for the type
    */
-  static getSchema(target: new () => any | string): MorphioSchema | undefined {
-    return this.schemas.get(target);
+  static getOrCreate(target: TypeIdentifier): MorphioSchema {
+    let schema = this.schemas.get(target);
+    if (!schema) {
+      const name = typeof target === 'string' ? target : target.name;
+      schema = SchemaOps.create(name);
+      this.schemas.set(target, schema);
+    }
+    return schema;
   }
 
   /**
-   * Gets an existing schema or creates a new one
+   * Gets a schema for a type if it exists
    *
    * @param target - The class constructor or interface name
-   * @param name - Optional name for the schema
-   * @returns The existing or newly created schema
+   * @returns The schema for the type or undefined if not found
    */
-  static getOrCreate(
-    target: new () => any | string,
-    name?: string
-  ): MorphioSchema {
-    let schema = this.getSchema(target);
-    if (!schema) {
-      schema = SchemaOps.create(
-        name ?? (typeof target === 'string' ? target : target.name)
-      );
-      this.registerSchema(target, schema);
-    }
-    return schema;
+  static getSchema(target: TypeIdentifier): MorphioSchema | undefined {
+    return this.schemas.get(target);
   }
 }
