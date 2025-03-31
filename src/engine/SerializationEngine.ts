@@ -2,10 +2,12 @@ import { ProcessorContext } from './processors/ProcessorContext';
 import { ValueProcessor } from './processors/ValueProcessor';
 import { ProcessorFactory } from './processors/ProcessorFactory';
 import {
+  MorphioSchema,
+  ObjectType,
+  PropertyMetadata,
   PropertyType,
   SchemaOps,
   SchemaRegistry,
-  TypeIdentifier,
 } from '../schema';
 
 /**
@@ -44,32 +46,28 @@ export class SerializationEngine implements ProcessorContext {
    * For interface implementations, includes discriminator field.
    *
    * @param input - The object to serialize
+   * @param objectType - The type of the value being serialized
+   * @param _meta - Optional metadata about the property being serialized
    * @returns A plain object with serialized properties
    */
-  serialize(input: any): Record<string, any> {
+  serialize(
+    input: any,
+    objectType?: ObjectType,
+    _meta?: PropertyMetadata
+  ): Record<string, any> {
     if (input === null || input === undefined) return {};
 
-    const schema = SchemaRegistry.getOrCreate(input.constructor);
+    const schema = SchemaRegistry.getOrCreate(objectType ?? input.constructor);
     if (!schema) {
       return Object.assign({}, input);
     }
 
+    return this.serializeWithSchema(schema, input);
+  }
+
+  private serializeWithSchema(schema: MorphioSchema, input: any) {
     const serializedObject: Record<string, any> = {};
     const allProperties = SchemaOps.getProperties(schema);
-
-    // Add discriminator value if this is an interface implementation
-    if (
-      schema.discriminatorValue &&
-      schema.extends?.some((s) => s.discriminator)
-    ) {
-      const parentWithDiscriminator = schema.extends.find(
-        (s) => s.discriminator
-      );
-      if (parentWithDiscriminator?.discriminator) {
-        serializedObject[parentWithDiscriminator.discriminator] =
-          schema.discriminatorValue;
-      }
-    }
 
     // Copy all properties from input
     for (const [key, value] of Object.entries(input)) {
@@ -79,13 +77,12 @@ export class SerializationEngine implements ProcessorContext {
       const meta = allProperties.get(key);
       if (meta) {
         const processor = this.findProcessor(meta.type);
-        serializedObject[key] = processor.serialize(value, meta.type, meta);
+        serializedObject[key] = processor.serialize(value, meta.type);
       } else {
         // No metadata, copy value directly
         serializedObject[key] = value;
       }
     }
-
     return serializedObject;
   }
 
@@ -98,7 +95,7 @@ export class SerializationEngine implements ProcessorContext {
    * @param type - The constructor function or interface name
    * @returns The deserialized object
    */
-  deserialize<T>(input: Record<string, any>, type: TypeIdentifier): T {
+  deserialize<T>(input: Record<string, any>, type: ObjectType): T {
     if (!input) {
       if (typeof type === 'function') {
         return new type() as T;
@@ -107,56 +104,43 @@ export class SerializationEngine implements ProcessorContext {
     }
 
     const schema = SchemaRegistry.getOrCreate(type);
+    // Handle no schema
     if (!schema) {
-      // If no schema, just copy all properties directly
-      if (typeof type === 'function') {
-        const instance = new type();
-        return Object.assign(instance as object, input) as T;
-      }
-      return Object.assign({}, input) as T;
+      return this.deserializeWithoutSchema<T>(input, type);
     }
 
-    // For interface types, we don't need to create an instance
-    if (typeof type === 'string') {
-      return input as T;
+    // Handle schema
+    return this.deserializeForSchema<T>(schema, input, type);
+  }
+
+  private deserializeWithoutSchema<T>(
+    input: Record<string, any>,
+    type: ObjectType
+  ): T {
+    // If no schema, just copy all properties directly
+
+    // If type is a function, create an instance
+    if (typeof type === 'function') {
+      const instance = new type();
+      return Object.assign(instance as object, input) as T;
     }
 
-    const instance = new type();
+    // If type is an interface, just return the input
+    return Object.assign({}, input) as T;
+  }
 
-    // Handle interface implementations
-    if (schema.isInterface) {
-      // If there's a default implementation, use it
-      if (schema.implementation) {
-        return this.deserialize(input, schema.implementation);
-      }
-
-      // If there's no discriminator, we can't determine the implementation
-      if (!schema.discriminator) {
-        throw new Error(
-          `No discriminator or default implementation found for interface ${schema.name}`
-        );
-      }
-
-      // Get discriminator value from input
-      const discriminatorValue = input[schema.discriminator];
-      if (!discriminatorValue) {
-        throw new Error(
-          `Missing discriminator value for interface ${schema.name}`
-        );
-      }
-
-      // Find implementation schema with matching discriminator value
-      const implementationSchema = SchemaRegistry.findImplementation(
-        schema.name,
-        discriminatorValue
-      );
-      if (!implementationSchema) {
-        throw new Error(
-          `No implementation found for interface ${schema.name} with discriminator value ${discriminatorValue}`
-        );
-      }
-
-      return this.deserialize(input, implementationSchema.implementation!);
+  private deserializeForSchema<T>(
+    schema: MorphioSchema,
+    input: Record<string, any>,
+    type: ObjectType
+  ): T {
+    let instance;
+    if (typeof type === 'function') {
+      // class
+      instance = new type();
+    } else {
+      // interface
+      instance = {};
     }
 
     // Get registered properties from schema
@@ -172,15 +156,13 @@ export class SerializationEngine implements ProcessorContext {
         const processor = this.findProcessor(meta.type);
         (instance as Record<string, any>)[key] = processor.deserialize(
           value,
-          meta.type,
-          meta
+          meta.type
         );
       } else {
         // No metadata, assign value directly
         (instance as Record<string, any>)[key] = value;
       }
     }
-
     return instance as T;
   }
 

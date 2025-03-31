@@ -1,5 +1,5 @@
 import { ValueProcessor } from './ValueProcessor';
-import { PropertyMetadata, PropertyType } from '../../schema';
+import { ObjectType, PropertyType } from '../../schema';
 
 /**
  * Interface for providing context to value processors during serialization/deserialization.
@@ -19,27 +19,17 @@ export interface ProcessorContext {
    * Deserializes a value using the appropriate processor for its type.
    *
    * @param value - The value to deserialize
-   * @param propertyType - The target type to deserialize to
-   * @param meta - Optional metadata about the property being deserialized
+   * @param objectType - The target type to deserialize to
    * @returns The deserialized value
    */
-  deserialize(
-    value: any,
-    propertyType: PropertyType,
-    meta?: PropertyMetadata
-  ): any;
+  deserialize(value: any, objectType: ObjectType): any;
 
   /**
    * Serializes a value using the appropriate processor for its type.
    *
    * @param value - The value to serialize
-   * @param propertyType - The type of the value being serialized
-   * @param meta - Optional metadata about the property being serialized
+   * @param objectType
    * @returns The serialized value
    */
-  serialize(
-    value: any,
-    propertyType: PropertyType,
-    meta?: PropertyMetadata
-  ): any;
+  serialize(value: any, objectType?: ObjectType): any;
 }

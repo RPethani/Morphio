@@ -15,6 +15,8 @@
  * @module morphio
  */
 
+import './polyfills/symbol-metadata-polyfill';
+
 // Core exports
 export { serialize } from './engine/serialize';
 export { deserialize } from './engine/deserialize';

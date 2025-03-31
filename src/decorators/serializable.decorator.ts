@@ -1,33 +1,41 @@
 import 'reflect-metadata';
-import { SchemaRegistry, SchemaOps } from '../schema';
+import { SchemaOps, SchemaRegistry } from '../schema';
 
 /**
- * A decorator to mark a class as serializable, enabling it to be serialized and deserialized.
+ * A decorator to mark a class as serializable and process its property metadata.
  *
- * This decorator registers a schema for the class, allowing the Morphio library to
- * understand how to serialize and deserialize instances of this class. It also allows
- * for customization of the schema name via the `options` parameter.
+ * This decorator performs two main functions:
+ * 1. Registers a schema for the class in the SchemaRegistry
+ * 2. Processes all property metadata collected by @JsonProp decorators
  *
- * The decorator uses the `SchemaRegistry` to create or fetch a schema and assign it a name.
+ * The decorator looks for a Map of property metadata in context.metadata.properties,
+ * which is populated by the @JsonProp decorators. It then registers each property
+ * with the class schema.
  *
  * Example usage:
  * ```ts
  * @Serializable({ name: 'CustomUser' })
  * class User {
- *   @JsonProp({ type: 'string' }) name: string;
- *   @JsonProp({ type: 'string' }) email: string;
+ *   @JsonProp({ type: 'string', required: true })
+ *   name: string;
+ *
+ *   @JsonProp({ type: 'number', description: 'User age' })
+ *   age?: number;
  * }
  * ```
- * In this example, the `User` class is marked as serializable and given the custom name `CustomUser`.
  *
- * @returns A decorator function that can be applied to a class constructor.
- * @param options - The options to customize the schema for the class. If not provided, the class's constructor name will be used as the default name.
+ * @param options - Configuration options
+ * @returns A decorator function that processes class and property metadata
  */
-
-export function Serializable(options?: { name?: string }) {
-  return function (target: new () => any) {
+export function Serializable(options?: SerializableOptions) {
+  return function (target: new () => any, context: ClassDecoratorContext) {
     const schema = SchemaRegistry.getOrCreate(target);
     SchemaOps.setName(schema, options?.name || target.name);
+    if (context.metadata && context.metadata?.properties instanceof Map) {
+      context.metadata.properties.forEach((metadata, key) => {
+        SchemaOps.addProperty(schema, key, metadata);
+      });
+    }
   };
 }
 

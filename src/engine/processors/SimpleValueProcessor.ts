@@ -1,4 +1,4 @@
-import { PropertyMetadata, PropertyType } from '../../schema';
+import { PropertyType } from '../../schema';
 import { BaseProcessor } from './BaseProcessor';
 import { ProcessorContext } from './ProcessorContext';
 
@@ -17,14 +17,9 @@ export class SimpleValueProcessor extends BaseProcessor {
    *
    * @param value - The value to deserialize
    * @param propertyType - The target type to deserialize to (as a string)
-   * @param _meta - Optional metadata (unused in simple value processing)
    * @returns The deserialized value converted to its target type
    */
-  deserialize(
-    value: any,
-    propertyType: PropertyType,
-    _meta?: PropertyMetadata
-  ): any {
+  deserialize(value: any, propertyType: PropertyType): any {
     if (value === null || value === undefined) return value;
 
     const type = propertyType as string;
@@ -48,14 +43,9 @@ export class SimpleValueProcessor extends BaseProcessor {
    *
    * @param value - The value to serialize
    * @param _propertyType - The type of the value (unused in simple value serialization)
-   * @param _meta - Optional metadata (unused in simple value processing)
    * @returns The serialized value
    */
-  serialize(
-    value: any,
-    _propertyType: PropertyType,
-    _meta?: PropertyMetadata
-  ): any {
+  serialize(value: any, _propertyType: PropertyType): any {
     if (value === null || value === undefined) return value;
 
     if (value instanceof Date) {

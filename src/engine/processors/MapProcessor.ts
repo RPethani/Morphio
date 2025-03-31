@@ -1,4 +1,4 @@
-import { ContainerType, PropertyMetadata, PropertyType } from '../../schema';
+import { ContainerType, PropertyType } from '../../schema';
 import { BaseProcessor } from './BaseProcessor';
 import { ProcessorContext } from './ProcessorContext';
 
@@ -17,14 +17,9 @@ export class MapProcessor extends BaseProcessor {
    *
    * @param value - The object to deserialize into a Map
    * @param propertyType - Container type information including the value type
-   * @param meta - Optional metadata about the Map property
    * @returns A Map with deserialized values
    */
-  deserialize(
-    value: any,
-    propertyType: PropertyType,
-    meta?: PropertyMetadata
-  ): Map<any, any> {
+  deserialize(value: any, propertyType: PropertyType): Map<any, any> {
     if (!value || typeof value !== 'object') return new Map();
 
     const container = propertyType as ContainerType;
@@ -32,7 +27,7 @@ export class MapProcessor extends BaseProcessor {
     const map = new Map();
 
     for (const [key, val] of Object.entries(value)) {
-      map.set(key, processor.deserialize(val, container.itemType, meta));
+      map.set(key, processor.deserialize(val, container.itemType));
     }
 
     return map;
@@ -43,24 +38,19 @@ export class MapProcessor extends BaseProcessor {
    *
    * @param value - The Map to serialize
    * @param propertyType - Container type information including the value type
-   * @param _meta - Optional metadata about the Map property
    * @returns A plain object with serialized values
    */
-  serialize(
-    value: any,
-    propertyType: PropertyType,
-    _meta?: PropertyMetadata
-  ): any {
+  serialize(value: any, propertyType: PropertyType): Record<string, any> {
     if (!(value instanceof Map)) return {};
 
-    const result: Record<string, any> = {};
     const container = propertyType as ContainerType;
     const processor = this.context.findProcessor(container.itemType);
+    const obj: Record<string, any> = {};
 
     for (const [key, val] of value.entries()) {
-      result[key] = processor.serialize(val, container.itemType, _meta);
+      obj[String(key)] = processor.serialize(val, container.itemType);
     }
 
-    return result;
+    return obj;
   }
 }

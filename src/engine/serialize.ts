@@ -1,4 +1,5 @@
 import { SerializationEngine } from './SerializationEngine';
+import { ObjectType } from '../schema';
 
 /**
  * Serializes an instance of a class into a plain object.
@@ -11,6 +12,7 @@ import { SerializationEngine } from './SerializationEngine';
  * metadata will be included in the serialized output.
  *
  * @param input The instance to serialize. It must be an instance of a class.
+ * @param objectType The type of the object to serialize.
  * @returns The serialized object.
  *
  * @example
@@ -20,8 +22,8 @@ import { SerializationEngine } from './SerializationEngine';
  * console.log(serialized); // { name: "John", email: "john@example.com" }
  * ```
  */
-export function serialize(input: any): object {
-  return SerializationEngine.getInstance().serialize(input);
+export function serialize(input: any, objectType?: ObjectType): object {
+  return SerializationEngine.getInstance().serialize(input, objectType);
 }
 
 /**
