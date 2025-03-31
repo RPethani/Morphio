@@ -18,18 +18,18 @@ describe('Nested Interface Serialization/Deserialization', () => {
   }
 
   // Register schemas
-  morphioSchema('Address', {
+  morphioSchema({ interface: 'Address' }, {
     street: { type: 'string', required: true },
     city: { type: 'string', required: true },
     country: { type: 'string', required: true },
   });
 
-  morphioSchema('Person', {
+  morphioSchema({ interface: 'Person' }, {
     name: { type: 'string', required: true },
     age: { type: 'number', required: true },
   });
 
-  morphioSchema('Contact', {
+  morphioSchema({ interface: 'Contact' }, {
     person: { type: 'Person', required: true },
     address: { type: 'Address', required: true },
   });

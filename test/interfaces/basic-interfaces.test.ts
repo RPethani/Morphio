@@ -10,7 +10,7 @@ describe('Basic Interface Serialization/Deserialization', () => {
 
   // Register schema
   beforeAll(() => {
-    morphioSchema('Person', {
+    morphioSchema({ interface: 'Person' }, {
       name: { type: 'string', required: true },
       age: { type: 'number', required: true },
     });

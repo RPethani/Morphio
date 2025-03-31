@@ -1,4 +1,4 @@
-import { Constructor, PropertyMetadata } from './PropertyMetadata';
+import { PropertyMetadata, TypeIdentifier } from './PropertyMetadata';
 
 /**
  * Represents the schema for an object in Morphio.
@@ -37,7 +37,7 @@ import { Constructor, PropertyMetadata } from './PropertyMetadata';
  * {
  *   name: 'Car',
  *   isInterface: false,
- *   extends: [vehicleSchema],
+ *   extends: ['Vehicle'],
  *   discriminatorValue: 'car',
  *   properties: new Map([
  *     ['doors', { type: 'number', required: true }]
@@ -68,35 +68,7 @@ export interface MorphioSchema {
   isInterface?: boolean;
 
   /**
-   * For polymorphic interfaces, specifies which property acts as the type discriminator.
-   * This property's value will be used to determine which implementation to use during deserialization.
-   *
-   * Example:
-   * ```typescript
-   * interface Vehicle {
-   *   type: 'car' | 'bike';  // discriminator property
-   * }
-   * discriminator = 'type'  // Property name that determines implementation
-   * ```
-   */
-  discriminator?: string;
-
-  /**
-   * For interface implementations, specifies the value of the discriminator property
-   * that identifies this specific implementation.
-   *
-   * Example:
-   * ```typescript
-   * interface Car extends Vehicle {
-   *   type: 'car';  // Concrete value for Vehicle's type discriminator
-   * }
-   * discriminatorValue = 'car'  // Matches the 'type' property value
-   * ```
-   */
-  discriminatorValue?: string;
-
-  /**
-   * For interface inheritance, list of parent schemas this schema extends from.
+   * For interface inheritance, list of parent type identifiers this schema extends from.
    * Properties from parent schemas are inherited by the implementing schema.
    *
    * Example:
@@ -104,32 +76,8 @@ export interface MorphioSchema {
    * interface Car extends Vehicle {
    *   doors: number;
    * }
-   * extends = [vehicleSchema]  // Inherits Vehicle's properties
+   * extends = ['Vehicle']  // References Vehicle's type identifier
    * ```
    */
-  extends?: MorphioSchema[];
-
-  /** Names of interfaces that this schema implements */
-  implementedInterfaces?: string[];
-
-  /**
-   * For interface types, specifies a concrete class implementation to always use.
-   * This is an alternative to discriminator-based resolution.
-   *
-   * Example:
-   * ```typescript
-   * interface Config {
-   *   settings: { [key: string]: any };
-   * }
-   *
-   * class JsonConfig implements Config {
-   *   settings = {};
-   *   load() { ... }
-   * }
-   *
-   * // Always use JsonConfig for Config properties
-   * implementation = JsonConfig
-   * ```
-   */
-  implementation?: Constructor;
+  extends?: TypeIdentifier[];
 }

@@ -16,13 +16,13 @@ describe('Optional Properties in Interfaces', () => {
   }
 
   // Register schema for Address first
-  morphioSchema('Address', {
+  morphioSchema({ interface: 'Address' }, {
     street: { type: 'string', required: false },
     city: { type: 'string', required: true },
   });
 
   // Then register schema for UserProfile
-  morphioSchema('UserProfile', {
+  morphioSchema({ interface: 'UserProfile' }, {
     name: { type: 'string', required: true },
     age: { type: 'number', required: false },
     email: { type: 'string', required: false },

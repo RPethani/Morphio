@@ -18,30 +18,25 @@ describe('Interface Inheritance', () => {
     vaccinated: boolean;
   }
 
+  // Register schemas
   beforeAll(() => {
     // Register base interface schema
-    morphioSchema('Base', {
+    morphioSchema({ interface: 'Base' }, {
       id: { type: 'string', required: true },
       createdAt: { type: 'Date', required: true },
     });
 
     // Register Animal schema with inheritance
-    morphioSchema('Animal', {
-      id: { type: 'string', required: true },
-      createdAt: { type: 'Date', required: true },
+    morphioSchema({ interface: 'Animal' }, {
       name: { type: 'string', required: true },
       species: { type: 'string', required: true },
-    });
+    }, [{ interface: 'Base' }]);
 
     // Register Pet schema with inheritance
-    morphioSchema('Pet', {
-      id: { type: 'string', required: true },
-      createdAt: { type: 'Date', required: true },
-      name: { type: 'string', required: true },
-      species: { type: 'string', required: true },
+    morphioSchema({ interface: 'Pet' }, {
       owner: { type: 'string', required: true },
       vaccinated: { type: 'boolean', required: true },
-    });
+    }, [{ interface: 'Animal' }]);
   });
 
   it('should serialize and deserialize inherited properties', () => {

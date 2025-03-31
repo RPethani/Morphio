@@ -1,5 +1,5 @@
 import { MorphioSchema } from '../types/MorphioSchema';
-import { PropertyMetadata } from '../types/PropertyMetadata';
+import { PropertyMetadata, ObjectType, isConstructorType, isInterfaceType, TypeIdentifier } from '../types/PropertyMetadata';
 import { SchemaRegistry } from '../registry/SchemaRegistry';
 
 /**
@@ -53,20 +53,24 @@ export const SchemaOps = {
   },
 
   /**
-   * Gets all properties of a schema, including inherited ones
+   * Gets all properties for a schema, including inherited ones.
+   * Properties from parent schemas are included first, then overridden by own properties.
    *
-   * @param schema - The schema to get properties from
-   * @returns Map of property names to their metadata
+   * @param schema - The schema to get properties for
+   * @returns Map of all property names to their metadata
    */
   getProperties(schema: MorphioSchema): Map<string, PropertyMetadata> {
     const allProperties = new Map<string, PropertyMetadata>();
 
     // Add properties from parent schemas first (if any)
     if (schema.extends) {
-      for (const parentSchema of schema.extends) {
-        const parentProps = this.getProperties(parentSchema);
-        for (const [key, meta] of parentProps) {
-          allProperties.set(key, meta);
+      for (const parentType of schema.extends) {
+        const parentSchema = SchemaRegistry.getSchema(parentType);
+        if (parentSchema) {
+          const parentProps = this.getProperties(parentSchema);
+          for (const [key, meta] of parentProps) {
+            allProperties.set(key, meta);
+          }
         }
       }
     }
@@ -81,9 +85,7 @@ export const SchemaOps = {
 };
 
 /**
- * Creates and registers a schema for an interface type.
- * This is a convenience function that combines schema creation, property registration,
- * and schema registration into a single call.
+ * Creates and registers a schema for an interface or class.
  *
  * @example
  * ```typescript
@@ -92,22 +94,43 @@ export const SchemaOps = {
  *   age: number;
  * }
  *
- * morphioSchema('Person', {
+ * // Using interface name
+ * morphioSchema({ interface: 'Person' }, {
  *   name: { type: 'string', required: true },
  *   age: { type: 'number', required: true }
  * });
+ *
+ * // Using class constructor with inheritance
+ * morphioSchema(Employee, {
+ *   salary: { type: 'number', required: true }
+ * }, [Person]);
+ *
+ * // Using interface with inheritance
+ * morphioSchema({ interface: 'Admin' }, {
+ *   permissions: { type: 'string', required: true }
+ * }, [{ interface: 'Employee' }]);
  * ```
  *
- * @param name - The name of the interface
+ * @param type - The class constructor or interface type
  * @param properties - Map of property names to their metadata
+ * @param parentTypes - Optional array of types this schema extends from
  * @returns The created and registered schema
  */
 export function morphioSchema(
-  name: string,
-  properties: Record<string, PropertyMetadata>
+  type: ObjectType,
+  properties: Record<string, PropertyMetadata>,
+  parentTypes?: TypeIdentifier[]
 ): MorphioSchema {
+  // Get the name from the type
+  const name = isConstructorType(type) ? type.name : type.interface;
+
   // Create the schema
-  const schema = SchemaOps.create(name, { isInterface: true });
+  const schema = SchemaOps.create(name, { isInterface: isInterfaceType(type) });
+
+  // Set extends if provided
+  if (parentTypes && parentTypes.length > 0) {
+    schema.extends = parentTypes;
+  }
 
   // Add all properties
   for (const [key, meta] of Object.entries(properties)) {
@@ -115,7 +138,7 @@ export function morphioSchema(
   }
 
   // Register the schema
-  SchemaRegistry.registerSchema(name, schema);
+  SchemaRegistry.registerSchema(type, schema);
 
   return schema;
 }
