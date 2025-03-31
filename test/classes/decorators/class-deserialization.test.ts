@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { deserialize, JsonProp, Serializable } from '../../src';
+import { deserialize, JsonProp, Serializable } from '../../../src';
 
 describe('Class Deserialization', () => {
   describe('Basic class deserialization', () => {

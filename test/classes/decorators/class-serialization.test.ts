@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { serialize, JsonProp, Serializable } from '../../src';
+import { serialize, JsonProp, Serializable } from '../../../src';
 
 describe('Class Serialization', () => {
   describe('Basic class serialization', () => {
@@ -74,9 +74,9 @@ describe('Class Serialization', () => {
       person.address.city = 'Mumbai';
 
       const json = serialize(person);
-      expect(json).toEqual({ 
-        name: 'Sara', 
-        address: { city: 'Mumbai' } 
+      expect(json).toEqual({
+        name: 'Sara',
+        address: { city: 'Mumbai' },
       });
     });
   });

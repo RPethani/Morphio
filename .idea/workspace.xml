@@ -6,14 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="7d0f02de-dd15-409d-9ed4-37e30dd76f3f" name="Changes" comment="Docs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/SerializationEngine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/SerializationEngine.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/processors/ClassProcessor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/processors/ClassProcessor.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/processors/ProcessorFactory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/processors/ProcessorFactory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/schema/operations/SchemaOps.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/schema/operations/SchemaOps.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/schema/registry/SchemaRegistry.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/schema/registry/SchemaRegistry.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/schema/types/MorphioSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/schema/types/MorphioSchema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/basics.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/basics.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/serialize.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/serialize.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/basic/class-deserialization.test.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/basic/class-serialization.test.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +67,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "Jest.Class Deserialization.Nested class deserialization.executor": "Debug",
     "Jest.Morphio.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -84,7 +81,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.standard": "",
     "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs.jest.jest_package": "/Users/rakeshpethani/Workspaces/Morphio/node_modules/jest-cli",
+    "nodejs.jest.jest_package": "/Users/rakeshpethani/Workspaces/Morphio/node_modules/jest",
     "nodejs_interpreter_path": "node",
     "nodejs_package_manager_path": "yarn",
     "npm.docs.executor": "Run",
@@ -103,6 +100,19 @@
     </key>
   </component>
   <component name="RunManager" selected="npm.test">
+    <configuration name="Class Deserialization.Nested class deserialization" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/basic/class-deserialization.test.ts" />
+      <test-names>
+        <test-name value="Class Deserialization" />
+        <test-name value="Nested class deserialization" />
+      </test-names>
+      <method v="2" />
+    </configuration>
     <configuration name="Morphio" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest-cli" />
@@ -146,6 +156,7 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Jest.Class Deserialization.Nested class deserialization" />
       <item itemvalue="Jest.Morphio" />
       <item itemvalue="npm.docs" />
       <item itemvalue="npm.prepare" />
@@ -154,10 +165,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.test" />
+        <item itemvalue="Jest.Class Deserialization.Nested class deserialization" />
         <item itemvalue="npm.docs" />
         <item itemvalue="npm.prepare" />
         <item itemvalue="Jest.Morphio" />
-        <item itemvalue="npm.test" />
       </list>
     </recent_temporary>
   </component>
@@ -208,7 +219,9 @@
       <workItem from="1742827040481" duration="6374000" />
       <workItem from="1742887914780" duration="9173000" />
       <workItem from="1743071525585" duration="16002000" />
-      <workItem from="1743099176808" duration="9134000" />
+      <workItem from="1743099176808" duration="10622000" />
+      <workItem from="1743158497464" duration="3146000" />
+      <workItem from="1743161659120" duration="42290000" />
     </task>
     <task id="LOCAL-00001" summary="Serializable decorator">
       <option name="closed" value="true" />
@@ -376,6 +389,27 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="ac08696e-5c5f-4f5c-b3a5-5069abf199ee" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="ac08696e-5c5f-4f5c-b3a5-5069abf199ee">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Serializable decorator" />
     <MESSAGE value="Array and map support" />
@@ -388,10 +422,16 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/test/basics.test.ts</url>
-          <line>12</line>
+          <url>file://$PROJECT_DIR$/test/interfaces/interface-inheritance.test.ts</url>
+          <line>73</line>
           <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="1" />
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/engine/SerializationEngine.ts</url>
+          <line>59</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="37" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

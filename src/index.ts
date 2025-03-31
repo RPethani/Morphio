@@ -25,6 +25,9 @@ export { deserialize } from './engine/deserialize';
 export { JsonProp } from './decorators/json-prop.decorator';
 export { Serializable } from './decorators/serializable.decorator';
 
+// Schema operations
+export { morphioSchema } from './schema/operations/SchemaOps';
+
 // Types
 export {
   MorphioSchema,

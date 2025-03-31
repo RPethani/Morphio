@@ -1,5 +1,11 @@
 import { MorphioSchema } from '../types/MorphioSchema';
-import { PropertyMetadata, ObjectType, isConstructorType, isInterfaceType, TypeIdentifier } from '../types/PropertyMetadata';
+import {
+  isConstructorType,
+  isInterfaceType,
+  ObjectType,
+  PropertyMetadata,
+  TypeIdentifier,
+} from '../types/PropertyMetadata';
 import { SchemaRegistry } from '../registry/SchemaRegistry';
 
 /**
