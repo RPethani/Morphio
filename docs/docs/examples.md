@@ -1,4 +1,168 @@
+---
+sidebar_position: 3
+---
+
 # Examples
+
+Here are various examples demonstrating Morphio's features.
+
+## Basic Types
+
+```typescript
+@Serializable()
+class User {
+  @JsonProp()
+  name: string;
+
+  @JsonProp()
+  age: number;
+
+  @JsonProp()
+  isActive: boolean;
+}
+```
+
+## Nested Objects
+
+```typescript
+@Serializable()
+class Address {
+  @JsonProp()
+  street: string;
+
+  @JsonProp()
+  city: string;
+}
+
+@Serializable()
+class User {
+  @JsonProp()
+  name: string;
+
+  @JsonProp()
+  address: Address;
+}
+```
+
+## Arrays and Collections
+
+```typescript
+@Serializable()
+class Team {
+  @JsonProp()
+  name: string;
+
+  @JsonProp()
+  members: User[];
+
+  @JsonProp()
+  tags: Set<string>;
+}
+```
+
+## Maps
+
+```typescript
+@Serializable()
+class Configuration {
+  @JsonProp()
+  settings: Map<string, any>;
+
+  @JsonProp()
+  metadata: Map<string, string>;
+}
+```
+
+## Optional Properties
+
+```typescript
+@Serializable()
+class Profile {
+  @JsonProp()
+  name: string;
+
+  @JsonProp({ required: false })
+  bio?: string;
+
+  @JsonProp({ defaultValue: false })
+  isPublic: boolean;
+}
+```
+
+## Inheritance
+
+```typescript
+@Serializable()
+class Animal {
+  @JsonProp()
+  name: string;
+}
+
+@Serializable()
+class Dog extends Animal {
+  @JsonProp()
+  breed: string;
+}
+```
+
+## Custom Type Processors
+
+```typescript
+class DateProcessor implements ValueProcessor<Date> {
+  serialize(value: Date): string {
+    return value.toISOString();
+  }
+
+  deserialize(value: string): Date {
+    return new Date(value);
+  }
+}
+
+@Serializable()
+class Event {
+  @JsonProp({ processor: DateProcessor })
+  startDate: Date;
+
+  @JsonProp({ processor: DateProcessor })
+  endDate: Date;
+}
+```
+
+## Complete Example
+
+Here's a complete example showing multiple features working together:
+
+```typescript
+@Serializable()
+class Organization {
+  @JsonProp()
+  name: string;
+
+  @JsonProp()
+  teams: Team[];
+
+  @JsonProp()
+  config: Configuration;
+
+  @JsonProp({ processor: DateProcessor })
+  createdAt: Date;
+
+  constructor(name: string) {
+    this.name = name;
+    this.teams = [];
+    this.config = new Configuration();
+    this.createdAt = new Date();
+  }
+}
+
+// Usage
+const org = new Organization('Acme Inc.');
+org.teams.push(new Team('Engineering'));
+org.config.settings.set('theme', 'dark');
+
+const json = JSON.stringify(org);
+const deserialized = JSON.parse(json, Organization);
+```
 
 ## Basic Usage
 
@@ -151,4 +315,3 @@ settings.darkMode = true;
 
 const json = serialize(settings);
 const deserialized = deserialize(json, Settings);
-```

@@ -2,100 +2,58 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
-
-Let's discover **Docusaurus in less than 5 minutes**.
-
-## Getting Started
+# Introduction
 
 Welcome to Morphio! A powerful TypeScript library for type-safe serialization and deserialization.
 
-### What is Morphio?
+## What is Morphio?
 
-Morphio is a TypeScript library that provides type-safe serialization and deserialization between TypeScript classes and JSON objects. It supports complex types, nested objects, arrays, maps, and custom type definitions through metadata.
+Morphio is a TypeScript library that provides type-safe serialization and deserialization between TypeScript classes and JSON objects. It offers:
 
-### Installation
+- **Type Safety**: Full TypeScript support with compile-time type checking
+- **Decorators**: Simple and intuitive decorator-based API
+- **Complex Types**: Support for nested objects, arrays, maps, and custom types
+- **Flexibility**: Extensible architecture for custom type handling
+- **Performance**: Optimized for both runtime performance and bundle size
 
-```bash
-npm install morphio
-# or
-yarn add morphio
-```
+## Key Features
 
-### Quick Start
-
-Here's a simple example of how to use Morphio:
+### Type-Safe Serialization
+Convert your TypeScript classes to JSON while preserving type information:
 
 ```typescript
-import { Serializable, JsonProp } from 'morphio';
-
 @Serializable()
 class User {
-  @JsonProp({ type: 'string', required: true })
+  @JsonProp()
   name: string;
-
-  @JsonProp({ type: 'number', required: false })
-  age?: number;
-
-  constructor() {
-    this.name = '';
-  }
 }
-
-// Create a user instance
-const user = new User();
-user.name = 'John Doe';
-user.age = 30;
-
-// Serialize to JSON
-const json = serialize(user);
-console.log(json); // { "name": "John Doe", "age": 30 }
-
-// Deserialize back to User instance
-const deserialized = deserialize(json, User);
-console.log(deserialized instanceof User); // true
-console.log(deserialized.name); // "John Doe"
 ```
 
-### Key Features
+### Complex Type Support
+Handle nested objects, arrays, maps, and custom types with ease:
 
-- Type-safe serialization and deserialization
-- Support for complex types and nested objects
-- Decorator-based metadata
-- Customizable property transformations
-- Built-in type validation
+```typescript
+@Serializable()
+class Team {
+  @JsonProp()
+  members: User[];
 
-### Next Steps
-
-- Check out the [API Reference](/docs/api/intro) for detailed documentation
-- See [Examples](/docs/examples) for more usage examples
-- Learn about [Advanced Features](/docs/advanced/custom-types)
-
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
+  @JsonProp()
+  metadata: Map<string, any>;
+}
 ```
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+### Custom Type Handling
+Extend Morphio's functionality with custom type processors:
 
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
+```typescript
+@Serializable()
+class Config {
+  @JsonProp({ processor: CustomDateProcessor })
+  createdAt: Date;
+}
 ```
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+## Getting Started
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+Ready to begin? Check out our [Getting Started](getting-started.md) guide!
