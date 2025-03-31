@@ -35,7 +35,7 @@ jobs:
         run: npm ci
 
       - name: Type Check
-        run: npm run type-check || tsc --noEmit  # Run type checking
+        run: npx tsc --noEmit
 
       - name: Lint
         run: npm run lint
