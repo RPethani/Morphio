@@ -7,22 +7,15 @@ const config: Config = {
   tagline: 'Type-safe serialization and deserialization for TypeScript',
   favicon: 'img/favicon.ico',
 
-  // Set the production url of your site here
   url: 'https://rpethani.github.io',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/Morphio/',
 
-  // GitHub pages deployment config.
-  organizationName: 'RPethani', // Usually your GitHub org/user name.
-  projectName: 'Morphio', // Usually your repo name.
+  organizationName: 'RPethani',
+  projectName: 'Morphio',
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
@@ -35,6 +28,13 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           editUrl: 'https://github.com/RPethani/Morphio/tree/main/docs/',
+          lastVersion: 'current',
+          versions: {
+            current: {
+              label: '0.1.0-beta.8',
+              path: '0.1.0-beta.8',
+            },
+          },
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -44,7 +44,6 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
     image: 'img/morphio-social-card.jpg',
     navbar: {
       title: 'Morphio',
@@ -58,6 +57,20 @@ const config: Config = {
           sidebarId: 'tutorialSidebar',
           position: 'left',
           label: 'Documentation',
+        },
+        {
+          type: 'docsVersionDropdown',
+          position: 'right',
+          dropdownItemsAfter: [
+            {
+              type: 'html',
+              value: '<hr class="dropdown-separator">',
+            },
+            {
+              to: '/versions',
+              label: 'All versions',
+            },
+          ],
         },
         {
           href: 'https://github.com/RPethani/Morphio',
