@@ -47,15 +47,11 @@
   "author": "Rakesh Pethani",
   "size-limit": [
     {
+      "path": "dist/index.cjs",
+      "limit": "10 KB"
+    },
+    {
       "path": "dist/index.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/index.mjs",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/index.esm.js",
       "limit": "10 KB"
     }
   ],
