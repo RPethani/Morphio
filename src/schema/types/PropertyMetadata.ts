@@ -102,6 +102,26 @@ export interface ContainerType {
 }
 
 /**
+ * Represents an inline object type with its property definitions.
+ * Used for objects that are defined directly in a schema without a separate class or interface.
+ *
+ * @example
+ * ```ts
+ * // Inline object type for an address
+ * const addressType: InlineObjectType = {
+ *   properties: {
+ *     street: { type: 'string', required: true },
+ *     city: { type: 'string', required: true },
+ *     country: { type: 'string', required: true }
+ *   }
+ * };
+ * ```
+ */
+export interface InlineObjectType {
+  properties: Record<string, PropertyMetadata>;
+}
+
+/**
  * Represents a type that can be used in property metadata.
  * This is the main type used for defining property types in schemas.
  * Can represent any valid type in the schema system.
@@ -121,7 +141,7 @@ export interface ContainerType {
  * const arrayType: PropertyType = { container: 'array', itemType: 'string' };
  * ```
  */
-export type PropertyType = TypeIdentifier | ContainerType;
+export type PropertyType = TypeIdentifier | ContainerType | InlineObjectType;
 
 /**
  * Metadata for a property used in serialization and deserialization.
@@ -265,4 +285,26 @@ export function isPrimitiveType(type: PropertyType): type is string {
  */
 export function isObjectType(type: PropertyType): type is ObjectType {
   return isConstructorType(type) || isInterfaceType(type);
+}
+
+/**
+ * Checks if the given property type is an inline object type.
+ * Inline object types are objects with properties.
+ *
+ * @param type - The property type to check
+ * @returns True if the type is an inline object type, false otherwise
+ *
+ * @example
+ * ```ts
+ * isInlineObjectType({ properties: { name: 'string' } }) // true
+ * isInlineObjectType('string') // false
+ * isInlineObjectType(User) // false
+ * isInlineObjectType({ interface: 'User' }) // false
+ * isInlineObjectType({ container: 'array', itemType: 'string' }) // false
+ * ```
+ */
+export function isInlineObjectType(
+  type: PropertyType
+): type is InlineObjectType {
+  return typeof type === 'object' && 'properties' in type;
 }

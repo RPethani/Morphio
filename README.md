@@ -2,84 +2,176 @@
 
 ![Morphio Logo](./assets/morphio.png)
 
-Morphio is a powerful and flexible TypeScript library for serialization and deserialization of objects. It supports data transformation with a focus on simplicity, performance, and extensibility. Morphio is designed to make it easy to handle JSON serialization in a structured and intuitive way, with a schema-driven approach.
+Morphio is a powerful and flexible TypeScript library for serialization and deserialization of objects. It provides robust support for complex data structures, type safety, and multiple approaches to schema definition. Perfect for applications that need to handle complex JSON transformations while maintaining strong typing.
 
 ## Features
-- **Schema-driven serialization**: Automatically handle JSON serialization and deserialization based on class schema.
-- **Flexible property handling**: Support for primitive types, nested objects, arrays, and maps.
-- **Forgiving deserialization**: Morphio can handle missing properties or undefined fields while maintaining data integrity.
-- **Type inference**: Automatically infer property types when no explicit `@JsonProp` decorator is defined.
+
+- **Multiple Schema Definition Approaches**:
+
+  - **Decorator-based**: Use `@Serializable` and `@JsonProp` decorators for a clean, declarative style
+  - **Declarative**: Define schemas programmatically using `morphioSchema`
+  - **Interface-based**: Work with interfaces and runtime type information
+
+- **Rich Type Support**:
+
+  - Primitive types (string, number, boolean, Date)
+  - Complex containers (Array, Map)
+  - Nested objects and inheritance
+  - Inline object definitions
+  - Optional properties
+
+- **Advanced Features**:
+  - Type-safe serialization and deserialization
+  - Automatic type inference
+  - Forgiving deserialization with proper error handling
+  - Extensible processor architecture
+  - Comprehensive schema validation
 
 ## Installation
-
-You can install Morphio via npm:
 
 ```bash
 npm install morphio
 ```
 
-## Usage
+## Usage Examples
 
-Here is an example of how to use Morphio to serialize and deserialize a class:
+### Decorator-Based Approach
 
-### Example Code
-
-```ts
-import { Serializable, JsonProp } from 'morphio';
+```typescript
+import { Serializable, JsonProp, serialize, deserialize } from 'morphio';
 
 @Serializable()
-class Address {
-  @JsonProp({ type: 'string' }) city: string;
+class UserProfile {
+  @JsonProp({ type: 'string', required: true })
+  name: string;
+
+  @JsonProp({ type: 'number' })
+  age?: number;
+
+  @JsonProp({
+    type: {
+      container: 'array',
+      itemType: 'string',
+    },
+  })
+  tags: string[] = [];
+
+  @JsonProp({
+    type: {
+      container: 'map',
+      itemType: 'number',
+    },
+  })
+  scores: Map<string, number> = new Map();
 }
 
-@Serializable()
-class User {
-  @JsonProp({ type: 'string' }) name: string;
-  @JsonProp({ type: Address }) address: Address;
-}
-
-const user = new User();
+// Create and populate an instance
+const user = new UserProfile();
 user.name = 'John Doe';
-user.address = new Address();
-user.address.city = 'New York';
+user.age = 30;
+user.tags = ['developer', 'typescript'];
+user.scores.set('math', 95);
 
-// Serialize the user object to JSON
+// Serialize to JSON
 const json = serialize(user);
 console.log(json);
+// {
+//   "name": "John Doe",
+//   "age": 30,
+//   "tags": ["developer", "typescript"],
+//   "scores": { "math": 95 }
+// }
 
-// Deserialize the JSON back into a User object
-const deserializedUser = deserialize(json, User);
-console.log(deserializedUser);
+// Deserialize back to class instance
+const deserialized = deserialize(json, UserProfile);
+console.log(deserialized instanceof UserProfile); // true
+```
+
+### Declarative Approach
+
+```typescript
+import { morphioSchema } from 'morphio';
+
+class Location {
+  latitude: number;
+  longitude: number;
+}
+
+// Define schema programmatically
+morphioSchema(Location, {
+  latitude: { type: 'number', required: true },
+  longitude: { type: 'number', required: true },
+});
+
+// Use the schema for serialization/deserialization
+const loc = new Location();
+loc.latitude = 40.7128;
+loc.longitude = -74.006;
+
+const json = serialize(loc);
+const deserialized = deserialize(json, Location);
+```
+
+### Inline Objects
+
+```typescript
+@Serializable()
+class BlogPost {
+  @JsonProp({ type: 'string' })
+  title: string;
+
+  @JsonProp({
+    type: {
+      properties: {
+        name: { type: 'string', required: true },
+        email: { type: 'string', required: true },
+      },
+    },
+  })
+  author: { name: string; email: string };
+}
 ```
 
 ## Documentation
 
-For detailed documentation and advanced usage examples, please visit our [documentation](./docs).
+For detailed documentation, including:
+
+- API Reference
+- Advanced Usage Guide
+- Best Practices
+- Migration Guide
+
+Visit our [documentation](https://rpethani.github.io/Morphio/).
 
 ## Contributing
 
-We welcome contributions! Please see our [Contributing Guidelines](./.github/CONTRIBUTING.md) for details on how to submit pull requests, report issues, and contribute to the project.
+We welcome contributions! Please see our [Contributing Guidelines](./.github/CONTRIBUTING.md) for:
 
-### Development
-
-Morphio uses a structured development process with a clear branching strategy. See our [Contributing Guidelines](./.github/CONTRIBUTING.md) for:
-- Branching strategy
-- Code style guidelines
-- Commit message conventions
-- Pull request process
 - Development setup
+- Coding standards
+- Pull request process
+- Testing requirements
+
+## Testing
+
+Morphio has extensive test coverage. Run the test suite:
+
+```bash
+npm test
+```
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+MIT License - see the [LICENSE](./LICENSE) file for details.
 
 ## Support
 
-If you encounter any issues or have questions:
-1. Check our [documentation](./docs)
-2. Search existing [issues](https://github.com/yourusername/morphio/issues)
-3. Create a new issue if needed
+Need help?
+
+1. Check the [documentation](https://rpethani.github.io/Morphio/)
+2. Search [existing issues](https://github.com/RPethani/Morphio/issues)
+3. Create a new issue
 
 ## Acknowledgments
 
-Thanks to all contributors who have helped shape Morphio!
+Special thanks to all contributors who have helped make Morphio better!
