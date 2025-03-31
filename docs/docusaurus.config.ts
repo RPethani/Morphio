@@ -10,18 +10,19 @@ const config: Config = {
   // Set the production url of your site here
   url: 'https://rpethani.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
+  // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/Morphio/',
 
-  // GitHub pages deployment config
-  organizationName: 'RPethani',
-  projectName: 'Morphio',
-  trailingSlash: false,
+  // GitHub pages deployment config.
+  organizationName: 'RPethani', // Usually your GitHub org/user name.
+  projectName: 'Morphio', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang
+  // useful metadata like html lang. For example, if your site is Chinese, you
+  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
@@ -35,7 +36,6 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           editUrl: 'https://github.com/RPethani/Morphio/tree/main/docs/',
         },
-        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -73,12 +73,12 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
-              label: 'Getting Started',
+              label: 'Introduction',
               to: '/docs/intro',
             },
             {
-              label: 'API Reference',
-              to: '/docs/api/intro',
+              label: 'Getting Started',
+              to: '/docs/getting-started',
             },
           ],
         },
@@ -88,10 +88,6 @@ const config: Config = {
             {
               label: 'GitHub',
               href: 'https://github.com/RPethani/Morphio',
-            },
-            {
-              label: 'Issues',
-              href: 'https://github.com/RPethani/Morphio/issues',
             },
           ],
         },
