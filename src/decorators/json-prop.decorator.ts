@@ -1,28 +1,43 @@
-import { SchemaRegistry } from '../SchemaRegistry';
-import { PropertyMetadata } from './PropertyMetadata';
+import { PropertyMetadata } from '../schema';
 
 /**
- * A decorator function that adds metadata to a class property.
+ * A decorator function that adds metadata to a class property for serialization/deserialization.
  *
- * This decorator is used to define the schema for a property in a class that will be
- * serialized or deserialized using the Morphio library. It allows the user to specify
- * the type, whether the property is required, and other options such as the property's
- * description, container type, and value type for collections like arrays and maps.
+ * This decorator collects property metadata in the class's context.metadata.properties Map,
+ * which is later processed by the @Serializable decorator to build the complete class schema.
+ *
+ * The property type defaults to 'string' if not explicitly specified in the options.
  *
  * Example usage:
  * ```ts
- * @JsonProp({ type: 'string', required: true })
- * name: string;
+ * @Serializable()
+ * class User {
+ *   @JsonProp({ type: 'string', required: true })
+ *   name: string;
+ *
+ *   @JsonProp({ type: 'number', description: 'User age in years' })
+ *   age?: number;
+ * }
  * ```
  *
- * @param options - The options for configuring the property metadata.
- * @returns A decorator function that applies the metadata to the target property.
+ * @param options - Property metadata configuration. See {@link PropertyMetadata} for details.
+ * @returns A decorator function that collects property metadata
  */
 export function JsonProp(options: PropertyMetadata) {
-  return function (target: any, propertyKey: string): void {
-    const schema = SchemaRegistry.getOrCreate(target.constructor);
+  return function (_: undefined, context: ClassFieldDecoratorContext) {
+    const propertyKey = context.name as string;
+    const propertyMetadata: PropertyMetadata = {
+      type: options?.type || 'string',
+      required: options?.required ?? true,
+      description: options?.description,
+    };
 
-    // Add property metadata to the schema
-    schema.addProperty(propertyKey, options);
+    if (context.metadata) {
+      context.metadata.properties ??= new Map<string, PropertyMetadata>();
+      (context.metadata.properties as Map<string, PropertyMetadata>).set(
+        propertyKey,
+        propertyMetadata
+      );
+    }
   };
 }
