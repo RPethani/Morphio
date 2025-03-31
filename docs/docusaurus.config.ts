@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Morphio',
-  tagline: 'Type-safe serialization and deserialization for TypeScript',
+  tagline: 'Type-safe JSON serialization for TypeScript',
   favicon: 'img/favicon.ico',
 
   url: 'https://rpethani.github.io',
@@ -13,7 +13,7 @@ const config: Config = {
   organizationName: 'RPethani',
   projectName: 'Morphio',
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   i18n: {
@@ -31,8 +31,8 @@ const config: Config = {
           lastVersion: 'current',
           versions: {
             current: {
-              label: '0.1.0-beta.8',
-              path: '0.1.0-beta.8',
+              label: 'Next',
+              banner: 'none',
             },
           },
         },
@@ -40,6 +40,24 @@ const config: Config = {
           customCss: './src/css/custom.css',
         },
       } satisfies Preset.Options,
+    ],
+  ],
+
+  plugins: [
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        entryPoints: ['../src/index.ts'],
+        tsconfig: '../tsconfig.json',
+        out: 'docs/api',
+        sidebar: {
+          categoryLabel: 'API Reference',
+          position: 3,
+          fullNames: true,
+        },
+        plugin: ['typedoc-plugin-markdown'],
+        watch: process.env.TYPEDOC_WATCH,
+      },
     ],
   ],
 

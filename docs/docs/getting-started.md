@@ -27,20 +27,29 @@ import { JsonProp, Serializable } from 'morphio';
 
 @Serializable()
 class User {
-  @JsonProp()
-  name: string;
+  @JsonProp({ type: 'string' })
+  name!: string;
 
-  @JsonProp()
-  age: number;
+  @JsonProp({ type: 'number' })
+  age!: number;
 
-  constructor(name: string, age: number) {
-    this.name = name;
-    this.age = age;
+  // Classes must have a no-args constructor for @Serializable to work
+  constructor() {
+    this.name = '';
+    this.age = 0;
+  }
+
+  // Use methods to create instances with specific values
+  static create(name: string, age: number): User {
+    const user = new User();
+    user.name = name;
+    user.age = age;
+    return user;
   }
 }
 
 // Serialization
-const user = new User('John Doe', 30);
+const user = User.create('John Doe', 30);
 const json = JSON.stringify(user); // {"name":"John Doe","age":30}
 
 // Deserialization

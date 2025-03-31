@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { type ReactElement } from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
 type FeatureItem = {
   title: string;
-  description: JSX.Element;
+  description: ReactElement;
 };
 
 const FeatureList: FeatureItem[] = [
@@ -38,7 +38,7 @@ const FeatureList: FeatureItem[] = [
   },
 ];
 
-function Feature({title, description}: FeatureItem) {
+function Feature({title, description}: FeatureItem): ReactElement {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center padding-horiz--md">
@@ -49,7 +49,7 @@ function Feature({title, description}: FeatureItem) {
   );
 }
 
-export default function HomepageFeatures(): JSX.Element {
+export default function HomepageFeatures(): ReactElement {
   return (
     <section className={styles.features}>
       <div className="container">

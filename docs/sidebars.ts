@@ -14,35 +14,112 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
  */
 const sidebars: SidebarsConfig = {
   tutorialSidebar: [
+    'intro',
+    'getting-started',
     {
-      type: 'doc',
-      id: 'intro',
-      label: 'Getting Started',
-    },
-    {
-      type: 'doc',
-      id: 'examples',
+      type: 'category',
       label: 'Examples',
+      link: {
+        type: 'doc',
+        id: 'examples/index',
+      },
+      items: [
+        {
+          type: 'category',
+          label: 'Basic Types',
+          link: {
+            type: 'doc',
+            id: 'examples/basic-types/index',
+          },
+          items: [
+            'examples/basic-types/decorator-based',
+            'examples/basic-types/schema-based',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Container Types',
+          link: {
+            type: 'doc',
+            id: 'examples/container-types/index',
+          },
+          items: [
+            'examples/container-types/decorator-based',
+            'examples/container-types/schema-based',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Class-Based Serialization',
+          link: {
+            type: 'doc',
+            id: 'examples/class-based/index',
+          },
+          items: [
+            'examples/class-based/decorator-based',
+            'examples/class-based/schema-based',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Inheritance',
+          link: {
+            type: 'doc',
+            id: 'examples/inheritance/index',
+          },
+          items: [
+            'examples/inheritance/decorator-based',
+            'examples/inheritance/schema-based',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Interface-Based Serialization',
+          link: {
+            type: 'doc',
+            id: 'examples/interfaces/index',
+          },
+          items: [
+            'examples/interfaces/basic',
+            'examples/interfaces/nested',
+            'examples/interfaces/inheritance',
+          ],
+        },
+      ],
     },
     {
       type: 'category',
       label: 'API Reference',
       items: [
         {
-          type: 'doc',
-          id: 'api/intro',
-          label: 'Overview',
+          type: 'category',
+          label: 'Classes',
+          items: ['api/classes/SchemaRegistry'],
         },
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Advanced',
-      items: [
         {
-          type: 'doc',
-          id: 'advanced/custom-types',
-          label: 'Custom Types',
+          type: 'category',
+          label: 'Functions',
+          items: [
+            'api/functions/deserialize',
+            'api/functions/JsonProp',
+            'api/functions/morphioSchema',
+            'api/functions/Serializable',
+            'api/functions/serialize',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Interfaces',
+          items: [
+            'api/interfaces/ContainerType',
+            'api/interfaces/MorphioSchema',
+            'api/interfaces/PropertyMetadata',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Types',
+          items: ['api/type-aliases/PropertyType'],
         },
       ],
     },

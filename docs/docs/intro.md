@@ -13,7 +13,7 @@ Morphio is a TypeScript library that provides type-safe serialization and deseri
 - **Type Safety**: Full TypeScript support with compile-time type checking
 - **Decorators**: Simple and intuitive decorator-based API
 - **Complex Types**: Support for nested objects, arrays, maps, and custom types
-- **Flexibility**: Extensible architecture for custom type handling
+- **Flexibility**: Support for both class-based and interface-based serialization
 - **Performance**: Optimized for both runtime performance and bundle size
 
 ## Key Features
@@ -24,33 +24,48 @@ Convert your TypeScript classes to JSON while preserving type information:
 ```typescript
 @Serializable()
 class User {
-  @JsonProp()
-  name: string;
+  @JsonProp({ type: 'string' })
+  name!: string;
+
+  @JsonProp({ type: 'number' })
+  age!: number;
 }
 ```
 
 ### Complex Type Support
-Handle nested objects, arrays, maps, and custom types with ease:
+Handle nested objects, arrays, and maps with ease:
 
 ```typescript
 @Serializable()
 class Team {
-  @JsonProp()
-  members: User[];
+  @JsonProp({ type: { container: 'array', itemType: User } })
+  members!: User[];
 
-  @JsonProp()
-  metadata: Map<string, any>;
+  @JsonProp({ type: { container: 'map', itemType: 'string' } })
+  preferences!: Map<string, string>;
 }
 ```
 
-### Custom Type Handling
-Extend Morphio's functionality with custom type processors:
+### Inheritance Support
+Work with class inheritance and preserve type information:
 
 ```typescript
 @Serializable()
-class Config {
-  @JsonProp({ processor: CustomDateProcessor })
-  createdAt: Date;
+class Animal {
+  @JsonProp({ type: 'string' })
+  species!: string;
+
+  @JsonProp({ type: 'number' })
+  age!: number;
+}
+
+@Serializable()
+class Dog extends Animal {
+  @JsonProp({ type: 'string' })
+  breed!: string;
+
+  @JsonProp({ type: 'boolean' })
+  isGoodBoy: boolean = true;
 }
 ```
 
