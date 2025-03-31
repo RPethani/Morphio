@@ -1,4 +1,4 @@
-import { ContainerType, PropertyMetadata, PropertyType } from '../../schema';
+import { isContainerType, PropertyType } from '../../schema';
 import { BaseProcessor } from './BaseProcessor';
 import { ProcessorContext } from './ProcessorContext';
 
@@ -16,20 +16,15 @@ export class ArrayProcessor extends BaseProcessor {
    *
    * @param value - The array to deserialize
    * @param propertyType - Container type information including the item type
-   * @param _meta - Optional metadata about the array property
    * @returns An array with deserialized elements
    */
-  deserialize(
-    value: any,
-    propertyType: PropertyType,
-    _meta?: PropertyMetadata
-  ): any[] {
-    if (!Array.isArray(value)) return [];
+  deserialize(value: any, propertyType: PropertyType): any[] {
+    if (!Array.isArray(value)) return value;
+    if (!isContainerType(propertyType)) return value;
 
-    const container = propertyType as ContainerType;
-    const processor = this.context.findProcessor(container.itemType);
+    const processor = this.context.findProcessor(propertyType.itemType);
     return value.map((item) =>
-      processor.deserialize(item, container.itemType, _meta)
+      processor.deserialize(item, propertyType.itemType)
     );
   }
 
@@ -38,19 +33,15 @@ export class ArrayProcessor extends BaseProcessor {
    *
    * @param value - The array to serialize
    * @param propertyType - Container type information including the item type
-   * @param _meta - Optional metadata about the array property
    * @returns An array with serialized elements
    */
-  serialize(
-    value: any,
-    propertyType: PropertyType,
-    _meta?: PropertyMetadata
-  ): any[] {
-    if (!Array.isArray(value)) return [];
-    const container = propertyType as ContainerType;
-    const processor = this.context.findProcessor(container.itemType);
+  serialize(value: any, propertyType: PropertyType): any[] {
+    if (!Array.isArray(value)) return value;
+    if (!isContainerType(propertyType)) return value;
+
+    const processor = this.context.findProcessor(propertyType.itemType);
     return value.map((item) =>
-      processor.serialize(item, container.itemType, _meta)
+      processor.serialize(item, propertyType.itemType)
     );
   }
 }

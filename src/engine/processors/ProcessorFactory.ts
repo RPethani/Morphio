@@ -1,7 +1,12 @@
-import { PropertyType, SchemaRegistry } from '../../schema';
+import {
+  isContainerType,
+  isObjectType,
+  isPrimitiveType,
+  PropertyType,
+} from '../../schema';
 import { ArrayProcessor } from './ArrayProcessor';
-import { ClassProcessor } from './ClassProcessor';
 import { MapProcessor } from './MapProcessor';
+import { ObjectProcessor } from './ObjectProcessor';
 import { ProcessorContext } from './ProcessorContext';
 import { SimpleValueProcessor } from './SimpleValueProcessor';
 import { ValueProcessor } from './ValueProcessor';
@@ -18,7 +23,7 @@ export enum ProcessorType {
   /** For processing Map objects */
   MAP = 'map',
   /** For processing class instances and interfaces */
-  CLASS = 'class',
+  OBJECT = 'object',
 }
 
 /**
@@ -47,8 +52,8 @@ export class ProcessorFactory {
     );
     this.processorMap.set(ProcessorType.MAP, new MapProcessor(this.context));
     this.processorMap.set(
-      ProcessorType.CLASS,
-      new ClassProcessor(this.context)
+      ProcessorType.OBJECT,
+      new ObjectProcessor(this.context)
     );
   }
 
@@ -74,8 +79,8 @@ export class ProcessorFactory {
    * @returns A processor capable of handling the given property type
    */
   findProcessor(propertyType: PropertyType | undefined): ValueProcessor {
-    // For undefined or null propertyType, return simple processor
-    if (!propertyType) {
+    // For undefined or null propertyType or primitive types, return simple processor
+    if (!propertyType || isPrimitiveType(propertyType)) {
       return (
         this.processorMap.get(ProcessorType.SIMPLE) ||
         new SimpleValueProcessor(this.context)
@@ -83,15 +88,14 @@ export class ProcessorFactory {
     }
 
     // Check for container types (array, map)
-    if (typeof propertyType === 'object' && 'container' in propertyType) {
-      const containerType = propertyType.container;
-      if (containerType === 'array') {
+    if (isContainerType(propertyType)) {
+      if (propertyType.container === 'array') {
         return (
           this.processorMap.get(ProcessorType.ARRAY) ||
           new ArrayProcessor(this.context)
         );
       }
-      if (containerType === 'map') {
+      if (propertyType.container === 'map') {
         return (
           this.processorMap.get(ProcessorType.MAP) ||
           new MapProcessor(this.context)
@@ -100,19 +104,10 @@ export class ProcessorFactory {
     }
 
     // Check for class types and interfaces
-    if (typeof propertyType === 'string') {
-      // Check if it's an interface
-      const schema = SchemaRegistry.getSchema(propertyType);
-      if (schema) {
-        return (
-          this.processorMap.get(ProcessorType.CLASS) ||
-          new ClassProcessor(this.context)
-        );
-      }
-    } else if (propertyType instanceof Function) {
+    if (isObjectType(propertyType)) {
       return (
-        this.processorMap.get(ProcessorType.CLASS) ||
-        new ClassProcessor(this.context)
+        this.processorMap.get(ProcessorType.OBJECT) ||
+        new ObjectProcessor(this.context)
       );
     }
 

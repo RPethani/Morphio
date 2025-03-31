@@ -1,4 +1,4 @@
-import { PropertyMetadata, PropertyType } from '../../schema';
+import { PropertyType } from '../../schema';
 import { ProcessorContext } from './ProcessorContext';
 import { ValueProcessor } from './ValueProcessor';
 
@@ -12,33 +12,23 @@ export abstract class BaseProcessor implements ValueProcessor {
    *
    * @param context - The context that provides access to other processors and serialization services
    */
-  constructor(protected context: ProcessorContext) {}
+  protected constructor(protected context: ProcessorContext) {}
 
   /**
    * Abstract method to deserialize a value. Must be implemented by concrete processors.
    *
    * @param value - The value to deserialize
    * @param propertyType - The target type to deserialize to
-   * @param meta - Optional metadata about the property being deserialized
    * @returns The deserialized value
    */
-  abstract deserialize(
-    value: any,
-    propertyType: PropertyType,
-    meta?: PropertyMetadata
-  ): any;
+  abstract deserialize(value: any, propertyType: PropertyType): any;
 
   /**
    * Abstract method to serialize a value. Must be implemented by concrete processors.
    *
    * @param value - The value to serialize
    * @param propertyType - The type of the value being serialized
-   * @param meta - Optional metadata about the property being serialized
    * @returns The serialized value
    */
-  abstract serialize(
-    value: any,
-    propertyType: PropertyType,
-    meta?: PropertyMetadata
-  ): any;
+  abstract serialize(value: any, propertyType: PropertyType): any;
 }
