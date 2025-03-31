@@ -53,6 +53,10 @@
     {
       "path": "dist/index.mjs",
       "limit": "10 KB"
+    },
+    {
+      "path": "dist/index.esm.js",
+      "limit": "10 KB"
     }
   ],
   "devDependencies": {
