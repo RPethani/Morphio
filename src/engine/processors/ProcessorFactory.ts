@@ -1,29 +1,46 @@
-import { PropertyType } from '../../decorators/PropertyMetadata';
+import {
+  isContainerType,
+  isInlineObjectType,
+  isObjectType,
+  isPrimitiveType,
+  PropertyType,
+} from '../../schema';
 import { ArrayProcessor } from './ArrayProcessor';
-import { ClassProcessor } from './ClassProcessor';
 import { MapProcessor } from './MapProcessor';
+import { ObjectProcessor } from './ObjectProcessor';
 import { ProcessorContext } from './ProcessorContext';
 import { SimpleValueProcessor } from './SimpleValueProcessor';
 import { ValueProcessor } from './ValueProcessor';
+import { InlineObjectProcessor } from './InlineObjectProcessor';
 
 /**
  * Enumeration of supported processor types.
  * Each type corresponds to a specific value processor implementation.
  */
-export enum ProcessorType {
+enum ProcessorType {
   /** For processing primitive types and dates */
   SIMPLE = 'simple',
   /** For processing arrays and array-like objects */
   ARRAY = 'array',
   /** For processing Map objects */
   MAP = 'map',
-  /** For processing class instances */
-  CLASS = 'class',
+  /** For processing class instances and interfaces */
+  OBJECT = 'object',
+  /** For processing inline objects */
+  INLINE_OBJECT = 'inlineObject',
 }
 
 /**
  * Factory class for creating and managing value processors.
  * Uses the singleton pattern to ensure only one instance exists.
+ * Each processor type is created once and reused for all subsequent requests.
+ *
+ * @example
+ * ```ts
+ * const factory = ProcessorFactory.getInstance(context);
+ * const processor = factory.findProcessor('string'); // Returns SimpleValueProcessor
+ * const arrayProcessor = factory.findProcessor({ container: 'array', itemType: 'string' }); // Returns ArrayProcessor
+ * ```
  */
 export class ProcessorFactory {
   private static instance: ProcessorFactory;
@@ -47,19 +64,22 @@ export class ProcessorFactory {
     );
     this.processorMap.set(ProcessorType.MAP, new MapProcessor(this.context));
     this.processorMap.set(
-      ProcessorType.CLASS,
-      new ClassProcessor(this.context)
+      ProcessorType.OBJECT,
+      new ObjectProcessor(this.context)
+    );
+    this.processorMap.set(
+      ProcessorType.INLINE_OBJECT,
+      new InlineObjectProcessor(this.context)
     );
   }
 
   /**
-   * Gets the singleton instance of ProcessorFactory.
-   * Creates a new instance if one doesn't exist.
+   * Gets or creates the singleton instance of ProcessorFactory.
    *
-   * @param context - The context to pass to the factory
+   * @param context - The context to pass to created processors if creating a new instance
    * @returns The singleton ProcessorFactory instance
    */
-  static getInstance(context: ProcessorContext): ProcessorFactory {
+  public static getInstance(context: ProcessorContext): ProcessorFactory {
     if (!ProcessorFactory.instance) {
       ProcessorFactory.instance = new ProcessorFactory(context);
     }
@@ -67,60 +87,36 @@ export class ProcessorFactory {
   }
 
   /**
-   * Gets a processor by its type.
-   *
-   * @param type - The type of processor to get
-   * @returns The processor instance or undefined if not found
-   */
-  getProcessor(type: ProcessorType): ValueProcessor | undefined {
-    return this.processorMap.get(type);
-  }
-
-  /**
    * Finds the appropriate processor for a given property type.
-   * Always returns a processor, falling back to SimpleValueProcessor if no specific processor is found.
+   * The processor selection is based on the type structure:
+   * - Primitive types and dates use SimpleValueProcessor
+   * - Arrays use ArrayProcessor
+   * - Maps use MapProcessor
+   * - Classes and interfaces use ObjectProcessor
+   * - Inline objects use InlineObjectProcessor
    *
-   * @param propertyType - The type of property to find a processor for
-   * @returns A processor capable of handling the given property type
+   * @param type - The property type to find a processor for
+   * @returns The appropriate value processor for the type
    */
-  findProcessor(propertyType: PropertyType | undefined): ValueProcessor {
-    // For undefined or null propertyType, return simple processor
-    if (!propertyType) {
-      return (
-        this.processorMap.get(ProcessorType.SIMPLE) ||
-        new SimpleValueProcessor(this.context)
-      );
+  public findProcessor(type: PropertyType): ValueProcessor {
+    if (isPrimitiveType(type)) {
+      return this.processorMap.get(ProcessorType.SIMPLE)!;
     }
 
-    // Check for container types (array, map)
-    if (typeof propertyType === 'object' && 'container' in propertyType) {
-      const containerType = propertyType.container;
-      if (containerType === 'array') {
-        return (
-          this.processorMap.get(ProcessorType.ARRAY) ||
-          new ArrayProcessor(this.context)
-        );
-      }
-      if (containerType === 'map') {
-        return (
-          this.processorMap.get(ProcessorType.MAP) ||
-          new MapProcessor(this.context)
-        );
-      }
+    if (isContainerType(type)) {
+      return type.container === 'array'
+        ? this.processorMap.get(ProcessorType.ARRAY)!
+        : this.processorMap.get(ProcessorType.MAP)!;
     }
 
-    // Check for class types
-    if (propertyType instanceof Function) {
-      return (
-        this.processorMap.get(ProcessorType.CLASS) ||
-        new ClassProcessor(this.context)
-      );
+    if (isInlineObjectType(type)) {
+      return this.processorMap.get(ProcessorType.INLINE_OBJECT)!;
     }
 
-    // Default to simple processor for primitive types
-    return (
-      this.processorMap.get(ProcessorType.SIMPLE) ||
-      new SimpleValueProcessor(this.context)
-    );
+    if (isObjectType(type)) {
+      return this.processorMap.get(ProcessorType.OBJECT)!;
+    }
+
+    throw new Error(`No processor found for type: ${JSON.stringify(type)}`);
   }
 }
