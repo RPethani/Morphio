@@ -29,8 +29,7 @@
     "format": "prettier --write \"src/**/*.{js,ts}\"",
     "prepare": "npm run build",
     "size": "size-limit",
-    "analyze": "size-limit --why",
-    "docs": "typedoc"
+    "analyze": "size-limit --why"
   },
   "husky": {
     "hooks": {
