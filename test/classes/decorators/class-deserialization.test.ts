@@ -1,15 +1,18 @@
 import 'reflect-metadata';
-import { deserialize, JsonProp, Serializable } from '../../../src';
+import { deserialize, MorphProp, MorphSchema } from '../../../src';
 
 describe('Class Deserialization', () => {
   describe('Basic class deserialization', () => {
-    @Serializable()
+    @MorphSchema()
     class TestClass {
-      name?: string;
+      @MorphProp({ type: 'string', required: true })
+      name!: string;
+
+      @MorphProp({ type: 'number', required: false })
       age?: number;
     }
 
-    it('should deserialize without JsonProp using fallback', () => {
+    it('should deserialize without MorphProp using fallback', () => {
       const jsonString = '{"name": "John Doe", "age": 30}';
       const result = deserialize(jsonString, TestClass);
 
@@ -29,16 +32,16 @@ describe('Class Deserialization', () => {
   });
 
   describe('Decorated class deserialization', () => {
-    @Serializable()
+    @MorphSchema()
     class DecoratedClass {
-      @JsonProp({ type: 'string', required: true })
+      @MorphProp({ type: 'string', required: true })
       name!: string;
 
-      @JsonProp({ type: 'number', required: false })
+      @MorphProp({ type: 'number', required: false })
       age?: number;
     }
 
-    it('should respect JsonProp decorator requirements', () => {
+    it('should respect MorphProp decorator requirements', () => {
       const jsonString = '{"name": "Jane Doe", "age": 25}';
       const result = deserialize(jsonString, DecoratedClass);
 
@@ -58,18 +61,18 @@ describe('Class Deserialization', () => {
   });
 
   describe('Nested class deserialization', () => {
-    @Serializable()
+    @MorphSchema()
     class Address {
-      @JsonProp({ type: 'string' })
+      @MorphProp({ type: 'string' })
       city!: string;
     }
 
-    @Serializable()
+    @MorphSchema()
     class Person {
-      @JsonProp({ type: 'string' })
+      @MorphProp({ type: 'string' })
       name!: string;
 
-      @JsonProp({ type: Address })
+      @MorphProp({ type: Address })
       address!: Address;
     }
 

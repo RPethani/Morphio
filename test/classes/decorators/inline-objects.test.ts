@@ -1,19 +1,19 @@
-import { deserialize, JsonProp, Serializable, serialize } from '../../../src';
+import { deserialize, MorphProp, MorphSchema, serialize } from '../../../src';
 
 describe('Inline Objects (Decorators)', () => {
   describe('Basic inline objects', () => {
-    @Serializable()
+    @MorphSchema()
     class UserProfile {
-      @JsonProp({ type: 'string', required: true })
+      @MorphProp({ type: 'string', required: true })
       name!: string;
 
-      @JsonProp({ type: 'number', required: false })
+      @MorphProp({ type: 'number', required: false })
       age?: number;
 
-      @JsonProp({ type: 'string', required: false })
+      @MorphProp({ type: 'string', required: false })
       email?: string;
 
-      @JsonProp({
+      @MorphProp({
         type: {
           properties: {
             street: { type: 'string', required: false },
@@ -150,15 +150,15 @@ describe('Inline Objects (Decorators)', () => {
   });
 
   describe('Array with inline objects', () => {
-    @Serializable()
+    @MorphSchema()
     class BlogPost {
-      @JsonProp({ type: 'string', required: true })
+      @MorphProp({ type: 'string', required: true })
       title!: string;
 
-      @JsonProp({ type: 'string', required: true })
+      @MorphProp({ type: 'string', required: true })
       content!: string;
 
-      @JsonProp({
+      @MorphProp({
         type: {
           properties: {
             tags: { 
@@ -266,9 +266,9 @@ describe('Inline Objects (Decorators)', () => {
   });
 
   describe('Complex containers with inline objects', () => {
-    @Serializable()
+    @MorphSchema()
     class TravelMap {
-      @JsonProp({ 
+      @MorphProp({ 
         type: { 
           container: 'array', 
           itemType: {
@@ -300,7 +300,7 @@ describe('Inline Objects (Decorators)', () => {
         };
       }>;
 
-      @JsonProp({
+      @MorphProp({
         type: {
           container: 'map',
           itemType: {

@@ -1,5 +1,6 @@
 {
   "version": "0.1.0-beta.8",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/RPethani/Morphio.git"
@@ -22,10 +23,10 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "test": "jest",
-    "lint": "eslint 'src/**/*.{js,ts}'",
-    "lint:fix": "eslint 'src/**/*.{js,ts}' --fix",
-    "format": "prettier --write 'src/**/*.{js,ts}'",
+    "test": "jest --config jest.config.cjs",
+    "lint": "eslint \"src/**/*.{js,ts}\"",
+    "lint:fix": "eslint \"src/**/*.{js,ts}\" --fix",
+    "format": "prettier --write \"src/**/*.{js,ts}\"",
     "prepare": "npm run build",
     "size": "size-limit",
     "analyze": "size-limit --why",
@@ -46,11 +47,11 @@
   "author": "Rakesh Pethani",
   "size-limit": [
     {
-      "path": "dist/index.js",
+      "path": "dist/index.cjs",
       "limit": "10 KB"
     },
     {
-      "path": "dist/index.mjs",
+      "path": "dist/index.js",
       "limit": "10 KB"
     }
   ],

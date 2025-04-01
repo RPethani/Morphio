@@ -2,25 +2,13 @@ import { SerializationEngine } from './SerializationEngine';
 import { ObjectType } from '../schema';
 
 /**
- * Serializes an instance of a class into a plain object.
+ * Serializes a class instance to a plain JavaScript object.
  *
- * The `serialize` function is responsible for converting an instance of a class into a plain
- * JavaScript object, based on the schema associated with that class. It respects the metadata
- * defined by the `@JsonProp` decorator and handles nested objects, arrays, and maps.
+ * This function recursively processes each property of the class instance based on
+ * the metadata defined by the `@MorphProp` decorator and handles nested objects, arrays, and maps.
  *
- * This function supports forgiving serialization, meaning that properties without explicit
- * metadata will be included in the serialized output.
- *
- * @param input The instance to serialize. It must be an instance of a class.
- * @param objectType The type of the object to serialize.
- * @returns The serialized object.
- *
- * @example
- * ```ts
- * const user = new User("John", "john@example.com");
- * const serialized = serialize(user);
- * console.log(serialized); // { name: "John", email: "john@example.com" }
- * ```
+ * @param value - The class instance to serialize
+ * @returns A plain JavaScript object representation of the class instance
  */
 export function serialize(input: any, objectType?: ObjectType): object {
   return SerializationEngine.getInstance().serialize(input, objectType);

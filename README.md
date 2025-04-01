@@ -8,7 +8,7 @@ Morphio is a powerful and flexible TypeScript library for serialization and dese
 
 - **Multiple Schema Definition Approaches**:
 
-  - **Decorator-based**: Use `@Serializable` and `@JsonProp` decorators for a clean, declarative style
+  - **Decorator-based**: Use `@MorphSchema` and `@MorphProp` decorators for a clean, declarative style
   - **Declarative**: Define schemas programmatically using `morphioSchema`
   - **Interface-based**: Work with interfaces and runtime type information
 
@@ -38,17 +38,17 @@ npm install morphio
 ### Decorator-Based Approach
 
 ```typescript
-import { Serializable, JsonProp, serialize, deserialize } from 'morphio';
+import { MorphSchema, MorphProp, serialize, deserialize } from 'morphio';
 
-@Serializable()
+@MorphSchema()
 class UserProfile {
-  @JsonProp({ type: 'string', required: true })
+  @MorphProp({ type: 'string', required: true })
   name: string;
 
-  @JsonProp({ type: 'number' })
+  @MorphProp({ type: 'number' })
   age?: number;
 
-  @JsonProp({
+  @MorphProp({
     type: {
       container: 'array',
       itemType: 'string',
@@ -56,7 +56,7 @@ class UserProfile {
   })
   tags: string[] = [];
 
-  @JsonProp({
+  @MorphProp({
     type: {
       container: 'map',
       itemType: 'number',
@@ -115,12 +115,12 @@ const deserialized = deserialize(json, Location);
 ### Inline Objects
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class BlogPost {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   title: string;
 
-  @JsonProp({
+  @MorphProp({
     type: {
       properties: {
         name: { type: 'string', required: true },

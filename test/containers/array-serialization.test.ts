@@ -1,11 +1,11 @@
 import 'reflect-metadata';
-import { deserialize, JsonProp, Serializable, serialize } from '../../src';
+import { deserialize, MorphProp, MorphSchema, serialize } from '../../src';
 
 describe('Array Serialization/Deserialization', () => {
   describe('Simple arrays', () => {
-    @Serializable()
+    @MorphSchema()
     class StringArrayContainer {
-      @JsonProp({ type: { container: 'array', itemType: 'string' } })
+      @MorphProp({ type: { container: 'array', itemType: 'string' } })
       items!: string[];
     }
 
@@ -22,9 +22,9 @@ describe('Array Serialization/Deserialization', () => {
   });
 
   describe('Arrays of objects', () => {
-    @Serializable()
+    @MorphSchema()
     class Item {
-      @JsonProp({ type: 'string' })
+      @MorphProp({ type: 'string' })
       name!: string;
 
       getName() {
@@ -32,9 +32,9 @@ describe('Array Serialization/Deserialization', () => {
       }
     }
 
-    @Serializable()
+    @MorphSchema()
     class Container {
-      @JsonProp({ type: { container: 'array', itemType: Item } })
+      @MorphProp({ type: { container: 'array', itemType: Item } })
       items!: Item[];
 
       getItemCount() {
@@ -62,9 +62,9 @@ describe('Array Serialization/Deserialization', () => {
   });
 
   describe('Empty arrays', () => {
-    @Serializable()
+    @MorphSchema()
     class EmptyArrayContainer {
-      @JsonProp({ type: { container: 'array', itemType: 'string' } })
+      @MorphProp({ type: { container: 'array', itemType: 'string' } })
       items!: string[];
     }
 

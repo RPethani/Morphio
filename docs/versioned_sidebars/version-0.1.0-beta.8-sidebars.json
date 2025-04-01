@@ -1,0 +1,36 @@
+{
+  "tutorialSidebar": [
+    {
+      "type": "doc",
+      "id": "intro",
+      "label": "Getting Started"
+    },
+    {
+      "type": "doc",
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "type": "category",
+      "label": "API Reference",
+      "items": [
+        {
+          "type": "doc",
+          "id": "api/intro",
+          "label": "Overview"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Advanced",
+      "items": [
+        {
+          "type": "doc",
+          "id": "advanced/custom-types",
+          "label": "Custom Types"
+        }
+      ]
+    }
+  ]
+}
