@@ -145,7 +145,8 @@ export type PropertyType =
   | TypeIdentifier
   | PrimitiveType
   | ContainerType
-  | InlineObjectType;
+  | InlineObjectType
+  | EnumPropertyType;
 
 /**
  * Represents the primitive types supported by Morphio.
@@ -221,6 +222,53 @@ export interface PropertyMetadata {
    * Used for documentation and schema generation.
    */
   description?: string;
+}
+
+/**
+ * Strategy for serializing enum values.
+ * - 'value': Use the enum's value (default)
+ * - 'key': Use the enum's key name
+ */
+export type EnumSerializationStrategy = 'value' | 'key';
+
+/**
+ * Configuration for enum property types.
+ * @example
+ * ```ts
+ * enum Status {
+ *   Active = 1,
+ *   Inactive = 0
+ * }
+ *
+ * // Basic usage
+ * @MorphProp({ type: { enum: Status } })
+ * status: Status;
+ *
+ * // With default value and key serialization
+ * @MorphProp({
+ *   type: {
+ *     enum: Status,
+ *     default: Status.Active,
+ *     serializeAs: 'key'
+ *   }
+ * })
+ * status: Status;
+ * ```
+ */
+export interface EnumPropertyType {
+  /** The enum type to use */
+  enum: Record<string, string | number>;
+  /** Default value if deserialization fails */
+  default?: string | number;
+  /** How to serialize the enum value */
+  serializeAs?: EnumSerializationStrategy;
+}
+
+/**
+ * Type guard to check if a property type is an enum type
+ */
+export function isEnumType(type: PropertyType): type is EnumPropertyType {
+  return typeof type === 'object' && 'enum' in type;
 }
 
 /**
