@@ -141,7 +141,39 @@ export interface InlineObjectType {
  * const arrayType: PropertyType = { container: 'array', itemType: 'string' };
  * ```
  */
-export type PropertyType = TypeIdentifier | ContainerType | InlineObjectType;
+export type PropertyType =
+  | TypeIdentifier
+  | PrimitiveType
+  | ContainerType
+  | InlineObjectType;
+
+/**
+ * Represents the primitive types supported by Morphio.
+ * These are the basic types that can be directly serialized/deserialized.
+ *
+ * @example
+ * ```ts
+ * class User {
+ *   @MorphProp({ type: 'string' })
+ *   name: string;
+ *
+ *   @MorphProp({ type: 'number' })
+ *   age: number;
+ *
+ *   @MorphProp({ type: 'bigint' })
+ *   id: bigint;
+ *
+ *   @MorphProp({ type: 'date' })
+ *   birthDate: Date;
+ * }
+ * ```
+ */
+export type PrimitiveType =
+  | 'string' // String primitive
+  | 'number' // Number primitive (includes integers and floats)
+  | 'boolean' // Boolean primitive
+  | 'bigint' // BigInt primitive (serialized as string)
+  | 'date'; // Date object (serialized as ISO string)
 
 /**
  * Metadata for a property used in serialization and deserialization.
@@ -263,7 +295,7 @@ export function isConstructorType(type: PropertyType): type is Constructor {
  * isPrimitiveType(User) // false
  * ```
  */
-export function isPrimitiveType(type: PropertyType): type is string {
+export function isPrimitiveType(type: PropertyType): type is PrimitiveType {
   return typeof type === 'string';
 }
 
