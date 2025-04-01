@@ -71,18 +71,17 @@ export class SerializationEngine implements ProcessorContext {
 
     // Copy all properties from input
     for (const [key, value] of Object.entries(input)) {
-      if (value === undefined) continue;
-
       // If property has metadata, use processor to serialize
       const meta = allProperties.get(key);
       if (meta) {
         const processor = this.findProcessor(meta.type);
         serializedObject[key] = processor.serialize(value, meta.type);
-      } else {
-        // No metadata, copy value directly
+      } else if (value !== undefined) {
+        // No metadata, copy non-undefined value directly
         serializedObject[key] = value;
       }
     }
+
     return serializedObject;
   }
 

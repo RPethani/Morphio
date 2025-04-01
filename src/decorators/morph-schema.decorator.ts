@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { SchemaOps, SchemaRegistry } from '../schema';
+import { createMorphSchema } from './compatibility';
 
 /**
  * A decorator to mark a class as transformable and process its property metadata.
@@ -27,17 +27,7 @@ import { SchemaOps, SchemaRegistry } from '../schema';
  * @param options - Configuration options
  * @returns A decorator function that processes class and property metadata
  */
-export function MorphSchema(options?: MorphSchemaOptions) {
-  return function (target: new () => any, context: ClassDecoratorContext) {
-    const schema = SchemaRegistry.getOrCreate(target);
-    SchemaOps.setName(schema, options?.name || target.name);
-    if (context.metadata && context.metadata?.properties instanceof Map) {
-      context.metadata.properties.forEach((metadata, key) => {
-        SchemaOps.addProperty(schema, key, metadata);
-      });
-    }
-  };
-}
+export const MorphSchema = createMorphSchema();
 
 /**
  * Options for configuring the `MorphSchema` decorator.
@@ -46,6 +36,4 @@ export function MorphSchema(options?: MorphSchemaOptions) {
  * a class that is marked as transformable. If the `name` is not provided, the class's
  * constructor name will be used as the default name.
  */
-export interface MorphSchemaOptions {
-  name?: string;
-}
+export { MorphSchemaOptions } from './compatibility';

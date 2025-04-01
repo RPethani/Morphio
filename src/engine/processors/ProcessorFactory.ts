@@ -1,11 +1,13 @@
 import {
   isContainerType,
+  isEnumType,
   isInlineObjectType,
   isObjectType,
   isPrimitiveType,
   PropertyType,
 } from '../../schema';
 import { ArrayProcessor } from './ArrayProcessor';
+import { EnumProcessor } from './EnumProcessor';
 import { MapProcessor } from './MapProcessor';
 import { ObjectProcessor } from './ObjectProcessor';
 import { ProcessorContext } from './ProcessorContext';
@@ -28,6 +30,8 @@ enum ProcessorType {
   OBJECT = 'object',
   /** For processing inline objects */
   INLINE_OBJECT = 'inlineObject',
+  /** For processing enum types */
+  ENUM = 'enum',
 }
 
 /**
@@ -71,6 +75,7 @@ export class ProcessorFactory {
       ProcessorType.INLINE_OBJECT,
       new InlineObjectProcessor(this.context)
     );
+    this.processorMap.set(ProcessorType.ENUM, new EnumProcessor(this.context));
   }
 
   /**
@@ -94,6 +99,7 @@ export class ProcessorFactory {
    * - Maps use MapProcessor
    * - Classes and interfaces use ObjectProcessor
    * - Inline objects use InlineObjectProcessor
+   * - Enum types use EnumProcessor
    *
    * @param type - The property type to find a processor for
    * @returns The appropriate value processor for the type
@@ -111,6 +117,10 @@ export class ProcessorFactory {
 
     if (isInlineObjectType(type)) {
       return this.processorMap.get(ProcessorType.INLINE_OBJECT)!;
+    }
+
+    if (isEnumType(type)) {
+      return this.processorMap.get(ProcessorType.ENUM)!;
     }
 
     if (isObjectType(type)) {

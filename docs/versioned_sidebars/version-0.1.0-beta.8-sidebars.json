@@ -20,17 +20,6 @@
           "label": "Overview"
         }
       ]
-    },
-    {
-      "type": "category",
-      "label": "Advanced",
-      "items": [
-        {
-          "type": "doc",
-          "id": "advanced/custom-types",
-          "label": "Custom Types"
-        }
-      ]
     }
   ]
 }

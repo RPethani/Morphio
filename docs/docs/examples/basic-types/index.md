@@ -9,6 +9,9 @@ This section demonstrates how to serialize and deserialize basic TypeScript type
 ## String, Number, and Boolean
 Learn how to handle primitive types with proper type information and validation. Examples show both required and optional properties.
 
+## Enum Types
+Learn how to work with TypeScript enums, including both numeric and string enums. Examples show different serialization strategies and handling of invalid values.
+
 ## Date Objects
 See how Morphio automatically handles date serialization and deserialization, maintaining proper date object functionality.
 
