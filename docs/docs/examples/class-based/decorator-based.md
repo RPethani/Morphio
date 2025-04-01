@@ -11,15 +11,15 @@ This section demonstrates how to use decorators to serialize and deserialize cla
 ```typescript
 import { deserialize, JsonProp, Serializable, serialize } from 'morphio';
 
-@Serializable()
+@MorphSchema()
 class User {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   name!: string;
 
-  @JsonProp({ type: 'number' })
+  @MorphProp({ type: 'number' })
   age!: number;
 
-  @JsonProp({ type: 'boolean' })
+  @MorphProp({ type: 'boolean' })
   isActive!: boolean;
 
   getFullName() {
@@ -49,12 +49,12 @@ console.log(deserialized.getFullName()); // 'John Doe'
 ## Nested Objects
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Address {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   street!: string;
 
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   city!: string;
 
   getFullAddress() {
@@ -62,12 +62,12 @@ class Address {
   }
 }
 
-@Serializable()
+@MorphSchema()
 class Person {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   name!: string;
 
-  @JsonProp({ type: Address })
+  @MorphProp({ type: Address })
   address!: Address;
 
   getAddressString() {
@@ -101,18 +101,18 @@ console.log(deserialized.getAddressString()); // '123 Main St, New York'
 ## Optional Properties
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Profile {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   name!: string;
 
-  @JsonProp({ type: 'string', required: false })
+  @MorphProp({ type: 'string', required: false })
   bio?: string;
 
-  @JsonProp({ type: 'number', required: false })
+  @MorphProp({ type: 'number', required: false })
   age?: number;
 
-  @JsonProp({ type: 'Date', required: false })
+  @MorphProp({ type: 'Date', required: false })
   lastUpdated?: Date;
 
   hasAge() {
@@ -153,9 +153,9 @@ console.log(serializedFull);
 ## Method Preservation
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Calculator {
-  @JsonProp({ type: 'number' })
+  @MorphProp({ type: 'number' })
   value!: number;
 
   add(n: number) {

@@ -2,7 +2,7 @@
 
 > `const` **SchemaOps**: `object`
 
-Defined in: [schema/operations/SchemaOps.ts:15](https://github.com/RPethani/Morphio/blob/85bf16253dc3893d85da652ef45df81ed1c5003e/src/schema/operations/SchemaOps.ts#L15)
+Defined in: [schema/operations/SchemaOps.ts:15](https://github.com/RPethani/Morphio/blob/faa508a3bb73f2316d16746415895e81e2772fdf/src/schema/operations/SchemaOps.ts#L15)
 
 Operations for managing MorphioSchema instances.
 These operations replace the previous class-based methods with pure functions.

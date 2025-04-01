@@ -11,15 +11,15 @@ Learn how to serialize simple classes:
 
 ### Decorator-Based Approach
 ```typescript
-@Serializable()
+@MorphSchema()
 class User {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   id: string;
 
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   name: string;
 
-  @JsonProp({ type: 'number', required: false })
+  @MorphProp({ type: 'number', required: false })
   age?: number;
 
   getDisplayName(): string {
@@ -62,15 +62,15 @@ Working with nested class instances:
 
 ### Decorator-Based Approach
 ```typescript
-@Serializable()
+@MorphSchema()
 class Address {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   street: string;
 
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   city: string;
 
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   country: string;
 
   getFullAddress(): string {
@@ -78,15 +78,15 @@ class Address {
   }
 }
 
-@Serializable()
+@MorphSchema()
 class User {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   name: string;
 
-  @JsonProp({ type: 'object', properties: Address })
+  @MorphProp({ type: 'object', properties: Address })
   address: Address;
 
-  @JsonProp({ type: 'array', items: { type: 'object', properties: Address } })
+  @MorphProp({ type: 'array', items: { type: 'object', properties: Address } })
   alternateAddresses?: Address[];
 }
 ```
@@ -131,15 +131,15 @@ Handling class methods and computed properties:
 
 ### Decorator-Based Approach
 ```typescript
-@Serializable()
+@MorphSchema()
 class Product {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   name: string;
 
-  @JsonProp({ type: 'number' })
+  @MorphProp({ type: 'number' })
   price: number;
 
-  @JsonProp({ type: 'number', required: false })
+  @MorphProp({ type: 'number', required: false })
   discountPercentage?: number;
 
   get discountedPrice(): number {

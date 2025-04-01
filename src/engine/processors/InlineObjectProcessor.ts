@@ -9,9 +9,8 @@ import { ProcessorContext } from './ProcessorContext';
  *
  * @example
  * ```ts
- * // Example of an inline object type in a schema
  * class User {
- *   @JsonProp({
+ *   @MorphProp({
  *     type: {
  *       properties: {
  *         street: { type: 'string', required: true },

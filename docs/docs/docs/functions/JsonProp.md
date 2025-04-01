@@ -45,12 +45,12 @@ The property type defaults to 'string' if not explicitly specified in the option
 
 Example usage:
 ```ts
-@Serializable()
+@MorphSchema()
 class User {
-  @JsonProp({ type: 'string', required: true })
+  @MorphProp({ type: 'string', required: true })
   name: string;
 
-  @JsonProp({ type: 'number', description: 'User age in years' })
+  @MorphProp({ type: 'number', description: 'User age in years' })
   age?: number;
 }
 ```

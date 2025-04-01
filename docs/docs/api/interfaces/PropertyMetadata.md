@@ -1,6 +1,6 @@
 # Interface: PropertyMetadata
 
-Defined in: [schema/types/PropertyMetadata.ts:168](https://github.com/RPethani/Morphio/blob/85bf16253dc3893d85da652ef45df81ed1c5003e/src/schema/types/PropertyMetadata.ts#L168)
+Defined in: [schema/types/PropertyMetadata.ts:168](https://github.com/RPethani/Morphio/blob/faa508a3bb73f2316d16746415895e81e2772fdf/src/schema/types/PropertyMetadata.ts#L168)
 
 Metadata for a property used in serialization and deserialization.
 Defines how a property should be processed during data transformation.
@@ -30,7 +30,7 @@ const tagsMetadata: PropertyMetadata = {
 
 > `optional` **description**: `string`
 
-Defined in: [schema/types/PropertyMetadata.ts:191](https://github.com/RPethani/Morphio/blob/85bf16253dc3893d85da652ef45df81ed1c5003e/src/schema/types/PropertyMetadata.ts#L191)
+Defined in: [schema/types/PropertyMetadata.ts:191](https://github.com/RPethani/Morphio/blob/faa508a3bb73f2316d16746415895e81e2772fdf/src/schema/types/PropertyMetadata.ts#L191)
 
 Optional description of the property.
 Used for documentation and schema generation.
@@ -41,7 +41,7 @@ Used for documentation and schema generation.
 
 > `optional` **required**: `boolean`
 
-Defined in: [schema/types/PropertyMetadata.ts:185](https://github.com/RPethani/Morphio/blob/85bf16253dc3893d85da652ef45df81ed1c5003e/src/schema/types/PropertyMetadata.ts#L185)
+Defined in: [schema/types/PropertyMetadata.ts:185](https://github.com/RPethani/Morphio/blob/faa508a3bb73f2316d16746415895e81e2772fdf/src/schema/types/PropertyMetadata.ts#L185)
 
 Whether the property is required during serialization/deserialization.
 - true: Property must be present (default)
@@ -59,7 +59,7 @@ true
 
 > **type**: [`PropertyType`](../type-aliases/PropertyType.md)
 
-Defined in: [schema/types/PropertyMetadata.ts:176](https://github.com/RPethani/Morphio/blob/85bf16253dc3893d85da652ef45df81ed1c5003e/src/schema/types/PropertyMetadata.ts#L176)
+Defined in: [schema/types/PropertyMetadata.ts:176](https://github.com/RPethani/Morphio/blob/faa508a3bb73f2316d16746415895e81e2772fdf/src/schema/types/PropertyMetadata.ts#L176)
 
 The type of the property. Can be one of:
 - Primitive type ('string', 'number', 'boolean', 'Date')

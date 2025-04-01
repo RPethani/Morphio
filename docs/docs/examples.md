@@ -9,15 +9,15 @@ Here are various examples demonstrating Morphio's features.
 ## Basic Types
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class User {
-  @JsonProp()
+  @MorphProp()
   name: string;
 
-  @JsonProp()
+  @MorphProp()
   age: number;
 
-  @JsonProp()
+  @MorphProp()
   isActive: boolean;
 }
 ```
@@ -25,21 +25,21 @@ class User {
 ## Nested Objects
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Address {
-  @JsonProp()
+  @MorphProp()
   street: string;
 
-  @JsonProp()
+  @MorphProp()
   city: string;
 }
 
-@Serializable()
+@MorphSchema()
 class User {
-  @JsonProp()
+  @MorphProp()
   name: string;
 
-  @JsonProp()
+  @MorphProp()
   address: Address;
 }
 ```
@@ -47,15 +47,15 @@ class User {
 ## Arrays and Collections
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Team {
-  @JsonProp()
+  @MorphProp()
   name: string;
 
-  @JsonProp()
+  @MorphProp()
   members: User[];
 
-  @JsonProp()
+  @MorphProp()
   tags: Set<string>;
 }
 ```
@@ -63,12 +63,12 @@ class Team {
 ## Maps
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Configuration {
-  @JsonProp()
+  @MorphProp()
   settings: Map<string, any>;
 
-  @JsonProp()
+  @MorphProp()
   metadata: Map<string, string>;
 }
 ```
@@ -76,15 +76,15 @@ class Configuration {
 ## Optional Properties
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Profile {
-  @JsonProp()
+  @MorphProp()
   name: string;
 
-  @JsonProp({ required: false })
+  @MorphProp({ required: false })
   bio?: string;
 
-  @JsonProp({ defaultValue: false })
+  @MorphProp({ defaultValue: false })
   isPublic: boolean;
 }
 ```
@@ -92,15 +92,15 @@ class Profile {
 ## Inheritance
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Animal {
-  @JsonProp()
+  @MorphProp()
   name: string;
 }
 
-@Serializable()
+@MorphSchema()
 class Dog extends Animal {
-  @JsonProp()
+  @MorphProp()
   breed: string;
 }
 ```
@@ -118,12 +118,12 @@ class DateProcessor implements ValueProcessor<Date> {
   }
 }
 
-@Serializable()
+@MorphSchema()
 class Event {
-  @JsonProp({ processor: DateProcessor })
+  @MorphProp({ processor: DateProcessor })
   startDate: Date;
 
-  @JsonProp({ processor: DateProcessor })
+  @MorphProp({ processor: DateProcessor })
   endDate: Date;
 }
 ```
@@ -133,18 +133,18 @@ class Event {
 Here's a complete example showing multiple features working together:
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Organization {
-  @JsonProp()
+  @MorphProp()
   name: string;
 
-  @JsonProp()
+  @MorphProp()
   teams: Team[];
 
-  @JsonProp()
+  @MorphProp()
   config: Configuration;
 
-  @JsonProp({ processor: DateProcessor })
+  @MorphProp({ processor: DateProcessor })
   createdAt: Date;
 
   constructor(name: string) {
@@ -171,12 +171,12 @@ const deserialized = JSON.parse(json, Organization);
 ```typescript
 import { Serializable, JsonProp, serialize, deserialize } from 'morphio';
 
-@Serializable()
+@MorphSchema()
 class User {
-  @JsonProp({ type: 'string', required: true })
+  @MorphProp({ type: 'string', required: true })
   name: string;
 
-  @JsonProp({ type: 'number', required: false })
+  @MorphProp({ type: 'number', required: false })
   age?: number;
 
   constructor() {
@@ -197,12 +197,12 @@ const deserialized = deserialize(json, User);
 ### Parent-Child Relationship
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Address {
-  @JsonProp({ type: 'string', required: true })
+  @MorphProp({ type: 'string', required: true })
   street: string;
 
-  @JsonProp({ type: 'string', required: true })
+  @MorphProp({ type: 'string', required: true })
   city: string;
 
   constructor() {
@@ -211,12 +211,12 @@ class Address {
   }
 }
 
-@Serializable()
+@MorphSchema()
 class Person {
-  @JsonProp({ type: 'string', required: true })
+  @MorphProp({ type: 'string', required: true })
   name: string;
 
-  @JsonProp({ type: Address, required: true })
+  @MorphProp({ type: Address, required: true })
   address: Address;
 
   constructor() {
@@ -239,12 +239,12 @@ const deserialized = deserialize(json, Person);
 ### Array of Objects
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Team {
-  @JsonProp({ type: 'string', required: true })
+  @MorphProp({ type: 'string', required: true })
   name: string;
 
-  @JsonProp({ type: [User], required: true })
+  @MorphProp({ type: [User], required: true })
   members: User[];
 
   constructor() {
@@ -269,12 +269,12 @@ const deserialized = deserialize(json, Team);
 ### Date Fields
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Event {
-  @JsonProp({ type: 'string', required: true })
+  @MorphProp({ type: 'string', required: true })
   title: string;
 
-  @JsonProp({ type: Date, required: true })
+  @MorphProp({ type: Date, required: true })
   date: Date;
 
   constructor() {
@@ -296,15 +296,15 @@ const deserialized = deserialize(json, Event);
 ### Partial Object
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Settings {
-  @JsonProp({ type: 'string', required: false })
+  @MorphProp({ type: 'string', required: false })
   theme?: string;
 
-  @JsonProp({ type: 'number', required: false })
+  @MorphProp({ type: 'number', required: false })
   fontSize?: number;
 
-  @JsonProp({ type: 'boolean', required: false })
+  @MorphProp({ type: 'boolean', required: false })
   darkMode?: boolean;
 }
 

@@ -22,12 +22,12 @@ Morphio is a TypeScript library that provides type-safe serialization and deseri
 Convert your TypeScript classes to JSON while preserving type information:
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class User {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   name!: string;
 
-  @JsonProp({ type: 'number' })
+  @MorphProp({ type: 'number' })
   age!: number;
 }
 ```
@@ -36,12 +36,12 @@ class User {
 Handle nested objects, arrays, and maps with ease:
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Team {
-  @JsonProp({ type: { container: 'array', itemType: User } })
+  @MorphProp({ type: { container: 'array', itemType: User } })
   members!: User[];
 
-  @JsonProp({ type: { container: 'map', itemType: 'string' } })
+  @MorphProp({ type: { container: 'map', itemType: 'string' } })
   preferences!: Map<string, string>;
 }
 ```
@@ -50,21 +50,21 @@ class Team {
 Work with class inheritance and preserve type information:
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Animal {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   species!: string;
 
-  @JsonProp({ type: 'number' })
+  @MorphProp({ type: 'number' })
   age!: number;
 }
 
-@Serializable()
+@MorphSchema()
 class Dog extends Animal {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   breed!: string;
 
-  @JsonProp({ type: 'boolean' })
+  @MorphProp({ type: 'boolean' })
   isGoodBoy: boolean = true;
 }
 ```

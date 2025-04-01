@@ -7,8 +7,8 @@ to and from TypeScript classes. It supports complex types, nested objects, array
 maps, and custom type definitions through metadata.
 
 Key features:
-- `@Serializable()` decorator for marking classes as serializable
-- `@JsonProp()` decorator for defining property metadata
+- `@MorphSchema()` decorator for marking classes as serializable
+- `@MorphProp()` decorator for defining property metadata
 - Support for nested objects, arrays, and maps
 - Type-safe serialization and deserialization
 - Schema registry for managing class metadata

@@ -8,7 +8,7 @@ Serializes an instance of a class into a plain object.
 
 The `serialize` function is responsible for converting an instance of a class into a plain
 JavaScript object, based on the schema associated with that class. It respects the metadata
-defined by the `@JsonProp` decorator and handles nested objects, arrays, and maps.
+defined by the `@MorphProp` decorator and handles nested objects, arrays, and maps.
 
 This function supports forgiving serialization, meaning that properties without explicit
 metadata will be included in the serialized output.

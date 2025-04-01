@@ -2,16 +2,12 @@
 
 > **serialize**(`input`, `objectType`?): `object`
 
-Defined in: [engine/serialize.ts:25](https://github.com/RPethani/Morphio/blob/85bf16253dc3893d85da652ef45df81ed1c5003e/src/engine/serialize.ts#L25)
+Defined in: [engine/serialize.ts:13](https://github.com/RPethani/Morphio/blob/faa508a3bb73f2316d16746415895e81e2772fdf/src/engine/serialize.ts#L13)
 
-Serializes an instance of a class into a plain object.
+Serializes a class instance to a plain JavaScript object.
 
-The `serialize` function is responsible for converting an instance of a class into a plain
-JavaScript object, based on the schema associated with that class. It respects the metadata
-defined by the `@JsonProp` decorator and handles nested objects, arrays, and maps.
-
-This function supports forgiving serialization, meaning that properties without explicit
-metadata will be included in the serialized output.
+This function recursively processes each property of the class instance based on
+the metadata defined by the `@MorphProp` decorator and handles nested objects, arrays, and maps.
 
 ## Parameters
 
@@ -19,24 +15,12 @@ metadata will be included in the serialized output.
 
 `any`
 
-The instance to serialize. It must be an instance of a class.
-
 ### objectType?
 
 `ObjectType`
-
-The type of the object to serialize.
 
 ## Returns
 
 `object`
 
-The serialized object.
-
-## Example
-
-```ts
-const user = new User("John", "john@example.com");
-const serialized = serialize(user);
-console.log(serialized); // { name: "John", email: "john@example.com" }
-```
+A plain JavaScript object representation of the class instance

@@ -9,57 +9,64 @@ sidebar_position: 2
 Install Morphio using npm:
 
 ```bash
-npm install morphio
+npm install @rpethani/morphio
 ```
 
 Or using yarn:
 
 ```bash
-yarn add morphio
+yarn add @rpethani/morphio
 ```
 
 ## Basic Usage
 
-Here's a simple example of how to use Morphio:
+Morphio provides two ways to define your schema:
+
+1. Using decorators (recommended)
+2. Using schema objects
+
+### Using Decorators
 
 ```typescript
-import { JsonProp, Serializable } from 'morphio';
+import { MorphProp, MorphSchema } from '@rpethani/morphio';
 
-@Serializable()
+@MorphSchema()
 class User {
-  @JsonProp({ type: 'string' })
-  name!: string;
+  @MorphProp()
+  name: string;
 
-  @JsonProp({ type: 'number' })
-  age!: number;
-
-  // Classes must have a no-args constructor for @Serializable to work
-  constructor() {
-    this.name = '';
-    this.age = 0;
-  }
-
-  // Use methods to create instances with specific values
-  static create(name: string, age: number): User {
-    const user = new User();
-    user.name = name;
-    user.age = age;
-    return user;
-  }
+  @MorphProp()
+  age: number;
 }
 
-// Serialization
-const user = User.create('John Doe', 30);
-const json = JSON.stringify(user); // {"name":"John Doe","age":30}
+const json = '{"name": "John Doe", "age": 30}';
+const user = deserialize(json, User);
+console.log(user.name); // "John Doe"
+console.log(user.age); // 30
+```
 
-// Deserialization
-const deserializedUser = JSON.parse(json, User);
-console.log(deserializedUser instanceof User); // true
-console.log(deserializedUser.name); // "John Doe"
+### Using Schema Objects
+
+```typescript
+import { morphioSchema, deserialize } from '@rpethani/morphio';
+
+const userSchema = morphioSchema({
+  type: 'object',
+  properties: {
+    name: { type: 'string' },
+    age: { type: 'number' },
+  },
+});
+
+const json = '{"name": "John Doe", "age": 30}';
+const user = deserialize(json, userSchema);
+console.log(user.name); // "John Doe"
+console.log(user.age); // 30
 ```
 
 ## Next Steps
 
-- Check out the [Examples](./examples.md) for more usage scenarios
-- Learn about [Advanced Features](./advanced/custom-types.md)
-- Explore the [API Reference](./api/intro.md)
+For more examples and detailed API documentation, check out:
+
+- [Examples](/docs/examples) - Various examples showing different use cases
+- [API Reference](/docs/api) - Detailed API documentation

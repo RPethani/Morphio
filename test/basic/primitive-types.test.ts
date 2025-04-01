@@ -1,11 +1,11 @@
 import 'reflect-metadata';
-import { deserialize, serialize, JsonProp, Serializable } from '../../src';
+import { deserialize, serialize, MorphProp, MorphSchema } from '../../src';
 
 describe('Primitive Types Serialization/Deserialization', () => {
   describe('String type', () => {
-    @Serializable()
+    @MorphSchema()
     class StringContainer {
-      @JsonProp({ type: 'string' })
+      @MorphProp({ type: 'string' })
       value!: string;
     }
 
@@ -33,9 +33,9 @@ describe('Primitive Types Serialization/Deserialization', () => {
   });
 
   describe('Number type', () => {
-    @Serializable()
+    @MorphSchema()
     class NumberContainer {
-      @JsonProp({ type: 'number' })
+      @MorphProp({ type: 'number' })
       value!: number;
     }
 
@@ -63,9 +63,9 @@ describe('Primitive Types Serialization/Deserialization', () => {
   });
 
   describe('Boolean type', () => {
-    @Serializable()
+    @MorphSchema()
     class BooleanContainer {
-      @JsonProp({ type: 'boolean' })
+      @MorphProp({ type: 'boolean' })
       value!: boolean;
     }
 

@@ -1,19 +1,6 @@
-import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
-
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
-
-/**
- * Creating a sidebar enables you to:
- - create an ordered group of docs
- - render a sidebar for each doc of that group
- - provide next/previous navigation
-
- The sidebars can be generated from the filesystem, or explicitly defined here.
-
- Create as many sidebars as you want.
- */
-const sidebars: SidebarsConfig = {
-  tutorialSidebar: [
+/** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
+const sidebars = {
+  docs: [
     'intro',
     'getting-started',
     {
@@ -21,7 +8,7 @@ const sidebars: SidebarsConfig = {
       label: 'Examples',
       link: {
         type: 'doc',
-        id: 'examples/index',
+        id: 'examples',
       },
       items: [
         {
@@ -38,6 +25,18 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Class-Based',
+          link: {
+            type: 'doc',
+            id: 'examples/class-based/index',
+          },
+          items: [
+            'examples/class-based/decorator-based',
+            'examples/class-based/schema-based',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Container Types',
           link: {
             type: 'doc',
@@ -46,18 +45,6 @@ const sidebars: SidebarsConfig = {
           items: [
             'examples/container-types/decorator-based',
             'examples/container-types/schema-based',
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Class-Based Serialization',
-          link: {
-            type: 'doc',
-            id: 'examples/class-based/index',
-          },
-          items: [
-            'examples/class-based/decorator-based',
-            'examples/class-based/schema-based',
           ],
         },
         {
@@ -74,15 +61,15 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
-          label: 'Interface-Based Serialization',
+          label: 'Interfaces',
           link: {
             type: 'doc',
             id: 'examples/interfaces/index',
           },
           items: [
             'examples/interfaces/basic',
-            'examples/interfaces/nested',
             'examples/interfaces/inheritance',
+            'examples/interfaces/nested',
           ],
         },
       ],
@@ -90,22 +77,27 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'API Reference',
+      link: {
+        type: 'doc',
+        id: 'api/index',
+      },
       items: [
-        {
-          type: 'category',
-          label: 'Classes',
-          items: ['api/classes/SchemaRegistry'],
-        },
+        'api/globals',
         {
           type: 'category',
           label: 'Functions',
           items: [
+            'api/functions/MorphProp',
+            'api/functions/MorphSchema',
             'api/functions/deserialize',
-            'api/functions/JsonProp',
             'api/functions/morphioSchema',
-            'api/functions/Serializable',
             'api/functions/serialize',
           ],
+        },
+        {
+          type: 'category',
+          label: 'Classes',
+          items: ['api/classes/SchemaRegistry'],
         },
         {
           type: 'category',
@@ -118,8 +110,13 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
-          label: 'Types',
+          label: 'Type Aliases',
           items: ['api/type-aliases/PropertyType'],
+        },
+        {
+          type: 'category',
+          label: 'Variables',
+          items: ['api/variables/SchemaOps'],
         },
       ],
     },

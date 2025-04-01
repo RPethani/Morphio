@@ -1,10 +1,10 @@
-# Function: Serializable()
+# Function: MorphSchema()
 
-> **Serializable**(`options`?): (`target`, `context`) => `void`
+> **MorphSchema**(`options`?): (`target`, `context`) => `void`
 
-Defined in: [decorators/serializable.decorator.ts:30](https://github.com/RPethani/Morphio/blob/85bf16253dc3893d85da652ef45df81ed1c5003e/src/decorators/serializable.decorator.ts#L30)
+Defined in: decorators/morph-schema.decorator.ts:30
 
-A decorator to mark a class as serializable and process its property metadata.
+A decorator to mark a class as transformable and process its property metadata.
 
 This decorator performs two main functions:
 1. Registers a schema for the class in the SchemaRegistry
@@ -14,7 +14,7 @@ This decorator performs two main functions:
 
 ### options?
 
-`SerializableOptions`
+`MorphSchemaOptions`
 
 Configuration options
 
@@ -38,26 +38,26 @@ A decorator function that processes class and property metadata
 
 `void`
 
-## Json Prop
+## Morph Prop
 
 decorators
 
 The decorator looks for a Map of property metadata in context.metadata.properties,
 which is populated by the
 
-## Json Prop
+## Morph Prop
 
 decorators. It then registers each property
 with the class schema.
 
 Example usage:
 ```ts
-@Serializable({ name: 'CustomUser' })
+@MorphSchema({ name: 'CustomUser' })
 class User {
-  @JsonProp({ type: 'string', required: true })
+  @MorphProp({ type: 'string', required: true })
   name: string;
 
-  @JsonProp({ type: 'number', description: 'User age' })
+  @MorphProp({ type: 'number', description: 'User age' })
   age?: number;
 }
 ```

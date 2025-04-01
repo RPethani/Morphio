@@ -11,9 +11,9 @@ This section demonstrates how to use decorators to serialize and deserialize bas
 ```typescript
 import { deserialize, JsonProp, Serializable, serialize } from 'morphio';
 
-@Serializable()
+@MorphSchema()
 class StringContainer {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   value!: string;
 }
 
@@ -36,9 +36,9 @@ console.log(serializedEmpty); // { value: '' }
 ```
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class NumberContainer {
-  @JsonProp({ type: 'number' })
+  @MorphProp({ type: 'number' })
   value!: number;
 }
 
@@ -58,9 +58,9 @@ console.log(serializedFloat); // { value: 3.14 }
 ```
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class BooleanContainer {
-  @JsonProp({ type: 'boolean' })
+  @MorphProp({ type: 'boolean' })
   value!: boolean;
 }
 
@@ -82,15 +82,15 @@ console.log(serializedFalse); // { value: false }
 ## Multiple Properties
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class User {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   name!: string;
 
-  @JsonProp({ type: 'number' })
+  @MorphProp({ type: 'number' })
   age!: number;
 
-  @JsonProp({ type: 'boolean' })
+  @MorphProp({ type: 'boolean' })
   isActive!: boolean;
 }
 
@@ -117,15 +117,15 @@ console.log(deserialized.isActive); // true
 ## Optional Properties
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Profile {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   name!: string;
 
-  @JsonProp({ type: 'string', required: false })
+  @MorphProp({ type: 'string', required: false })
   bio?: string;
 
-  @JsonProp({ type: 'number', required: false })
+  @MorphProp({ type: 'number', required: false })
   age?: number;
 }
 

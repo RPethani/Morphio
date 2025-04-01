@@ -6,8 +6,8 @@
  * maps, and custom type definitions through metadata.
  *
  * Key features:
- * - `@Serializable()` decorator for marking classes as serializable
- * - `@JsonProp()` decorator for defining property metadata
+ * - `@MorphSchema()` decorator for defining class schemas
+ * - `@MorphProp()` decorator for defining property metadata
  * - Support for nested objects, arrays, and maps
  * - Type-safe serialization and deserialization
  * - Schema registry for managing class metadata
@@ -22,8 +22,8 @@ export { serialize } from './engine/serialize';
 export { deserialize } from './engine/deserialize';
 
 // Decorators
-export { JsonProp } from './decorators/json-prop.decorator';
-export { Serializable } from './decorators/serializable.decorator';
+export { MorphProp } from './decorators/morph-prop.decorator';
+export { MorphSchema } from './decorators/morph-schema.decorator';
 
 // Schema operations
 export { morphioSchema } from './schema/operations/SchemaOps';

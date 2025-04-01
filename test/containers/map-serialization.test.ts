@@ -1,11 +1,11 @@
 import 'reflect-metadata';
-import { deserialize, JsonProp, Serializable, serialize } from '../../src';
+import { deserialize, MorphProp, MorphSchema, serialize } from '../../src';
 
 describe('Map Serialization/Deserialization', () => {
   describe('Simple maps', () => {
-    @Serializable()
+    @MorphSchema()
     class StringMapContainer {
-      @JsonProp({ type: { container: 'map', itemType: 'string' } })
+      @MorphProp({ type: { container: 'map', itemType: 'string' } })
       map!: Map<string, string>;
 
       getMapSize() {
@@ -36,9 +36,9 @@ describe('Map Serialization/Deserialization', () => {
   });
 
   describe('Maps with object values', () => {
-    @Serializable()
+    @MorphSchema()
     class Value {
-      @JsonProp({ type: 'number' })
+      @MorphProp({ type: 'number' })
       count!: number;
 
       getCount() {
@@ -46,9 +46,9 @@ describe('Map Serialization/Deserialization', () => {
       }
     }
 
-    @Serializable()
+    @MorphSchema()
     class ObjectMapContainer {
-      @JsonProp({ type: { container: 'map', itemType: Value } })
+      @MorphProp({ type: { container: 'map', itemType: Value } })
       map!: Map<string, Value>;
 
       getMapSize() {
@@ -80,9 +80,9 @@ describe('Map Serialization/Deserialization', () => {
   });
 
   describe('Empty maps', () => {
-    @Serializable()
+    @MorphSchema()
     class EmptyMapContainer {
-      @JsonProp({ type: { container: 'map', itemType: 'string' } })
+      @MorphProp({ type: { container: 'map', itemType: 'string' } })
       map!: Map<string, string>;
     }
 

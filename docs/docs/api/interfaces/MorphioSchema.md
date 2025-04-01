@@ -1,6 +1,6 @@
 # Interface: MorphioSchema
 
-Defined in: [schema/types/MorphioSchema.ts:48](https://github.com/RPethani/Morphio/blob/85bf16253dc3893d85da652ef45df81ed1c5003e/src/schema/types/MorphioSchema.ts#L48)
+Defined in: [schema/types/MorphioSchema.ts:48](https://github.com/RPethani/Morphio/blob/faa508a3bb73f2316d16746415895e81e2772fdf/src/schema/types/MorphioSchema.ts#L48)
 
 Represents the schema for an object in Morphio.
 The schema contains metadata about the properties of the object and helps with serialization/deserialization.
@@ -52,7 +52,7 @@ interface Car extends Vehicle {
 
 > `optional` **extends**: `TypeIdentifier`[]
 
-Defined in: [schema/types/MorphioSchema.ts:82](https://github.com/RPethani/Morphio/blob/85bf16253dc3893d85da652ef45df81ed1c5003e/src/schema/types/MorphioSchema.ts#L82)
+Defined in: [schema/types/MorphioSchema.ts:82](https://github.com/RPethani/Morphio/blob/faa508a3bb73f2316d16746415895e81e2772fdf/src/schema/types/MorphioSchema.ts#L82)
 
 For interface inheritance, list of parent type identifiers this schema extends from.
 Properties from parent schemas are inherited by the implementing schema.
@@ -71,7 +71,7 @@ extends = ['Vehicle']  // References Vehicle's type identifier
 
 > `optional` **isInterface**: `boolean`
 
-Defined in: [schema/types/MorphioSchema.ts:68](https://github.com/RPethani/Morphio/blob/85bf16253dc3893d85da652ef45df81ed1c5003e/src/schema/types/MorphioSchema.ts#L68)
+Defined in: [schema/types/MorphioSchema.ts:68](https://github.com/RPethani/Morphio/blob/faa508a3bb73f2316d16746415895e81e2772fdf/src/schema/types/MorphioSchema.ts#L68)
 
 Whether this schema represents an interface (true) or a class (false/undefined).
 
@@ -86,7 +86,7 @@ When true:
 
 > **name**: `string`
 
-Defined in: [schema/types/MorphioSchema.ts:52](https://github.com/RPethani/Morphio/blob/85bf16253dc3893d85da652ef45df81ed1c5003e/src/schema/types/MorphioSchema.ts#L52)
+Defined in: [schema/types/MorphioSchema.ts:52](https://github.com/RPethani/Morphio/blob/faa508a3bb73f2316d16746415895e81e2772fdf/src/schema/types/MorphioSchema.ts#L52)
 
 The name of the schema (class or interface name)
 
@@ -96,7 +96,7 @@ The name of the schema (class or interface name)
 
 > **properties**: `Map`\<`string`, [`PropertyMetadata`](PropertyMetadata.md)\>
 
-Defined in: [schema/types/MorphioSchema.ts:58](https://github.com/RPethani/Morphio/blob/85bf16253dc3893d85da652ef45df81ed1c5003e/src/schema/types/MorphioSchema.ts#L58)
+Defined in: [schema/types/MorphioSchema.ts:58](https://github.com/RPethani/Morphio/blob/faa508a3bb73f2316d16746415895e81e2772fdf/src/schema/types/MorphioSchema.ts#L58)
 
 A map holding the metadata of properties defined in this schema.
 The map's keys are property names, and the values are the metadata describing each property.
