@@ -52,12 +52,12 @@ with the class schema.
 
 Example usage:
 ```ts
-@Serializable({ name: 'CustomUser' })
+@MorphSchema({ name: 'CustomUser' })
 class User {
-  @JsonProp({ type: 'string', required: true })
+  @MorphProp({ type: 'string', required: true })
   name: string;
 
-  @JsonProp({ type: 'number', description: 'User age' })
+  @MorphProp({ type: 'number', description: 'User age' })
   age?: number;
 }
 ```

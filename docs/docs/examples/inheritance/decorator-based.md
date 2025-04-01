@@ -11,12 +11,12 @@ This section demonstrates how to use decorators with class inheritance.
 ```typescript
 import { deserialize, JsonProp, Serializable, serialize } from 'morphio';
 
-@Serializable()
+@MorphSchema()
 class Animal {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   name!: string;
 
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   species!: string;
 
   getSpecies() {
@@ -24,12 +24,12 @@ class Animal {
   }
 }
 
-@Serializable()
+@MorphSchema()
 class Pet extends Animal {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   owner!: string;
 
-  @JsonProp({ type: 'boolean' })
+  @MorphProp({ type: 'boolean' })
   vaccinated!: boolean;
 
   isVaccinated() {
@@ -61,12 +61,12 @@ console.log(deserialized.isVaccinated()); // true
 ## Multi-Level Inheritance
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class LivingBeing {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   id!: string;
 
-  @JsonProp({ type: 'Date' })
+  @MorphProp({ type: 'Date' })
   createdAt!: Date;
 
   getId() {
@@ -74,12 +74,12 @@ class LivingBeing {
   }
 }
 
-@Serializable()
+@MorphSchema()
 class Animal extends LivingBeing {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   species!: string;
 
-  @JsonProp({ type: 'number' })
+  @MorphProp({ type: 'number' })
   age!: number;
 
   getAge() {
@@ -87,12 +87,12 @@ class Animal extends LivingBeing {
   }
 }
 
-@Serializable()
+@MorphSchema()
 class Pet extends Animal {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   owner!: string;
 
-  @JsonProp({ type: 'boolean', required: false })
+  @MorphProp({ type: 'boolean', required: false })
   vaccinated?: boolean;
 
   getOwner() {
@@ -130,21 +130,21 @@ console.log(deserialized.getOwner()); // 'John'
 ## Optional Properties in Inheritance
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Vehicle {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   id!: string;
 
-  @JsonProp({ type: 'string', required: false })
+  @MorphProp({ type: 'string', required: false })
   color?: string;
 }
 
-@Serializable()
+@MorphSchema()
 class Car extends Vehicle {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   model!: string;
 
-  @JsonProp({ type: 'number', required: false })
+  @MorphProp({ type: 'number', required: false })
   year?: number;
 }
 

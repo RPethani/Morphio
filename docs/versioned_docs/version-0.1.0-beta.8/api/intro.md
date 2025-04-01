@@ -33,7 +33,7 @@ An instance of the specified class type
 
 ## Decorators
 
-### @Serializable()
+### @MorphSchema()
 
 Marks a class as serializable and processes its property metadata.
 
@@ -44,7 +44,7 @@ function Serializable(options?: SerializableOptions): ClassDecorator
 #### Options
 - `name`: Optional custom name for the schema
 
-### @JsonProp()
+### @MorphProp()
 
 Adds metadata to a class property for serialization/deserialization.
 

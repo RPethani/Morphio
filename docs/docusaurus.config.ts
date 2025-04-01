@@ -1,21 +1,29 @@
 import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import type {Config} from '@docusaurus/types';
 
 const config: Config = {
   title: 'Morphio',
-  tagline: 'Type-safe JSON serialization for TypeScript',
+  tagline: 'A TypeScript library for JSON serialization and deserialization',
   favicon: 'img/favicon.ico',
 
+  // Set the production url of your site here
   url: 'https://rpethani.github.io',
+  // Set the /<baseUrl>/ pathname under which your site is served
+  // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/Morphio/',
 
-  organizationName: 'RPethani',
-  projectName: 'Morphio',
+  // GitHub pages deployment config.
+  // If you aren't using GitHub pages, you don't need these.
+  organizationName: 'RPethani', // Usually your GitHub org/user name.
+  projectName: 'Morphio', // Usually your repo name.
 
-  onBrokenLinks: 'warn',
+  onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
+  // Even if you don't use internationalization, you can use this field to set
+  // useful metadata like html lang. For example, if your site is Chinese, you
+  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
@@ -26,16 +34,21 @@ const config: Config = {
       'classic',
       {
         docs: {
+          routeBasePath: 'docs',
           sidebarPath: './sidebars.ts',
+          sidebarCollapsible: true,
+          sidebarCollapsed: false,
           editUrl: 'https://github.com/RPethani/Morphio/tree/main/docs/',
+          editLocalizedFiles: true,
           lastVersion: 'current',
           versions: {
             current: {
-              label: 'Next',
-              banner: 'none',
+              label: '0.1.0-beta.8',
+              path: '',
             },
           },
         },
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -43,26 +56,9 @@ const config: Config = {
     ],
   ],
 
-  plugins: [
-    [
-      'docusaurus-plugin-typedoc',
-      {
-        entryPoints: ['../src/index.ts'],
-        tsconfig: '../tsconfig.json',
-        out: 'docs/api',
-        sidebar: {
-          categoryLabel: 'API Reference',
-          position: 3,
-          fullNames: true,
-        },
-        plugin: ['typedoc-plugin-markdown'],
-        watch: process.env.TYPEDOC_WATCH,
-      },
-    ],
-  ],
-
   themeConfig: {
-    image: 'img/morphio-social-card.jpg',
+    // Replace with your project's social card
+    image: 'img/docusaurus-social-card.jpg',
     navbar: {
       title: 'Morphio',
       logo: {
@@ -72,23 +68,9 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'docs',
           position: 'left',
-          label: 'Documentation',
-        },
-        {
-          type: 'docsVersionDropdown',
-          position: 'right',
-          dropdownItemsAfter: [
-            {
-              type: 'html',
-              value: '<hr class="dropdown-separator">',
-            },
-            {
-              to: '/versions',
-              label: 'All versions',
-            },
-          ],
+          label: 'Docs',
         },
         {
           href: 'https://github.com/RPethani/Morphio',
@@ -104,12 +86,16 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
-              label: 'Introduction',
-              to: '/docs/intro',
-            },
-            {
               label: 'Getting Started',
               to: '/docs/getting-started',
+            },
+            {
+              label: 'Examples',
+              to: '/docs/examples',
+            },
+            {
+              label: 'API Reference',
+              to: '/docs/api',
             },
           ],
         },

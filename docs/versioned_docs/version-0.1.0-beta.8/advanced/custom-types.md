@@ -9,9 +9,9 @@ Morphio provides flexibility in handling custom types and complex scenarios.
 You can implement custom type transformations for special cases:
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class CustomType {
-  @JsonProp({
+  @MorphProp({
     type: 'string',
     required: true,
     transform: {
@@ -32,12 +32,12 @@ class CustomType {
 Handling arrays of complex types:
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Library {
-  @JsonProp({ type: 'string', required: true })
+  @MorphProp({ type: 'string', required: true })
   name: string;
 
-  @JsonProp({ type: [[Book]], required: true })
+  @MorphProp({ type: [[Book]], required: true })
   shelves: Book[][];
 
   constructor() {
@@ -52,9 +52,9 @@ class Library {
 Working with Map objects:
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Cache {
-  @JsonProp({ type: Map, required: true, keyType: 'string', valueType: 'any' })
+  @MorphProp({ type: Map, required: true, keyType: 'string', valueType: 'any' })
   data: Map<string, any>;
 
   constructor() {
@@ -68,9 +68,9 @@ class Cache {
 ### Custom Schema Names
 
 ```typescript
-@Serializable({ name: 'CustomUser' })
+@MorphSchema({ name: 'CustomUser' })
 class User {
-  @JsonProp({ type: 'string', required: true })
+  @MorphProp({ type: 'string', required: true })
   name: string;
 }
 ```
@@ -93,12 +93,12 @@ console.log(userSchema.properties);
 Always specify types explicitly:
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class SafeClass {
-  @JsonProp({ type: 'string', required: true })
+  @MorphProp({ type: 'string', required: true })
   id!: string;  // Use definite assignment assertion
 
-  @JsonProp({ type: 'number', required: false })
+  @MorphProp({ type: 'number', required: false })
   count?: number;  // Mark optional properties with ?
 }
 ```
@@ -124,9 +124,9 @@ try {
 For large datasets, consider streaming:
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class LargeData {
-  @JsonProp({ type: [DataChunk], required: true })
+  @MorphProp({ type: [DataChunk], required: true })
   chunks: DataChunk[];
 
   async *processChunks() {

@@ -22,9 +22,9 @@ Morphio is a TypeScript library that provides type-safe serialization and deseri
 Convert your TypeScript classes to JSON while preserving type information:
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class User {
-  @JsonProp()
+  @MorphProp()
   name: string;
 }
 ```
@@ -33,12 +33,12 @@ class User {
 Handle nested objects, arrays, maps, and custom types with ease:
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Team {
-  @JsonProp()
+  @MorphProp()
   members: User[];
 
-  @JsonProp()
+  @MorphProp()
   metadata: Map<string, any>;
 }
 ```
@@ -47,9 +47,9 @@ class Team {
 Extend Morphio's functionality with custom type processors:
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Config {
-  @JsonProp({ processor: CustomDateProcessor })
+  @MorphProp({ processor: CustomDateProcessor })
   createdAt: Date;
 }
 ```

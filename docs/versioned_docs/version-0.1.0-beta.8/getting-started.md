@@ -25,12 +25,12 @@ Here's a simple example of how to use Morphio:
 ```typescript
 import { JsonProp, Serializable } from 'morphio';
 
-@Serializable()
+@MorphSchema()
 class User {
-  @JsonProp()
+  @MorphProp()
   name: string;
 
-  @JsonProp()
+  @MorphProp()
   age: number;
 
   constructor(name: string, age: number) {

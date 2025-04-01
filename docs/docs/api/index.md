@@ -1,6 +1,6 @@
 # Morphio - TypeScript Serialization Library
 
-![Morphio Logo](./assets/morphio.png)
+![Morphio Logo](_media/morphio.png)
 
 Morphio is a powerful and flexible TypeScript library for serialization and deserialization of objects. It provides robust support for complex data structures, type safety, and multiple approaches to schema definition. Perfect for applications that need to handle complex JSON transformations while maintaining strong typing.
 
@@ -8,7 +8,7 @@ Morphio is a powerful and flexible TypeScript library for serialization and dese
 
 - **Multiple Schema Definition Approaches**:
 
-  - **Decorator-based**: Use `@MorphSchema` and `@MorphProp` decorators for a clean, declarative style
+  - **Decorator-based**: Use `@MorphProp` and `@MorphSchema` decorators for a clean, declarative style
   - **Declarative**: Define schemas programmatically using `morphioSchema`
   - **Interface-based**: Work with interfaces and runtime type information
 
@@ -130,7 +130,6 @@ class BlogPost {
   })
   author: { name: string; email: string };
 }
-```
 
 ## Documentation
 
@@ -141,11 +140,11 @@ For detailed documentation, including:
 - Best Practices
 - Migration Guide
 
-Visit our [documentation](https://rpethani.github.io/Morphio/).
+Visit our [API Reference](https://rpethani.github.io/Morphio/docs/api) for detailed information about all the public APIs exposed by Morphio.
 
 ## Contributing
 
-We welcome contributions! Please see our [Contributing Guidelines](./.github/CONTRIBUTING.md) for:
+We welcome contributions! Please see our [Contributing Guide](https://github.com/RPethani/Morphio/blob/main/CONTRIBUTING.md) for:
 
 - Development setup
 - Coding standards
@@ -162,13 +161,13 @@ npm test
 
 ## License
 
-MIT License - see the [LICENSE](./LICENSE) file for details.
+Morphio is licensed under the [MIT License](https://github.com/RPethani/Morphio/blob/main/LICENSE).
 
 ## Support
 
 Need help?
 
-1. Check the [documentation](https://rpethani.github.io/Morphio/)
+1. Check the [API Reference](https://rpethani.github.io/Morphio/docs/api)
 2. Search [existing issues](https://github.com/RPethani/Morphio/issues)
 3. Create a new issue
 

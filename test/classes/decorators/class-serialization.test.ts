@@ -1,15 +1,15 @@
 import 'reflect-metadata';
-import { serialize, JsonProp, Serializable } from '../../../src';
+import { serialize, MorphProp, MorphSchema } from '../../../src';
 
 describe('Class Serialization', () => {
   describe('Basic class serialization', () => {
-    @Serializable()
+    @MorphSchema()
     class BasicUser {
       name?: string;
       age?: number;
     }
 
-    it('should serialize a class without JsonProp using fallback', () => {
+    it('should serialize a class without MorphProp using fallback', () => {
       const user = new BasicUser();
       user.name = 'Jane';
       user.age = 28;
@@ -20,19 +20,19 @@ describe('Class Serialization', () => {
   });
 
   describe('Decorated class serialization', () => {
-    @Serializable()
+    @MorphSchema()
     class DecoratedUser {
-      @JsonProp({ type: 'string' })
+      @MorphProp({ type: 'string' })
       name?: string;
 
-      @JsonProp({ type: 'number' })
+      @MorphProp({ type: 'number' })
       age?: number;
 
-      @JsonProp({ type: 'string' })
+      @MorphProp({ type: 'string' })
       email?: string;
     }
 
-    it('should respect JsonProp decorator', () => {
+    it('should respect MorphProp decorator', () => {
       const user = new DecoratedUser();
       user.name = 'Tom';
       user.age = 32;
@@ -52,18 +52,18 @@ describe('Class Serialization', () => {
   });
 
   describe('Nested class serialization', () => {
-    @Serializable()
+    @MorphSchema()
     class Address {
-      @JsonProp({ type: 'string' })
+      @MorphProp({ type: 'string' })
       city!: string;
     }
 
-    @Serializable()
+    @MorphSchema()
     class Person {
-      @JsonProp({ type: 'string' })
+      @MorphProp({ type: 'string' })
       name!: string;
 
-      @JsonProp({ type: Address })
+      @MorphProp({ type: Address })
       address!: Address;
     }
 

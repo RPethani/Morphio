@@ -26,21 +26,21 @@ The examples in this section are presented in two formats:
 ### Decorator-Based
 Using TypeScript decorators with proper type information:
 ```typescript
-@Serializable()
+@MorphSchema()
 class Animal {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   id: string;
 
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   species: string;
 }
 
-@Serializable()
+@MorphSchema()
 class Pet extends Animal {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   name: string;
 
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   owner: string;
 }
 ```

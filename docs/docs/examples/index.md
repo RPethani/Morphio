@@ -30,9 +30,9 @@ Each section (where applicable) provides examples in two formats:
 ### Decorator-Based
 Using TypeScript decorators for a clean, declarative approach. Example:
 ```typescript
-@Serializable()
+@MorphSchema()
 class User {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   name: string;
 }
 ```

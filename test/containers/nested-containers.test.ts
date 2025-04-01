@@ -1,17 +1,17 @@
 import 'reflect-metadata';
-import { deserialize, JsonProp, Serializable, serialize } from '../../src';
+import { deserialize, MorphProp, MorphSchema, serialize } from '../../src';
 
 describe('Nested Containers Serialization/Deserialization', () => {
   describe('Array of Maps', () => {
-    @Serializable()
+    @MorphSchema()
     class Value {
-      @JsonProp({ type: 'string' })
+      @MorphProp({ type: 'string' })
       data!: string;
     }
 
-    @Serializable()
+    @MorphSchema()
     class ArrayOfMapsContainer {
-      @JsonProp({ 
+      @MorphProp({ 
         type: { 
           container: 'array', 
           itemType: { 
@@ -55,15 +55,15 @@ describe('Nested Containers Serialization/Deserialization', () => {
   });
 
   describe('Map of Arrays', () => {
-    @Serializable()
+    @MorphSchema()
     class Item {
-      @JsonProp({ type: 'string' })
+      @MorphProp({ type: 'string' })
       name!: string;
     }
 
-    @Serializable()
+    @MorphSchema()
     class MapOfArraysContainer {
-      @JsonProp({ 
+      @MorphProp({ 
         type: { 
           container: 'map', 
           itemType: { 

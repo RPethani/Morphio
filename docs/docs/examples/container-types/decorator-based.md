@@ -13,9 +13,9 @@ This section demonstrates how to use decorators to work with arrays and maps.
 ```typescript
 import { deserialize, JsonProp, Serializable, serialize } from 'morphio';
 
-@Serializable()
+@MorphSchema()
 class StringArrayContainer {
-  @JsonProp({ type: { container: 'array', itemType: 'string' } })
+  @MorphProp({ type: { container: 'array', itemType: 'string' } })
   items!: string[];
 }
 
@@ -43,9 +43,9 @@ console.log(serializedEmpty); // { items: [] }
 ### Arrays of Objects
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Item {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   name!: string;
 
   getName() {
@@ -53,9 +53,9 @@ class Item {
   }
 }
 
-@Serializable()
+@MorphSchema()
 class Container {
-  @JsonProp({ type: { container: 'array', itemType: Item } })
+  @MorphProp({ type: { container: 'array', itemType: Item } })
   items!: Item[];
 
   getItemCount() {
@@ -90,9 +90,9 @@ console.log(deserialized.items[0].getName()); // 'A'
 ### Maps with Primitive Values
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class StringMapContainer {
-  @JsonProp({ type: { container: 'map', itemType: 'string' } })
+  @MorphProp({ type: { container: 'map', itemType: 'string' } })
   map!: Map<string, string>;
 
   getMapSize() {
@@ -124,9 +124,9 @@ console.log(deserialized.map.get('key1')); // 'value1'
 ### Maps with Object Values
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Value {
-  @JsonProp({ type: 'number' })
+  @MorphProp({ type: 'number' })
   count!: number;
 
   getCount() {
@@ -134,9 +134,9 @@ class Value {
   }
 }
 
-@Serializable()
+@MorphSchema()
 class ObjectMapContainer {
-  @JsonProp({ type: { container: 'map', itemType: Value } })
+  @MorphProp({ type: { container: 'map', itemType: Value } })
   map!: Map<string, Value>;
 
   getMapSize() {
@@ -168,9 +168,9 @@ console.log(deserialized.map.get('one')?.getCount()); // 1
 ### Empty Maps
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class EmptyMapContainer {
-  @JsonProp({ type: { container: 'map', itemType: 'string' } })
+  @MorphProp({ type: { container: 'map', itemType: 'string' } })
   map!: Map<string, string>;
 }
 

@@ -2,7 +2,7 @@
 
 > **morphioSchema**(`type`, `properties`, `parentTypes`?): [`MorphioSchema`](../interfaces/MorphioSchema.md)
 
-Defined in: [schema/operations/SchemaOps.ts:125](https://github.com/RPethani/Morphio/blob/85bf16253dc3893d85da652ef45df81ed1c5003e/src/schema/operations/SchemaOps.ts#L125)
+Defined in: [schema/operations/SchemaOps.ts:125](https://github.com/RPethani/Morphio/blob/faa508a3bb73f2316d16746415895e81e2772fdf/src/schema/operations/SchemaOps.ts#L125)
 
 Creates and registers a schema for an interface or class.
 

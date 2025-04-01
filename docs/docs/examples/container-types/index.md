@@ -28,12 +28,12 @@ The examples in this section are presented in two formats:
 ### Decorator-Based
 Using TypeScript decorators with proper type information:
 ```typescript
-@Serializable()
+@MorphSchema()
 class UserList {
-  @JsonProp({ type: 'array', items: { type: 'string' } })
+  @MorphProp({ type: 'array', items: { type: 'string' } })
   names: string[];
 
-  @JsonProp({ type: 'map', values: { type: 'number' } })
+  @MorphProp({ type: 'map', values: { type: 'number' } })
   scores: Map<string, number>;
 }
 ```
@@ -57,12 +57,12 @@ Each example demonstrates proper type handling and validation for container type
 ## Arrays of Basic Types
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class TodoList {
-  @JsonProp({ type: 'array', items: { type: 'string' } })
+  @MorphProp({ type: 'array', items: { type: 'string' } })
   tags: string[];
 
-  @JsonProp({ type: 'array', items: { type: 'number' } })
+  @MorphProp({ type: 'array', items: { type: 'number' } })
   priorities: number[];
 }
 
@@ -80,24 +80,24 @@ console.log(list.priorities); // [1, 2, 3]
 ## Nested Objects
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Address {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   street: string;
 
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   city: string;
 
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   country: string;
 }
 
-@Serializable()
+@MorphSchema()
 class User {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   name: string;
 
-  @JsonProp({ type: 'object', properties: Address })
+  @MorphProp({ type: 'object', properties: Address })
   address: Address;
 }
 
@@ -119,21 +119,21 @@ console.log(user.address.street); // "123 Main St"
 ## Arrays of Objects
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Comment {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   author: string;
 
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   text: string;
 }
 
-@Serializable()
+@MorphSchema()
 class BlogPost {
-  @JsonProp({ type: 'string' })
+  @MorphProp({ type: 'string' })
   title: string;
 
-  @JsonProp({ type: 'array', items: { type: 'object', properties: Comment } })
+  @MorphProp({ type: 'array', items: { type: 'object', properties: Comment } })
   comments: Comment[];
 }
 
@@ -160,9 +160,9 @@ console.log(post.comments[0].author); // "Alice"
 ## Maps
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Cache {
-  @JsonProp({ type: 'map', values: { type: 'number' } })
+  @MorphProp({ type: 'map', values: { type: 'number' } })
   data: Map<string, number>;
 
   constructor() {
@@ -191,9 +191,9 @@ console.log(deserialized.data.get("views")); // 100
 ## Nested Maps and Arrays
 
 ```typescript
-@Serializable()
+@MorphSchema()
 class Analytics {
-  @JsonProp({ type: 'map', values: { type: 'array', items: { type: 'number' } } })
+  @MorphProp({ type: 'map', values: { type: 'array', items: { type: 'number' } } })
   metrics: Map<string, number[]>;
 
   constructor() {
