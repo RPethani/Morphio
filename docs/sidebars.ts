@@ -3,6 +3,7 @@ const sidebars = {
   docs: [
     'intro',
     'getting-started',
+    'decorator-compatibility',
     {
       type: 'category',
       label: 'Examples',

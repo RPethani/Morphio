@@ -43,7 +43,7 @@ const config: Config = {
           lastVersion: 'current',
           versions: {
             current: {
-              label: '0.1.0-beta.9',
+              label: '1.0.0-beta.0',
               path: '',
             },
           },
@@ -75,62 +75,62 @@ const config: Config = {
   themeConfig: {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
-    navbar: {
-      title: 'Morphio',
-      logo: {
-        alt: 'Morphio Logo',
-        src: 'img/logo.svg',
-      },
-      items: [
-        {
+      navbar: {
+        title: 'Morphio',
+        logo: {
+          alt: 'Morphio Logo',
+          src: 'img/logo.svg',
+        },
+        items: [
+          {
           type: 'docSidebar',
           sidebarId: 'docs',
-          position: 'left',
+            position: 'left',
           label: 'Docs',
-        },
-        {
-          href: 'https://github.com/RPethani/Morphio',
-          label: 'GitHub',
-          position: 'right',
-        },
-      ],
-    },
-    footer: {
-      style: 'dark',
-      links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Getting Started',
+          },
+          {
+            href: 'https://github.com/RPethani/Morphio',
+            label: 'GitHub',
+            position: 'right',
+          },
+        ],
+      },
+      footer: {
+        style: 'dark',
+        links: [
+          {
+            title: 'Docs',
+            items: [
+              {
+                label: 'Getting Started',
               to: '/docs/getting-started',
             },
             {
               label: 'Examples',
               to: '/docs/examples',
-            },
-            {
-              label: 'API Reference',
+              },
+              {
+                label: 'API Reference',
               to: '/docs/api',
-            },
-          ],
-        },
-        {
+              },
+            ],
+          },
+          {
           title: 'More',
-          items: [
-            {
-              label: 'GitHub',
-              href: 'https://github.com/RPethani/Morphio',
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright ${new Date().getFullYear()} Morphio. Built with Docusaurus.`,
-    },
-    prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
-    },
+            items: [
+              {
+                label: 'GitHub',
+                href: 'https://github.com/RPethani/Morphio',
+              },
+            ],
+          },
+        ],
+        copyright: `Copyright ${new Date().getFullYear()} Morphio. Built with Docusaurus.`,
+      },
+      prism: {
+        theme: prismThemes.github,
+        darkTheme: prismThemes.dracula,
+      },
   } satisfies Preset.ThemeConfig,
 };
 

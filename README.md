@@ -132,6 +132,24 @@ class BlogPost {
 }
 ```
 
+## Decorator Compatibility
+
+Morphio's decorators work seamlessly in both modern TypeScript projects and older TypeScript versions. No special configuration is needed for TypeScript 5.x and later.
+
+For TypeScript versions before 5.x, add the following configuration to your `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "useDefineForClassFields": true
+  }
+}
+```
+
+For more details, see the [Decorator Compatibility Guide](https://rpethani.github.io/Morphio/advanced/decorator-compatibility) in our documentation.
+
 ## Documentation
 
 For detailed documentation, including:

@@ -1,4 +1,5 @@
 import { PropertyMetadata } from '../schema';
+import { createMorphProp } from './compatibility';
 
 /**
  * A decorator function that adds metadata to a class property for transformation.
@@ -23,21 +24,4 @@ import { PropertyMetadata } from '../schema';
  * @param options - Property metadata configuration. See {@link PropertyMetadata} for details.
  * @returns A decorator function that collects property metadata
  */
-export function MorphProp(options: PropertyMetadata) {
-  return function (_: undefined, context: ClassFieldDecoratorContext) {
-    const propertyKey = context.name as string;
-    const propertyMetadata: PropertyMetadata = {
-      type: options?.type || 'string',
-      required: options?.required ?? true,
-      description: options?.description,
-    };
-
-    if (context.metadata) {
-      context.metadata.properties ??= new Map<string, PropertyMetadata>();
-      (context.metadata.properties as Map<string, PropertyMetadata>).set(
-        propertyKey,
-        propertyMetadata
-      );
-    }
-  };
-}
+export const MorphProp = createMorphProp();
