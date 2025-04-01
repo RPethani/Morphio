@@ -141,7 +141,40 @@ export interface InlineObjectType {
  * const arrayType: PropertyType = { container: 'array', itemType: 'string' };
  * ```
  */
-export type PropertyType = TypeIdentifier | ContainerType | InlineObjectType;
+export type PropertyType =
+  | TypeIdentifier
+  | PrimitiveType
+  | ContainerType
+  | InlineObjectType
+  | EnumPropertyType;
+
+/**
+ * Represents the primitive types supported by Morphio.
+ * These are the basic types that can be directly serialized/deserialized.
+ *
+ * @example
+ * ```ts
+ * class User {
+ *   @MorphProp({ type: 'string' })
+ *   name: string;
+ *
+ *   @MorphProp({ type: 'number' })
+ *   age: number;
+ *
+ *   @MorphProp({ type: 'bigint' })
+ *   id: bigint;
+ *
+ *   @MorphProp({ type: 'date' })
+ *   birthDate: Date;
+ * }
+ * ```
+ */
+export type PrimitiveType =
+  | 'string' // String primitive
+  | 'number' // Number primitive (includes integers and floats)
+  | 'boolean' // Boolean primitive
+  | 'bigint' // BigInt primitive (serialized as string)
+  | 'date'; // Date object (serialized as ISO string)
 
 /**
  * Metadata for a property used in serialization and deserialization.
@@ -189,6 +222,53 @@ export interface PropertyMetadata {
    * Used for documentation and schema generation.
    */
   description?: string;
+}
+
+/**
+ * Strategy for serializing enum values.
+ * - 'value': Use the enum's value (default)
+ * - 'key': Use the enum's key name
+ */
+export type EnumSerializationStrategy = 'value' | 'key';
+
+/**
+ * Configuration for enum property types.
+ * @example
+ * ```ts
+ * enum Status {
+ *   Active = 1,
+ *   Inactive = 0
+ * }
+ *
+ * // Basic usage
+ * @MorphProp({ type: { enum: Status } })
+ * status: Status;
+ *
+ * // With default value and key serialization
+ * @MorphProp({
+ *   type: {
+ *     enum: Status,
+ *     default: Status.Active,
+ *     serializeAs: 'key'
+ *   }
+ * })
+ * status: Status;
+ * ```
+ */
+export interface EnumPropertyType {
+  /** The enum type to use */
+  enum: Record<string, string | number>;
+  /** Default value if deserialization fails */
+  default?: string | number;
+  /** How to serialize the enum value */
+  serializeAs?: EnumSerializationStrategy;
+}
+
+/**
+ * Type guard to check if a property type is an enum type
+ */
+export function isEnumType(type: PropertyType): type is EnumPropertyType {
+  return typeof type === 'object' && 'enum' in type;
 }
 
 /**
@@ -263,7 +343,7 @@ export function isConstructorType(type: PropertyType): type is Constructor {
  * isPrimitiveType(User) // false
  * ```
  */
-export function isPrimitiveType(type: PropertyType): type is string {
+export function isPrimitiveType(type: PropertyType): type is PrimitiveType {
   return typeof type === 'string';
 }
 

@@ -3,6 +3,7 @@ const sidebars = {
   docs: [
     'intro',
     'getting-started',
+    'decorator-compatibility',
     {
       type: 'category',
       label: 'Examples',
@@ -21,6 +22,18 @@ const sidebars = {
           items: [
             'examples/basic-types/decorator-based',
             'examples/basic-types/schema-based',
+            {
+              type: 'category',
+              label: 'Enum Types',
+              link: {
+                type: 'doc',
+                id: 'examples/basic-types/enum-types/index',
+              },
+              items: [
+                'examples/basic-types/enum-types/decorator-based',
+                'examples/basic-types/enum-types/schema-based',
+              ],
+            },
           ],
         },
         {

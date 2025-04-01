@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-beta.9",
+  "version": "1.0.0-beta.0",
   "type": "module",
   "repository": {
     "type": "git",
@@ -29,8 +29,7 @@
     "format": "prettier --write \"src/**/*.{js,ts}\"",
     "prepare": "npm run build",
     "size": "size-limit",
-    "analyze": "size-limit --why",
-    "docs": "typedoc"
+    "analyze": "size-limit --why"
   },
   "husky": {
     "hooks": {

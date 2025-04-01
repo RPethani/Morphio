@@ -23,7 +23,7 @@ describe('Interface Inheritance', () => {
     // Register base interface schema
     morphioSchema({ interface: 'Base' }, {
       id: { type: 'string', required: true },
-      createdAt: { type: 'Date', required: true },
+      createdAt: { type: 'date', required: true },
     });
 
     // Register Animal schema with inheritance
