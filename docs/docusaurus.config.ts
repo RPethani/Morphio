@@ -43,7 +43,7 @@ const config: Config = {
           lastVersion: 'current',
           versions: {
             current: {
-              label: '0.1.0-beta.8',
+              label: '0.1.0-beta.9',
               path: '',
             },
           },
