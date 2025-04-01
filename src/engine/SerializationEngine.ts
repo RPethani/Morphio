@@ -174,6 +174,6 @@ export class SerializationEngine implements ProcessorContext {
    * @returns A processor capable of handling the given property type
    */
   findProcessor(propertyType: PropertyType | undefined): ValueProcessor {
-    return this.processorFactory.findProcessor(propertyType);
+    return this.processorFactory.findProcessor(propertyType || 'string');
   }
 }

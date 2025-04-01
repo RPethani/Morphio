@@ -1,0 +1,12 @@
+# These owners will be the default owners for everything in
+# the repo. Unless a later match takes precedence,
+# @RPethani will be requested for review when someone 
+# opens a pull request.
+*       @RPethani
+
+# Specific ownership for critical paths
+/src/   @RPethani
+/docs/  @RPethani
+/.github/ @RPethani
+/package.json @RPethani
+/tsconfig.json @RPethani
